@@ -9,9 +9,8 @@ import { MsalGuard } from '@azure/msal-angular';
 
 
 //Empleado
-import { HomeComponent as EmployeeHome } from './components/employee/home/home.component';
-import { DetailsComponent as EmployeeDetailsComponent } from './components/employee/details/details.component';
-
+import { EmployeeHomeComponent } from './components/employee/employee-home/employee-home.component';
+import { EmployeeDetailsComponent } from './components/employee/employee-details/employee-details.component';
 
 //Shared
 import { SidebarComponent } from './components/shared/sidebar/sidebar.component';
@@ -20,7 +19,7 @@ const routes: Routes = [
   
   {
     path: 'employee_home', 
-    component: EmployeeHome,
+    component: EmployeeHomeComponent,
     canActivate: [MsalGuard]
   },
   {

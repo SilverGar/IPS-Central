@@ -1,1 +1,30 @@
-<p>sign-in works!</p>
+<link rel="stylesheet" href="./sign-in.component.css">
+
+<main>
+  <div *ngIf="!loginDisplay">
+    
+  
+    <section class="logo-section">
+      <img src="https://yt3.ggpht.com/a/AGF-l79b_9Tw9iTZ9nM_qOeACpuCz3kUc1EWEsgKUQ=s900-mo-c-c0xffffffff-rj-k-no" alt="">
+    </section>
+
+    <section class="sign-in-section">
+      <input class="sign-in-button" type="image" src="http://localhost:4200/assets/loginAssets/ms-signin-button.svg" (click)="login()"> 
+    </section>
+  </div>
+</main>
+<footer>
+  <div *ngIf="!loginDisplay">
+    <ul class="footer-left">
+      <li>Logo</li>
+      <li>Logo</li>
+      <li>Logo</li>
+    </ul>
+    <ul class="footer-right">
+      <li>© 2022 Inflection Point</li>
+    </ul>
+  </div>
+  
+</footer>
+
+<router-outlet></router-outlet>>

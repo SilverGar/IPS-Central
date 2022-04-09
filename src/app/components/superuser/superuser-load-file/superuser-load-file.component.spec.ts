@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { NotificationsComponent } from './notifications.component';
+import { SuperuserLoadFileComponent } from './superuser-load-file.component';
 
-describe('NotificationsComponent', () => {
-  let component: NotificationsComponent;
-  let fixture: ComponentFixture<NotificationsComponent>;
+describe('SuperuserLoadFileComponent', () => {
+  let component: SuperuserLoadFileComponent;
+  let fixture: ComponentFixture<SuperuserLoadFileComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ NotificationsComponent ]
+      declarations: [ SuperuserLoadFileComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(NotificationsComponent);
+    fixture = TestBed.createComponent(SuperuserLoadFileComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

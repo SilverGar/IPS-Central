@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { LoadFileComponent } from './load-file.component';
+import { SuperuserHomeComponent } from './superuser-home.component';
 
-describe('LoadFileComponent', () => {
-  let component: LoadFileComponent;
-  let fixture: ComponentFixture<LoadFileComponent>;
+describe('SuperuserHomeComponent', () => {
+  let component: SuperuserHomeComponent;
+  let fixture: ComponentFixture<SuperuserHomeComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ LoadFileComponent ]
+      declarations: [ SuperuserHomeComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(LoadFileComponent);
+    fixture = TestBed.createComponent(SuperuserHomeComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
