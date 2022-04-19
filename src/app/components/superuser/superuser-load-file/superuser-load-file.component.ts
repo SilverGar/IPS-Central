@@ -1,7 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit, ViewChild } from '@angular/core';
+import { error } from 'console';
 import { NgxCsvParser, NgxCSVParserError } from 'ngx-csv-parser';
-import { import_user } from 'src/app/models/import_user';
+import { User, Regular_Team, Team360 } from 'src/app/models/userModels';
 
 @Component({
   selector: 'app-superuser-load-file',
@@ -15,8 +16,10 @@ export class SuperuserLoadFileComponent implements OnInit {
   header: boolean = false;
 
 
-  currentLead: string = ""
-  allUsers: import_user[] = []
+  
+  allUsers: User[] = []
+  temporalTeam360: Array<Team360> = []
+  allTeam360: Array<Team360> = []
 
 
   constructor(
@@ -35,11 +38,17 @@ export class SuperuserLoadFileComponent implements OnInit {
         this.csvRecords = result
         try{
           this.userInput = this.csvRecords
-          this.createUser(this.userInput)
+
+          //Crea empleados en base al CSV
+          this.allUsers = this.createUser(this.userInput)
+          this.temporalTeam360 = this.getTeams(this.allUsers)
+          this.allTeam360 = this.mergeTeams(this.temporalTeam360)
+          
         }
         catch{
           console.log("Archivo no valido")
         }
+        
         
       },
       error: (error: NgxCSVParserError): void =>{
@@ -48,65 +57,81 @@ export class SuperuserLoadFileComponent implements OnInit {
     })
   }
 
-  createUser(input: Array<Array<string>>){
-   
+  createUser(input: Array<Array<string>>): User[]{
+    //console.log("Entradas: " + input.length)
+
+    //Lista de todos los empleados, aunque esten duplicados. Si un usuario se repite, se le asigna la ID anterior que se hubiera generado.
+    var newUserList: User[] = []
+
+    //Obtiene el lider del empleado en el proyecto que este participando.
+    var currentLead: string = ""
+
+    //Lleva el conteo de la ID actual
     var currentID: number = 0
+
+    //El ID que se ha generado y se asigna al usuario
     var newID: number = 0
-    for(var index in input){
-      //Excluye primeras dos filas
-      if(index > '2'){
-        //Excluye la fila que tenga nombre "Totals"
-        if(input[index][3] != 'Totals'){
+    for(var index = 3; index < input.length; index++){
 
-          var newUser: import_user = {
-            ID: -1,
-            userName: "",
-            project: "",
-            projectLead: "",
-            clientname: "",
-            hours: 0
-          }
+      //Excluye la fila que tenga nombre "Totals"
+      if(input[index][3] != 'Totals'){
+        //Obtiene una ID nueva en caso que el usuario no lo hubiera visto antes
+        newID = this.getNewID(newUserList, input[index][3], currentID)
+        if(newID > currentID){
+          currentID = newID
+        }
 
-          var totalHours: number = 0
-          
+        //Establece como horas totales 0
+        var totalHours: number = 0
 
-          newID = this.getNewID(input[index][3], currentID)
-          if(newID > currentID){
-            currentID = newID
-          }
-          newUser.ID = newID
-          newUser.clientname = input[index][0]
-          newUser.project = input[index][1]
-          newUser.projectLead = this.currentLead
-          newUser.userName = input[index][3]
-          for(var indexHours in input[index]){
-            if(indexHours > '3'){
-              if(input[index][indexHours] != '-'){
-                totalHours = totalHours + parseFloat(input[index][indexHours])
-              }
+        //Genera un nuevo usuario vacio
+        var newUser: User = {
+          ID: -1,
+          userName: "",
+          project: "",
+          projectLead: "",
+          clientname: "",
+          hours: 0
+        }
+        newUser.ID = newID
+        newUser.clientname = input[index][0]
+        newUser.project = input[index][1]
+        newUser.projectLead = currentLead
+        newUser.userName = input[index][3]
+
+        //Suma las horas del empleado en el proyecto que hubiera participado.
+        for(var indexHours in input[index]){
+          if(indexHours > '3'){
+            if(input[index][indexHours] != '-'){
+              totalHours = totalHours + parseFloat(input[index][indexHours])
             }
           }
-          newUser.hours = totalHours
-          this.allUsers.push(newUser)
         }
-        else{
-          this.currentLead = input[index][2]
-        }
+
+        newUser.hours = totalHours
+
+        //El nuevo usuario se añade al array de todos los usuarios.
+        newUserList.push(newUser)
       }
+      else{
+        currentLead = input[index][2]
+      }
+      
     }
     
-    for(var index in this.allUsers){
-      console.log(this.allUsers[index])
-    }
+    
+
+    //console.log(newUserList.length)
+    return newUserList
 
   }
 
-  getNewID(name: string, newID: number): number{
-    if(this.allUsers != null){
-      for(var i in this.allUsers){
-        if(this.allUsers[i].userName == name){
+  getNewID(input: Array<User>, name: string, newID: number): number{
+    if(input != null){
+      for(var i in input){
+        if(input[i].userName == name){
           //Si encuentra un nombre igual, regresa el mismo ID
-          return this.allUsers[i].ID
+          return input[i].ID
         }
       }
       //Si es una nueva ID, regresa un ID nuevo
@@ -114,6 +139,139 @@ export class SuperuserLoadFileComponent implements OnInit {
     }
     //Si la lista esta vacia, envia 1
     return 1
+  }
+
+  getTeams(input: Array<User>): Array<Team360>{
+    //Se crean equipos normales [Proyecto -> Empleados involucrados]
+    //Se crea para poder determinar que empleados trabajaron con otros en los proyectos.
+    
+
+    var currentTeam = input[0].project
+    var currentID = -1
+    var teamList: Array<Regular_Team> = []
+    var currentMembers: Array<User> = []
+
+    //Cicla por toda la longitud de la lista de empleados generados
+    for(var i in input){
+      if(currentTeam == input[i].project){
+        currentMembers.push(input[i])
+        if(parseInt(i) == (input.length - 1)){
+          currentID = currentID + 1
+        
+          //Inicializa un equipo con los valores establecidos
+          var newTeam: Regular_Team = {
+            ID: -1,
+            projectName: "",
+            teamMembers: []
+          }
+          newTeam.ID = currentID
+          newTeam.projectName = currentTeam
+          newTeam.teamMembers = currentMembers
+          teamList.push(newTeam)
+
+          var emptyMembers: Array<User> = []
+          currentMembers = emptyMembers
+          
+
+
+          currentMembers.push(input[i])
+          currentTeam = input[i].project
+          
+        }
+      }
+      else{
+        currentID = currentID + 1
+        
+        //Inicializa un equipo con los valores establecidos
+        var newTeam: Regular_Team = {
+          ID: -1,
+          projectName: "",
+          teamMembers: []
+        }
+        newTeam.ID = currentID
+        newTeam.projectName = currentTeam
+        newTeam.teamMembers = currentMembers
+        teamList.push(newTeam)
+
+        var emptyMembers: Array<User> = []
+        currentMembers = emptyMembers
+        
+
+
+        currentMembers.push(input[i])
+        currentTeam = input[i].project
+      }
+    }
+
+    var newCompanions: Array<User> = []
+    var finishedTeams: Array<Team360> = []
+    currentID = -1
+
+    for(var i in teamList){
+      for(var j in teamList[i].teamMembers){
+        newCompanions = []
+        currentID = currentID + 1
+        for(var k in teamList[i].teamMembers){
+          if(teamList[i].teamMembers[j].ID != teamList[i].teamMembers[k].ID){
+            //Añadir empleados que trabajaron juntos
+            newCompanions.push(teamList[i].teamMembers[k])
+          }
+        }
+        var newTeam360: Team360 = {
+          ID: currentID,
+          teamOwner: teamList[i].teamMembers[j],
+          relationships: newCompanions
+        }
+        finishedTeams.push(newTeam360)
+      }
+    }
+
+    
+    return finishedTeams
+  }
+
+  mergeTeams(input: Array<Team360>): Array<Team360>{
+    var mergedTeams: Array<Team360> = []
+    var finishedMembers: Array<number> = []
+    
+    for(var i in input){
+      if(finishedMembers.indexOf(input[i].teamOwner.ID) == -1){
+        var newTeam: Team360 = {
+          ID: -1,
+          teamOwner: input[i].teamOwner,
+          relationships: this.getUniqueRelations(input, input[i].teamOwner.ID)
+        }
+        mergedTeams.push(newTeam)
+        finishedMembers.push(input[i].teamOwner.ID)
+      }
+      else{
+        console.log("Ya termine con ese")
+      }
+    }
+
+
+
+    for(var i in mergedTeams){
+      console.log("ID: " +  mergedTeams[i].teamOwner.ID + " TeamOwner: " + mergedTeams[i].teamOwner.userName)
+      for (var j in mergedTeams[i].relationships){
+        console.log("  Persona: " + mergedTeams[i].relationships[j].userName)
+      }
+    }
+
+    return mergedTeams
+
+  }
+
+  getUniqueRelations(input: Array<Team360>, currentMember: number): Array<User>{
+    var uniqueRelations: Array<User> = []
+    for(var i in input){
+      if(input[i].teamOwner.ID == currentMember){
+        for(var j in input[i].relationships){
+          uniqueRelations.push(input[i].relationships[j])
+        }
+      }
+    }
+    return uniqueRelations
   }
 
 
