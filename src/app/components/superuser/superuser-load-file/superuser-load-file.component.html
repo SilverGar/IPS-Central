@@ -1,1 +1,10 @@
-<p>superuser-load-file works!</p>
+
+
+<input type="file" #fileImportInput name="File Upload" id="csvFileUpload" (change)="fileChangeListener($event)"
+accept=".csv" /> 
+
+<div>
+    <ul *ngFor="let user of allUsers">
+        <li>ID: {{user.ID}} | Usuario: {{user.userName}}</li>
+    </ul>
+</div>
