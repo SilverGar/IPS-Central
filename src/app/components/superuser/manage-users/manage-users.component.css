@@ -17,11 +17,6 @@ html {
 }
 
 
-h1 {
-    font-size: 2rem;
-    margin-bottom: 2.4rem;
-}
-
 .main-section {
     width: 100%;
     height: fit-content;
@@ -31,10 +26,24 @@ h1 {
     flex-direction: column;
 }
 
+.main-section .title-section {
+    width: 70%;
+    display: flex;
+    align-items: center;
+    justify-content: left;
+}
+
+.main-section .title-section h1{
+    font-size: 3rem;
+    margin-bottom: 2.4rem;
+    align-self: left;
+}
+
 #hr-title {
     width: 100%;
     display: grid;
-    grid-template-columns: 1fr 35%;
+    grid-template-areas: 'left right';
+    grid-template-columns: 1fr ;
     margin-bottom: 1.2rem;
     align-items: baseline;
 }
