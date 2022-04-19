@@ -7,6 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Apricot Sidebar</title>
 </head>
+
 <body>
     <div class="sidebar">
         <div class="logo_content">
@@ -19,7 +20,7 @@
         </div>
         <ul class="nav_list">
             <li>
-                <i class='bx bx-search' ></i>
+                <i class='bx bx-search'></i>
                 <input type="text" placeholder="Search...">
                 <span class="tooltip">Search</span>
             </li>
@@ -46,35 +47,35 @@
             </li>
             <li>
                 <a href="#">
-                    <i class='bx bx-pie-chart-alt' ></i>
+                    <i class='bx bx-pie-chart-alt'></i>
                     <span class="links_name">Analytics</span>
                 </a>
                 <span class="tooltip">Analytics</span>
             </li>
             <li>
                 <a href="#">
-                    <i class='bx bx-folder' ></i>
+                    <i class='bx bx-folder'></i>
                     <span class="links_name">File Manager</span>
                 </a>
                 <span class="tooltip">Files</span>
             </li>
             <li>
                 <a href="#">
-                    <i class='bx bx-cart' ></i>
+                    <i class='bx bx-cart'></i>
                     <span class="links_name">Order</span>
                 </a>
                 <span class="tooltip">Order</span>
             </li>
             <li>
                 <a href="#">
-                    <i class='bx bx-heart' ></i>
+                    <i class='bx bx-heart'></i>
                     <span class="links_name">Saved</span>
                 </a>
                 <span class="tooltip">Saved</span>
             </li>
             <li>
                 <a href="#">
-                    <i class='bx bx-cog' ></i>
+                    <i class='bx bx-cog'></i>
                     <span class="links_name">Settings</span>
                 </a>
                 <span class="tooltip">Settings</span>
@@ -95,7 +96,7 @@
     </div>
     <div class="home_content">
         <!-- <app-employee-home></app-employee-home> -->
-        <app-superuser-load-file></app-superuser-load-file>
+        <!-- <app-superuser-load-file></app-superuser-load-file> -->
     </div>
 
     <script>
@@ -103,10 +104,10 @@
         let sidebar = document.querySelector(".sidebar");
         let searchBtn = document.querySelector(".bx-search");
 
-        btn.onclick = function(){
+        btn.onclick = function () {
             sidebar.classList.toggle("active");
         }
-        searchBtn.onclick = function(){
+        searchBtn.onclick = function () {
             sidebar.classList.toggle("active");
         }
     </script>

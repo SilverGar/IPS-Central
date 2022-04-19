@@ -22,6 +22,7 @@ import { HrNotificationsComponent } from './components/humanresources/hr-notific
 import { SuperuserHomeComponent } from './components/superuser/superuser-home/superuser-home.component';
 import { SuperuserLoadFileComponent } from './components/superuser/superuser-load-file/superuser-load-file.component';
 import { SignInComponent } from './components/shared/sign-in/sign-in.component';
+import { MANAGEUSERSComponent } from './components/superuser/manage-users/manage-users.component';
 
 const isIE = window.navigator.userAgent.indexOf('MSIE ') > -1 || window.navigator.userAgent.indexOf('Trident/') > -1;
 
@@ -36,7 +37,8 @@ const isIE = window.navigator.userAgent.indexOf('MSIE ') > -1 || window.navigato
     HrNotificationsComponent,
     SuperuserHomeComponent,
     SuperuserLoadFileComponent,
-    SignInComponent
+    SignInComponent,
+    MANAGEUSERSComponent
   ],
   imports: [
     BrowserModule,
@@ -48,7 +50,7 @@ const isIE = window.navigator.userAgent.indexOf('MSIE ') > -1 || window.navigato
     HttpClientModule,
     BrowserModule,
     AppRoutingModule,
-    MsalModule.forRoot( new PublicClientApplication({
+    MsalModule.forRoot(new PublicClientApplication({
       auth: {
         //clientId: '01f29e73-b3dc-4096-9f42-51fed93bedc5',
         clientId: 'cba815b2-a711-4989-b197-d77ffd118ba6',
@@ -63,11 +65,11 @@ const isIE = window.navigator.userAgent.indexOf('MSIE ') > -1 || window.navigato
       interactionType: InteractionType.Redirect,
       authRequest: {
         scopes: ['user.read']
-        }
+      }
     }, {
       interactionType: InteractionType.Redirect, // MSAL Interceptor Configuration
-      protectedResourceMap: new Map([ 
-          ['https://graph.microsoft.com/v1.0/me', ['User.Read']]
+      protectedResourceMap: new Map([
+        ['https://graph.microsoft.com/v1.0/me', ['User.Read']]
       ])
     })
   ],
