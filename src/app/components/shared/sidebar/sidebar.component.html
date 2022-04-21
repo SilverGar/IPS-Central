@@ -95,23 +95,11 @@
         </div>
     </div>
     
-    <app-employee-home></app-employee-home>
-    <!-- <app-superuser-load-file></app-superuser-load-file>
-    <app-manage-users></app-manage-users> -->
+
+    <router-outlet></router-outlet>
     
 
-    <script>
-        let btn = document.querySelector("#btn");
-        let sidebar = document.querySelector(".sidebar");
-        let searchBtn = document.querySelector(".bx-search");
-
-        btn.onclick = function () {
-            sidebar.classList.toggle("active");
-        }
-        searchBtn.onclick = function () {
-            sidebar.classList.toggle("active");
-        }
-    </script>
+    
 
 
 </body>
@@ -121,4 +109,17 @@
 
 
 
+<!-- 
+<script>
+    let btn = document.querySelector("btn");
+    let sidebar = document.querySelector(".sidebar");
+    let searchBtn = document.querySelector(".bx-search");
 
+    btn.onclick = function () {
+        console.log("Hola")
+        sidebar.classList.toggle("active");
+    }
+    searchBtn.onclick = function () {
+        sidebar.classList.toggle("active");
+    }
+</script> -->

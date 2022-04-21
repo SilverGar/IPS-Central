@@ -23,6 +23,7 @@ import { SuperuserHomeComponent } from './components/superuser/superuser-home/su
 import { SuperuserLoadFileComponent } from './components/superuser/superuser-load-file/superuser-load-file.component';
 import { SignInComponent } from './components/shared/sign-in/sign-in.component';
 import { MANAGEUSERSComponent } from './components/superuser/manage-users/manage-users.component';
+import { EmployeeRequestComponent } from './components/employee/employee-request/employee-request.component';
 
 const isIE = window.navigator.userAgent.indexOf('MSIE ') > -1 || window.navigator.userAgent.indexOf('Trident/') > -1;
 
@@ -38,7 +39,8 @@ const isIE = window.navigator.userAgent.indexOf('MSIE ') > -1 || window.navigato
     SuperuserHomeComponent,
     SuperuserLoadFileComponent,
     SignInComponent,
-    MANAGEUSERSComponent
+    MANAGEUSERSComponent,
+    EmployeeRequestComponent
   ],
   imports: [
     BrowserModule,

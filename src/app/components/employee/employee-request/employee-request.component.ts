@@ -16,12 +16,13 @@ type ProfileType = {
   userPrincipalName?: string,
   id?: string
 };
+
 @Component({
-  selector: 'app-employee-home',
-  templateUrl: './employee-home.component.html',
-  styleUrls: ['./employee-home.component.css']
+  selector: 'app-employee-request',
+  templateUrl: './employee-request.component.html',
+  styleUrls: ['./employee-request.component.css']
 })
-export class EmployeeHomeComponent implements OnInit {
+export class EmployeeRequestComponent implements OnInit {
 
   profile!: ProfileType;
   loginDisplay = false;
@@ -38,10 +39,9 @@ export class EmployeeHomeComponent implements OnInit {
     private msalBroadcastService: MsalBroadcastService,
     private data: DataSharingService,
     private router: Router
-    ) { }
+  ) { }
 
   ngOnInit(): void {
-
     this.msalBroadcastService.msalSubject$
       .pipe(
         filter((msg: EventMessage) => msg.eventType === EventType.LOGIN_SUCCESS),
@@ -62,7 +62,6 @@ export class EmployeeHomeComponent implements OnInit {
 
     //Carga la informacion
     this.subscription = this.data.currentTeams.subscribe(message => this.displayTeam = message)
-
   }
 
   setLoginDisplay() {
@@ -85,14 +84,5 @@ export class EmployeeHomeComponent implements OnInit {
       })
   }
 
-  logout() { // Add log out function here
-    this.authService.logoutPopup({
-      mainWindowRedirectUri: "/"
-    });
-  }
 
-  displayRequest(){
-    this.router.navigateByUrl('/home/request')
-  }
-  
 }

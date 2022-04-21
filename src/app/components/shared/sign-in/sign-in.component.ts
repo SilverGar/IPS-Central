@@ -77,7 +77,7 @@ export class SignInComponent implements OnInit {
         next: (result) => {
           console.log(result);
           this.setLoginDisplay();
-          this.router.navigateByUrl('/sidebar')
+          this.router.navigateByUrl('/home/employee_home')
         },
         error: (error) => console.log(error)
       });

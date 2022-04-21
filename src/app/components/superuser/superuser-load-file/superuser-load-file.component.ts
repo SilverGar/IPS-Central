@@ -26,16 +26,16 @@ export class SuperuserLoadFileComponent implements OnInit, OnDestroy {
   allTeam360: Array<Team360> = []
 
   //Sharing data between views
-  // message?: string;
-  // subscription?: Subscription;
+  message?: Team360;
+  subscription?: Subscription;
 
   //Helps subscribing to the data
   ngOnInit(): void {
-    // this.subscription = this.data.currentMessage.subscribe(message => this.message = message)
+    this.subscription = this.data.currentTeams.subscribe(message => this.message = message)
   }
 
   ngOnDestroy(): void {
-    // this.subscription?.unsubscribe()
+    this.subscription?.unsubscribe()
   }
 
   constructor(
@@ -60,6 +60,9 @@ export class SuperuserLoadFileComponent implements OnInit, OnDestroy {
           this.allUsers = this.createUser(this.userInput)
           this.temporalTeam360 = this.getTeams(this.allUsers)
           this.allTeam360 = this.mergeTeams(this.temporalTeam360)
+
+          //Guarda los equipos localmente
+          this.data.changeLocalTeam(this.allTeam360[0])
           
         }
         catch{

@@ -9,7 +9,8 @@ export class DataSharingService {
   private messageSource = new BehaviorSubject('Default Message');
   currentMessage = this.messageSource.asObservable();
 
-  private generatedTeams = new BehaviorSubject('')
+  initTeams: Team360 = {} as Team360;
+  private generatedTeams = new BehaviorSubject<Team360>(this.initTeams)
   currentTeams = this.generatedTeams.asObservable();
   
 
@@ -17,5 +18,9 @@ export class DataSharingService {
 
   changeMessage(message: string){
     this.messageSource.next(message)
+  }
+
+  changeLocalTeam(message: Team360){
+    this.generatedTeams.next(message)
   }
 }

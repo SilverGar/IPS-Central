@@ -11,26 +11,35 @@ import { MsalGuard } from '@azure/msal-angular';
 //Empleado
 import { EmployeeHomeComponent } from './components/employee/employee-home/employee-home.component';
 import { EmployeeDetailsComponent } from './components/employee/employee-details/employee-details.component';
+import { EmployeeRequestComponent } from './components/employee/employee-request/employee-request.component';
 
 //Shared
 import { SidebarComponent } from './components/shared/sidebar/sidebar.component';
 
 const routes: Routes = [
   
-  {
-    path: 'employee_home', 
-    component: EmployeeHomeComponent,
-    canActivate: [MsalGuard]
-  },
+  
   {
     path: 'employee_details',
     component: EmployeeDetailsComponent,
     canActivate: [MsalGuard]
   },
   {
-    path: 'sidebar',
+    path: 'home',
     component: SidebarComponent,
-    canActivate: [MsalGuard]
+    canActivate: [MsalGuard],
+    children:[
+      {
+        path: 'employee_home', 
+        component: EmployeeHomeComponent,
+        canActivate: [MsalGuard],
+      },
+      {
+        path: 'request',
+        component: EmployeeRequestComponent,
+        canActivate: [MsalGuard]
+      }
+    ]
   }
 ]
 

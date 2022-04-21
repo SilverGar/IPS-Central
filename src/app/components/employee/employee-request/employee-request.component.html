@@ -1,10 +1,7 @@
-<!-- <div *ngIf="loginDisplay">
-    <p>Login successful!</p>
-</div> -->
 <body>
     <section class="paddingSidebar">
         <div class="title-selection">
-            <h1>Bienvenido {{profile?.givenName}} {{profile?.surname}}</h1>
+            <h1>Editar Evaluacion de {{profile?.givenName}} {{profile?.surname}}</h1>
         </div>
         <section class="hr-users">
     
@@ -15,10 +12,7 @@
                 </div>
                 <div class="button-section">
                     <div class="add-user-button-center">
-                        <figure class=".add-icon">
-                            <img src="https://cdn.onlinewebfonts.com/svg/img_529925.png" alt="icono agregar usuario">
-                        </figure>
-                        <a class="add-user" (click)="displayRequest()">Nueva peticion</a>
+                        <a class="add-user" routerLink="/home/employee_home">Cancelar</a>
                     </div>
         
                     <div class="add-user-button-right">
@@ -48,23 +42,6 @@
                 
             </table>
         </section>
-        <button (click)="logout()">Log out</button>
-        <app-superuser-load-file></app-superuser-load-file>
     </section>
-
-
 </body>
-
-
-
 <router-outlet></router-outlet>
-
-
-
-<!-- <div>
-    <p><strong>First Name: </strong> {{profile?.givenName}}</p>
-    <p><strong>Last Name: </strong> {{profile?.surname}}</p>
-    <p><strong>Email: </strong> {{profile?.userPrincipalName}}</p>
-    <p><strong>Id: </strong> {{profile?.id}}</p>
-    <button (click)="logout()">Log out</button>
-</div> -->
