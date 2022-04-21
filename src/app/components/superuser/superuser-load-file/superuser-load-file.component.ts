@@ -1,29 +1,46 @@
 import { HttpClient } from '@angular/common/http';
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { Data } from '@angular/router';
 import { error } from 'console';
 import { NgxCsvParser, NgxCSVParserError } from 'ngx-csv-parser';
+import { Subscription } from 'rxjs';
 import { User, Regular_Team, Team360 } from 'src/app/models/userModels';
+import { DataSharingService } from 'src/app/services/dataManagement/data-sharing.service';
 
 @Component({
   selector: 'app-superuser-load-file',
   templateUrl: './superuser-load-file.component.html',
   styleUrls: ['./superuser-load-file.component.css']
 })
-export class SuperuserLoadFileComponent implements OnInit {
+export class SuperuserLoadFileComponent implements OnInit, OnDestroy {
 
+  //Read file CSV
   csvRecords: any;
   userInput: Array<Array<string>> = [[]]
   header: boolean = false;
 
 
-  
+  //Create user variables
   allUsers: User[] = []
   temporalTeam360: Array<Team360> = []
   allTeam360: Array<Team360> = []
 
+  //Sharing data between views
+  // message?: string;
+  // subscription?: Subscription;
+
+  //Helps subscribing to the data
+  ngOnInit(): void {
+    // this.subscription = this.data.currentMessage.subscribe(message => this.message = message)
+  }
+
+  ngOnDestroy(): void {
+    // this.subscription?.unsubscribe()
+  }
 
   constructor(
-    private ngxCsvParser: NgxCsvParser
+    private ngxCsvParser: NgxCsvParser,
+    private data: DataSharingService
   ) { }
 
   @ViewChild('fileImportInput') fileImportInput: any;
@@ -275,9 +292,7 @@ export class SuperuserLoadFileComponent implements OnInit {
   }
 
 
-  ngOnInit(): void {
-    
-  }
+ 
 
 
 

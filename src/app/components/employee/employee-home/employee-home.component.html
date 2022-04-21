@@ -1,11 +1,61 @@
-<div *ngIf="loginDisplay">
+<!-- <div *ngIf="loginDisplay">
     <p>Login successful!</p>
-</div>
+</div> -->
 
-<div>
+<section class="paddingSidebar">
+    <div class="title-selection">
+        <h1>Bienvenido {{profile?.givenName}}</h1>
+    </div>
+    <section class="hr-users">
+
+
+        <div id="hr-title">
+            <div>
+                <h2 class="subtitle">Mi Evaluación360</h2>
+            </div>
+            <div class="button-section">
+                <div class="add-user-button-center">
+                    <figure class=".add-icon">
+                        <img src="https://cdn.onlinewebfonts.com/svg/img_529925.png" alt="icono agregar usuario">
+                    </figure>
+                    <a class="add-user" href="">Nueva peticion</a>
+                </div>
+    
+                <div class="add-user-button-right">
+                    <a class="add-user" href="">Guardar</a>
+                </div>
+            </div>
+        </div>
+
+            
+        <table class="rh-table">
+            <tr>
+                <th>#</th>
+                <th>Usuario</th>
+                <th>Como evaluo</th>
+                <th>Como me evaluan</th>
+                <th>Proyecto</th>
+                <th>Horas Totales</th>
+            </tr>
+            <tr *ngFor="let team of displayTeam?.relationships">
+                <th>{{team.ID}}</th>
+                <th>{{team.userName}}</th>
+                <th>{{team.projectLead}}</th>
+                <th>Team</th>
+                <th>{{team.project}}</th>
+                <th>{{team.hours}}</th>
+            </tr>
+            
+        </table>
+    </section>
+    
+</section>
+
+
+<!-- <div>
     <p><strong>First Name: </strong> {{profile?.givenName}}</p>
     <p><strong>Last Name: </strong> {{profile?.surname}}</p>
     <p><strong>Email: </strong> {{profile?.userPrincipalName}}</p>
     <p><strong>Id: </strong> {{profile?.id}}</p>
     <button (click)="logout()">Log out</button>
-</div>
+</div> -->
