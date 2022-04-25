@@ -7,6 +7,10 @@ import { filter } from 'rxjs/operators';
 import { User, Team360 } from 'src/app/models/userModels';
 import { DataSharingService } from 'src/app/services/dataManagement/data-sharing.service';
 import { Router } from '@angular/router';
+
+import * as e from 'express';
+import { DbUserTeam360 } from 'src/app/models/db-user';
+
 const GRAPH_ENDPOINT = 'https://graph.microsoft.com/v1.0/me';
 const GRAPH_ENDPOINTPHOTO = 'https://graph.microsoft.com/v1.0/me/photo/$value';
 
@@ -27,18 +31,21 @@ export class EmployeeRequestComponent implements OnInit {
   profile!: ProfileType;
   loginDisplay = false;
 
-  displayTeam?: Team360;
+  displayTeam?: Array<DbUserTeam360>;
 
 
   //Data Sharing Service
   subscription?: Subscription;
+
+  //Checkbox
+  itemCheckbox: Array<boolean> = [true, true, true]
 
   constructor(
     private http: HttpClient, 
     private authService: MsalService, 
     private msalBroadcastService: MsalBroadcastService,
     private data: DataSharingService,
-    private router: Router
+    private router: Router,
   ) { }
 
   ngOnInit(): void {
@@ -61,7 +68,10 @@ export class EmployeeRequestComponent implements OnInit {
 
 
     //Carga la informacion
-    this.subscription = this.data.currentTeams.subscribe(message => this.displayTeam = message)
+    //this.subscription = this.data.currentTeams.subscribe(message => this.displayTeam = message)
+    
+    this.displayTeam = this.loadTemporaryData()
+
   }
 
   setLoginDisplay() {
@@ -82,6 +92,55 @@ export class EmployeeRequestComponent implements OnInit {
       .subscribe(photo =>{
         console.log(photo);
       })
+  }
+
+  printData(){
+    console.log(this.displayTeam)
+  }
+
+
+  loadTemporaryData(): Array<DbUserTeam360>{
+
+    var user1: DbUserTeam360 = {
+      ID: 0,
+      name: 'Christian',
+      Check1: true,
+      Check2: false,
+      hours: 30,
+      TipoEval: 0
+    }
+
+    var user2: DbUserTeam360 = {
+      ID: 0,
+      name: 'Pedro',
+      Check1: true,
+      Check2: false,
+      hours: 30,
+      TipoEval: 1
+    }
+
+    var user3: DbUserTeam360 = {
+      ID: 0,
+      name: 'Jorge',
+      Check1: true,
+      Check2: false,
+      hours: 30,
+      TipoEval: 2
+    }
+
+    var user4: DbUserTeam360 = {
+      ID: 0,
+      name: 'Silver',
+      Check1: true,
+      Check2: false,
+      hours: 30,
+      TipoEval: 0
+    }
+
+
+    var newDisplay: Array<DbUserTeam360> = [user1, user2, user3, user4]
+
+    return newDisplay
   }
 
 

@@ -27,17 +27,21 @@
                     <th>#</th>
                     <th>Usuario</th>
                     <th>Como evaluo</th>
-                    <th>Como me evaluan</th>
-                    <th>Proyecto</th>
                     <th>Horas Totales</th>
+                    <th>Accion</th>
                 </tr>
-                <tr *ngFor="let team of displayTeam?.relationships">
+                <tr *ngFor="let team of displayTeam">
                     <th>{{team.ID}}</th>
-                    <th>{{team.userName}}</th>
-                    <th>{{team.projectLead}}</th>
-                    <th>Team</th>
-                    <th>{{team.project}}</th>
+                    <th>{{team.name}}</th>
+                    <th>{{team.TipoEval}}</th>
                     <th>{{team.hours}}</th>
+                    <th>
+                        <label class="switch">
+                            <input type="checkbox" value="{{team.Check1}}" [checked]="team.Check1" (change)="team.Check1 = !team.Check1; printData()">
+                            <span class="slider"></span>
+                        </label>
+                        <h3>Conservar</h3>
+                    </th>
                 </tr>
                 
             </table>

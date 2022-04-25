@@ -1,109 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <link rel="stylesheet" href="sidebar.component.css">
+    <link rel="stylesheet" href="./sidebar.component.css">
     <!-- Boxicons CDN Link -->
     <link href='https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css' rel='stylesheet'>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Apricot Sidebar</title>
 </head>
-
 <body>
     <div class="sidebar">
-        <div class="logo_content">
-            <div class="logo">
-                <i class='bx bxl-windows'></i>
-
-                <div class="logo_name">Inflection Point</div>
-            </div>
-            <i class='bx bx-menu' id="btn"></i>
+        <div class="logo-details">
+            <i class='bx bxl-windows'></i>
+            <span class="logo_name">Inflection Point</span>
         </div>
-        <ul class="nav_list">
-            <li>
-                <i class='bx bx-search'></i>
-                <input type="text" placeholder="Search...">
-                <span class="tooltip">Search</span>
-            </li>
+        <ul class="nav-links">
             <li>
                 <a href="#">
                     <i class='bx bx-grid-alt'></i>
-                    <span class="links_name">Dashboard</span>
+                    <span class="link_name">Dashboard</span>
                 </a>
-                <span class="tooltip">Dashboard</span>
+                <ul class="sub-menu blank">
+                    <li><a class="link_name" href="#">Dashboard</a></li>
+                </ul>
             </li>
             <li>
-                <a href="#">
-                    <i class='bx bx-user'></i>
-                    <span class="links_name">User</span>
-                </a>
-                <span class="tooltip">User</span>
-            </li>
-            <li>
-                <a href="#">
-                    <i class='bx bx-chat'></i>
-                    <span class="links_name">Messages</span>
-                </a>
-                <span class="tooltip">Messages</span>
+                <div class="icon-link">
+                    <a href="#">
+                        <i class='bx bx-user'></i>
+                        <span class="link_name">Equipos</span>
+                    </a>
+                    <i class="bx bxs-chevron-down arrow"></i>
+                </div>
+                <ul class="sub-menu">
+                    <li><a class="link_name" href="#">Equipos</a></li>
+                    <li><a href="#">Editar</a></li>
+                    <li><a href="#">Visualizar</a></li>
+                </ul>
             </li>
             <li>
                 <a href="#">
                     <i class='bx bx-pie-chart-alt'></i>
-                    <span class="links_name">Analytics</span>
+                    <span class="link_name">Notificaciones</span>
                 </a>
-                <span class="tooltip">Analytics</span>
+                <ul class="sub-menu blank">
+                    <li><a class="link_name" href="#">Notificaciones</a></li>
+                </ul>
             </li>
             <li>
                 <a href="#">
                     <i class='bx bx-folder'></i>
-                    <span class="links_name">File Manager</span>
+                    <span class="link_name">Administrar Usuarios</span>
                 </a>
-                <span class="tooltip">Files</span>
-            </li>
-            <li>
-                <a href="#">
-                    <i class='bx bx-cart'></i>
-                    <span class="links_name">Order</span>
-                </a>
-                <span class="tooltip">Order</span>
+                <ul class="sub-menu blank">
+                    <li><a class="link_name" href="#">Administrar Usuarios</a></li>
+                </ul>
             </li>
             <li>
                 <a href="#">
                     <i class='bx bx-heart'></i>
-                    <span class="links_name">Saved</span>
+                    <span class="link_name">Cargar Información</span>
                 </a>
-                <span class="tooltip">Saved</span>
+                <ul class="sub-menu blank">
+                    <li><a class="link_name" href="#">Cargar Información</a></li>
+                </ul>
             </li>
             <li>
-                <a href="#">
-                    <i class='bx bx-cog'></i>
-                    <span class="links_name">Settings</span>
-                </a>
-                <span class="tooltip">Settings</span>
+                <div class="profile-details">
+                    <div class="profile-content">
+                        <img src="http://localhost:4200/assets/stock.jpeg" alt="">
+                    </div>
+                        <div class="name-job">
+                            <div class="profile_name">Jorge Maa</div>
+                            <div class="job">Recursos Humanos</div>
+                        </div>
+                        <i class='bx bx-log-out' id="log_out"></i>
+                </div>
             </li>
         </ul>
-        <div class="profile_content">
-            <div class="profile">
-                <div class="profile_details">
-                    <img src="http://localhost:4200/assets/stock.jpeg" alt="">
-                    <div class="name_job">
-                        <div class="name">Jorge Maa</div>
-                        <div class="job">Developer</div>
-                    </div>
-                </div>
-                <i class='bx bx-log-out' id="log_out"></i>
-            </div>
-        </div>
     </div>
+    <section class="home-section">
+        <router-outlet></router-outlet>
+
+    </section>
+    <script>
+        let arrow = document.querySelectorAll(".arrow");
+        for(var i = 0; i < arrow.length; i++) {
+            arrow[i].addEventListener("click", (e)=>{
+                let arrowParent = e.target.parentElement.parentElement;
+                console.log(arrowParent);
+                arrowParent.classList.toggle("showMenu");
+            });
+        }
+
+        let sidebar = document.querySelector(".sidebar");
+        let sidebarBtn = document.querySelector(".bx-menu");
+        console.log(sidebarBtn)
+        sidebarBtn.addEventListener("click", ()=>{
+            sidebar.classList.toggle("close");
+        });
+    </script>
     
-
-    <router-outlet></router-outlet>
-    
-
-    
-
-
 </body>
-
+</html>
 
 
 

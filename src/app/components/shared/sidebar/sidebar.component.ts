@@ -12,6 +12,9 @@ export class SidebarComponent implements OnInit {
   ngOnInit(): void {
   }
 
+
+  }
+
 //   toggleSidebar(){
 //     let btn = document.querySelector("btn");
 //     let sidebar = document.querySelector(".sidebar");
@@ -21,4 +24,4 @@ export class SidebarComponent implements OnInit {
     
 // }
 //   }
-}
+

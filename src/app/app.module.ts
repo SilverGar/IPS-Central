@@ -10,7 +10,7 @@ import { MatListModule } from '@angular/material/list';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { SidebarComponent } from './components/shared/sidebar/sidebar.component';
-
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 
 import { MsalModule, MsalRedirectComponent, MsalGuard, MsalInterceptor } from '@azure/msal-angular'; // Import MsalInterceptor
@@ -52,6 +52,8 @@ const isIE = window.navigator.userAgent.indexOf('MSIE ') > -1 || window.navigato
     HttpClientModule,
     BrowserModule,
     AppRoutingModule,
+    FormsModule,
+    ReactiveFormsModule,
     MsalModule.forRoot(new PublicClientApplication({
       auth: {
         //clientId: '01f29e73-b3dc-4096-9f42-51fed93bedc5',

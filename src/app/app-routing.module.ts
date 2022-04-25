@@ -32,7 +32,7 @@ const routes: Routes = [
       {
         path: 'employee_home', 
         component: EmployeeHomeComponent,
-        canActivate: [MsalGuard],
+        canActivate: [MsalGuard]
       },
       {
         path: 'request',

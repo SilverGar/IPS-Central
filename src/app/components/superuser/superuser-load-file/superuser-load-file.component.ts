@@ -62,7 +62,7 @@ export class SuperuserLoadFileComponent implements OnInit, OnDestroy {
           this.allTeam360 = this.mergeTeams(this.temporalTeam360)
 
           //Guarda los equipos localmente
-          this.data.changeLocalTeam(this.allTeam360[0])
+          this.data.changeLocalTeam(this.allTeam360[1])
           
         }
         catch{
