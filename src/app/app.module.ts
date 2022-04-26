@@ -26,6 +26,9 @@ import { MANAGEUSERSComponent } from './components/superuser/manage-users/manage
 import { EmployeeRequestComponent } from './components/employee/employee-request/employee-request.component';
 import { ProgressBarComponent } from './components/shared/progress-bar/progress-bar.component';
 import { EmployeeNotificationsComponent } from './components/employee/employee-notifications/employee-notifications.component';
+import { SidebarHumanresourcesComponent } from './components/shared/sidebar-humanresources/sidebar-humanresources.component';
+import { SidebarSuperuserComponent } from './components/shared/sidebar-superuser/sidebar-superuser.component';
+
 
 const isIE = window.navigator.userAgent.indexOf('MSIE ') > -1 || window.navigator.userAgent.indexOf('Trident/') > -1;
 
@@ -44,7 +47,9 @@ const isIE = window.navigator.userAgent.indexOf('MSIE ') > -1 || window.navigato
     MANAGEUSERSComponent,
     EmployeeRequestComponent,
     ProgressBarComponent,
-    EmployeeNotificationsComponent
+    EmployeeNotificationsComponent,
+    SidebarHumanresourcesComponent,
+    SidebarSuperuserComponent
   ],
   imports: [
     BrowserModule,

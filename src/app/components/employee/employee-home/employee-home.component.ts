@@ -7,6 +7,7 @@ import { filter } from 'rxjs/operators';
 import { DataSharingService } from 'src/app/services/dataManagement/data-sharing.service';
 import { Router } from '@angular/router';
 import { DbUserTeam360 } from 'src/app/models/db-user';
+import { Team360 } from 'src/app/models/userModels';
 const GRAPH_ENDPOINT = 'https://graph.microsoft.com/v1.0/me';
 const GRAPH_ENDPOINTPHOTO = 'https://graph.microsoft.com/v1.0/me/photo/$value';
 
@@ -27,6 +28,7 @@ export class EmployeeHomeComponent implements OnInit, OnDestroy {
   loginDisplay = false;
 
   displayTeam?: Array<DbUserTeam360>;
+  //displayTeam?: Team360;
 
 
 

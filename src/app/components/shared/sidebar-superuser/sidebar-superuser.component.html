@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <link rel="stylesheet" href="./sidebar.component.css">
+    <link rel="stylesheet" href="./sidebar-superuser.component.css">
     <!-- Boxicons CDN Link -->
     <link href='https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css' rel='stylesheet'>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -17,7 +17,7 @@
         </div>
         <ul class="nav-links">
             <li>
-                <a routerLink="/home/employee_home">
+                <a routerLink="/superuser/dashboard">
                     <i class='bx bx-grid-alt'></i>
                     <span class="link_name">Dashboard</span>
                 </a>
@@ -26,16 +26,7 @@
                 </ul>
             </li>
             <li>
-                <a routerLink="/home/notifications">
-                    <i class='bx bx-pie-chart-alt'></i>
-                    <span class="link_name">Notificaciones</span>
-                </a>
-                <ul class="sub-menu blank">
-                    <li><a class="link_name">Notificaciones</a></li>
-                </ul>
-            </li>
-            <li>
-                <a routerLink="/home/details">
+                <a routerLink="/superuser/manage-users">
                     <i class='bx bx-folder'></i>
                     <span class="link_name">Mi Usuario</span>
                 </a>
@@ -44,12 +35,12 @@
                 </ul>
             </li>
             <li>
-                <a routerLink="/home/load-file">
-                    <i class='bx bx-grid-alt'></i>
-                    <span class="link_name">Cargar archivo</span>
+                <a routerLink="/superuser/load-file">
+                    <i class='bx bx-folder'></i>
+                    <span class="link_name">File Manager</span>
                 </a>
                 <ul class="sub-menu blank">
-                    <li><a class="link_name">Cargar archivo</a></li>
+                    <li><a class="link_name" href="#">Files</a></li>
                 </ul>
             </li>
             <li>
@@ -93,18 +84,3 @@
 
 
 
-
-<!-- 
-<script>
-    let btn = document.querySelector("btn");
-    let sidebar = document.querySelector(".sidebar");
-    let searchBtn = document.querySelector(".bx-search");
-
-    btn.onclick = function () {
-        console.log("Hola")
-        sidebar.classList.toggle("active");
-    }
-    searchBtn.onclick = function () {
-        sidebar.classList.toggle("active");
-    }
-</script> -->

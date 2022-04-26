@@ -87,33 +87,35 @@ export class SuperuserLoadFileComponent implements OnInit, OnDestroy {
     this.file = files[0];
     this.fileBrowserHandler(this.file);
     this.header = (this.header as unknown as string) === 'true' || this.header === true;
-    // this.ngxCsvParser.parse(files[0], {header: this.header, delimiter: ','})
-    // .pipe().subscribe({
-    //   next: (result): void =>{
-    //     //console.log('Result', result);
-    //     this.csvRecords = result
-    //     try{
-    //       this.userInput = this.csvRecords
 
-    //       //Crea empleados en base al CSV
-    //       this.allUsers = this.createUser(this.userInput)
-    //       this.temporalTeam360 = this.getTeams(this.allUsers)
-    //       this.allTeam360 = this.mergeTeams(this.temporalTeam360)
+    //CARGAR ARCHIVO
+    this.ngxCsvParser.parse(files[0], {header: this.header, delimiter: ','})
+    .pipe().subscribe({
+      next: (result): void =>{
+        //console.log('Result', result);
+        this.csvRecords = result
+        try{
+          this.userInput = this.csvRecords
 
-    //       //Guarda los equipos localmente
-    //       this.data.changeLocalTeam(this.allTeam360[1])
+          //Crea empleados en base al CSV
+          this.allUsers = this.createUser(this.userInput)
+          this.temporalTeam360 = this.getTeams(this.allUsers)
+          this.allTeam360 = this.mergeTeams(this.temporalTeam360)
+
+          //Guarda los equipos localmente
+          this.data.changeLocalTeam(this.allTeam360[1])
           
-    //     }
-    //     catch{
-    //       console.log("Archivo no valido")
-    //     }
+        }
+        catch{
+          console.log("Archivo no valido")
+        }
         
         
-    //   },
-    //   error: (error: NgxCSVParserError): void =>{
-    //     console.log('Error', error)
-    //   }
-    // })
+      },
+      error: (error: NgxCSVParserError): void =>{
+        console.log('Error', error)
+      }
+    })
   }
 
   createData() {

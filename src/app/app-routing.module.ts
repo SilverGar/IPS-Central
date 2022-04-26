@@ -16,6 +16,13 @@ import { EmployeeRequestComponent } from './components/employee/employee-request
 //Shared
 import { SidebarComponent } from './components/shared/sidebar/sidebar.component';
 import { EmployeeNotificationsComponent } from './components/employee/employee-notifications/employee-notifications.component';
+import { SuperuserLoadFileComponent } from './components/superuser/superuser-load-file/superuser-load-file.component';
+import { SidebarSuperuserComponent } from './components/shared/sidebar-superuser/sidebar-superuser.component';
+import { SidebarHumanresourcesComponent } from './components/shared/sidebar-humanresources/sidebar-humanresources.component';
+import { MANAGEUSERSComponent } from './components/superuser/manage-users/manage-users.component';
+import { SuperuserHomeComponent } from './components/superuser/superuser-home/superuser-home.component';
+import { HrDashboardComponent } from './components/humanresources/hr-dashboard/hr-dashboard.component';
+import { HrNotificationsComponent } from './components/humanresources/hr-notifications/hr-notifications.component';
 
 const routes: Routes = [
   
@@ -48,6 +55,50 @@ const routes: Routes = [
       {
         path: 'notifications',
         component: EmployeeNotificationsComponent,
+        canActivate: [MsalGuard]
+      },
+      {
+        path: 'load-file',
+        component: SuperuserLoadFileComponent,
+        canActivate: [MsalGuard]
+      }
+    ]
+  },
+  {
+    path: 'superuser',
+    component: SidebarSuperuserComponent,
+    canActivate: [MsalGuard],
+    children:[
+      {
+        path: 'load-file',
+        component: SuperuserLoadFileComponent,
+        canActivate: [MsalGuard]
+      },
+      {
+        path: 'manage-users',
+        component: MANAGEUSERSComponent,
+        canActivate: [MsalGuard]
+      },
+      {
+        path: 'dashboard',
+        component: SuperuserHomeComponent,
+        canActivate: [MsalGuard]
+      }
+    ]
+  },
+  {
+    path: 'admin',
+    component: SidebarHumanresourcesComponent,
+    canActivate: [MsalGuard],
+    children:[
+      {
+        path: 'dashboard',
+        component: HrDashboardComponent,
+        canActivate: [MsalGuard]
+      },
+      {
+        path: 'notifications',
+        component: HrNotificationsComponent,
         canActivate: [MsalGuard]
       }
     ]
