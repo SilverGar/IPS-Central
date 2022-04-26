@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { Component, OnDestroy, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { Data } from '@angular/router';
 import { error } from 'console';
 import { NgxCsvParser, NgxCSVParserError } from 'ngx-csv-parser';
@@ -18,6 +18,7 @@ export class SuperuserLoadFileComponent implements OnInit, OnDestroy {
   csvRecords: any;
   userInput: Array<Array<string>> = [[]]
   header: boolean = false;
+  file: any;
 
 
   //Create user variables
@@ -40,15 +41,83 @@ export class SuperuserLoadFileComponent implements OnInit, OnDestroy {
 
   constructor(
     private ngxCsvParser: NgxCsvParser,
-    private data: DataSharingService
+    private data: DataSharingService, 
   ) { }
 
-  @ViewChild('fileImportInput') fileImportInput: any;
+  // @ViewChild('fileImportInput') fileImportInput: any;
+  @ViewChild("fileDropRef", { static: false }) fileDropEl!: ElementRef;
+
+  formatSize(size: number, decimal = 2){
+    if(size === 0){
+      return "0 bytes";
+    }
+    const k = 1024;
+    const dm = decimal <= 0 ? 0 : decimal;
+    const sizes = ["Bytes", "KB", "MB"];
+    const i = Math.floor(Math.log(size) / Math.log(k));
+    return parseFloat((size / Math.pow(k, i)).toFixed(dm)) + " " + sizes[i];
+}
+
+  fileBrowserHandler(file: any){
+    this.progressDisplay(file);
+  }
+  
+  progressBarSim(){
+    setTimeout(() =>{
+      const progressInterval = setInterval(() =>{
+        if(this.csvRecords.progress === 100){
+          clearInterval(progressInterval);
+        }
+        else{
+          this.csvRecords.progress += 1;
+        }
+      }, 5);
+    }, 1000);
+  }
+
+  progressDisplay(file: any){
+    file.progress = 0;
+    this.csvRecords = file;
+    this.fileDropEl.nativeElement.value = "";
+    this.progressBarSim();
+  }
 
   fileChangeListener($event: any): void{
     const files = $event.srcElement.files;
+    this.file = files[0];
+    this.fileBrowserHandler(this.file);
     this.header = (this.header as unknown as string) === 'true' || this.header === true;
-    this.ngxCsvParser.parse(files[0], {header: this.header, delimiter: ','})
+    // this.ngxCsvParser.parse(files[0], {header: this.header, delimiter: ','})
+    // .pipe().subscribe({
+    //   next: (result): void =>{
+    //     //console.log('Result', result);
+    //     this.csvRecords = result
+    //     try{
+    //       this.userInput = this.csvRecords
+
+    //       //Crea empleados en base al CSV
+    //       this.allUsers = this.createUser(this.userInput)
+    //       this.temporalTeam360 = this.getTeams(this.allUsers)
+    //       this.allTeam360 = this.mergeTeams(this.temporalTeam360)
+
+    //       //Guarda los equipos localmente
+    //       this.data.changeLocalTeam(this.allTeam360[1])
+          
+    //     }
+    //     catch{
+    //       console.log("Archivo no valido")
+    //     }
+        
+        
+    //   },
+    //   error: (error: NgxCSVParserError): void =>{
+    //     console.log('Error', error)
+    //   }
+    // })
+  }
+
+  createData() {
+    this.ngxCsvParser.parse(this.file, {header: this.header, delimiter: ','})
     .pipe().subscribe({
       next: (result): void =>{
         //console.log('Result', result);
@@ -271,12 +340,12 @@ export class SuperuserLoadFileComponent implements OnInit, OnDestroy {
 
 
 
-    for(var i in mergedTeams){
-      console.log("ID: " +  mergedTeams[i].teamOwner.ID + " TeamOwner: " + mergedTeams[i].teamOwner.userName)
-      for (var j in mergedTeams[i].relationships){
-        console.log("  Persona: " + mergedTeams[i].relationships[j].userName)
-      }
-    }
+    // for(var i in mergedTeams){
+    //   console.log("ID: " +  mergedTeams[i].teamOwner.ID + " TeamOwner: " + mergedTeams[i].teamOwner.userName)
+    //   for (var j in mergedTeams[i].relationships){
+    //     console.log("  Persona: " + mergedTeams[i].relationships[j].userName)
+    //   }
+    // }
 
     return mergedTeams
 
@@ -293,12 +362,5 @@ export class SuperuserLoadFileComponent implements OnInit, OnDestroy {
     }
     return uniqueRelations
   }
-
-
- 
-
-
-
-
 
 }

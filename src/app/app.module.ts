@@ -24,6 +24,7 @@ import { SuperuserLoadFileComponent } from './components/superuser/superuser-loa
 import { SignInComponent } from './components/shared/sign-in/sign-in.component';
 import { MANAGEUSERSComponent } from './components/superuser/manage-users/manage-users.component';
 import { EmployeeRequestComponent } from './components/employee/employee-request/employee-request.component';
+import { ProgressBarComponent } from './components/shared/progress-bar/progress-bar.component';
 
 const isIE = window.navigator.userAgent.indexOf('MSIE ') > -1 || window.navigator.userAgent.indexOf('Trident/') > -1;
 
@@ -40,7 +41,8 @@ const isIE = window.navigator.userAgent.indexOf('MSIE ') > -1 || window.navigato
     SuperuserLoadFileComponent,
     SignInComponent,
     MANAGEUSERSComponent,
-    EmployeeRequestComponent
+    EmployeeRequestComponent,
+    ProgressBarComponent
   ],
   imports: [
     BrowserModule,
