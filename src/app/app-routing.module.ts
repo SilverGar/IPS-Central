@@ -15,6 +15,7 @@ import { EmployeeRequestComponent } from './components/employee/employee-request
 
 //Shared
 import { SidebarComponent } from './components/shared/sidebar/sidebar.component';
+import { EmployeeNotificationsComponent } from './components/employee/employee-notifications/employee-notifications.component';
 
 const routes: Routes = [
   
@@ -37,6 +38,16 @@ const routes: Routes = [
       {
         path: 'request',
         component: EmployeeRequestComponent,
+        canActivate: [MsalGuard]
+      },
+      {
+        path: 'details',
+        component: EmployeeDetailsComponent,
+        canActivate: [MsalGuard]
+      },
+      {
+        path: 'notifications',
+        component: EmployeeNotificationsComponent,
         canActivate: [MsalGuard]
       }
     ]

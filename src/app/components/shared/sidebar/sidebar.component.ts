@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { MsalService } from '@azure/msal-angular';
 
 @Component({
   selector: 'app-sidebar',
@@ -7,12 +9,19 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SidebarComponent implements OnInit {
 
-  constructor() { }
+  constructor(
+    private router: Router,
+    private authService: MsalService
+  ) { }
 
   ngOnInit(): void {
   }
 
-
+  logout() { // Add log out function here
+    this.authService.logoutPopup({
+      mainWindowRedirectUri: "/"
+    });
+  }
   }
 
 //   toggleSidebar(){
