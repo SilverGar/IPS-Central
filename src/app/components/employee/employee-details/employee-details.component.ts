@@ -3,6 +3,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { MsalBroadcastService } from '@azure/msal-angular';
 import { EventMessage, EventType } from '@azure/msal-browser';
 import { filter, map } from 'rxjs';
+import { MsSignInService } from 'src/app/services/ms-sign-in.service';
 
 const GRAPH_ENDPOINT = 'https://graph.microsoft.com/v1.0/me';
 const GRAPH_ENDPOINTPHOTO = 'https://graph.microsoft.com/v1.0/me/photo/$value'
@@ -24,11 +25,13 @@ type ProfileType = {
 
 
 export class EmployeeDetailsComponent implements OnInit {
-
   profile!: ProfileType;
+
+
   constructor(
     private http: HttpClient,
     private msalBroadcastService: MsalBroadcastService,
+    private msSignIn: MsSignInService
   ) { }
 
   ngOnInit(): void {
@@ -47,17 +50,17 @@ export class EmployeeDetailsComponent implements OnInit {
 
 
   getProfile(){
-    this.http.get(GRAPH_ENDPOINT)
-      .subscribe(profile =>{
-        this.profile = profile;
-      });
+
+    this.msSignIn.getProfile().subscribe(resp => {
+      this.profile = resp;
+    });
   }
 
   getProfilePhoto(){
-    this.http.get(GRAPH_ENDPOINTPHOTO)
-      .subscribe((blob) => {
-        this
-      })
+    // this.http.get(GRAPH_ENDPOINTPHOTO)
+    //   .subscribe((blob) => {
+    //     this
+    //   })
   }
 
 }

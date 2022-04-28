@@ -1,11 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { DbUserTeam360 } from 'src/app/models/db-user';
-import { Observable, throwError } from 'rxjs';
-import { catchError, retry } from 'rxjs/operators';
-import { DataSharingService } from './data-sharing.service';
 import { map } from 'rxjs';
-import { newArray } from '@angular/compiler/src/util';
 
 
 @Injectable({

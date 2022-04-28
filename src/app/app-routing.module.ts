@@ -56,11 +56,6 @@ const routes: Routes = [
         path: 'notifications',
         component: EmployeeNotificationsComponent,
         canActivate: [MsalGuard]
-      },
-      {
-        path: 'load-file',
-        component: SuperuserLoadFileComponent,
-        canActivate: [MsalGuard]
       }
     ]
   },
@@ -87,7 +82,7 @@ const routes: Routes = [
     ]
   },
   {
-    path: 'admin',
+    path: 'hr',
     component: SidebarHumanresourcesComponent,
     canActivate: [MsalGuard],
     children:[

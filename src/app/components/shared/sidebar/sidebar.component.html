@@ -46,21 +46,12 @@
                 </ul>
             </li>
             <li>
-                <a routerLink="/home/load-file">
-                    <i class='bx bx-grid-alt'></i>
-                    <span class="link_name">Cargar archivo</span>
-                </a>
-                <ul class="sub-menu blank">
-                    <li><a class="link_name">Cargar archivo</a></li>
-                </ul>
-            </li>
-            <li>
                 <div class="profile-details">
                     <div class="profile-content">
                         <img src="http://localhost:4200/assets/stock.jpeg" alt="">
                     </div>
                         <div class="name-job">
-                            <div class="profile_name">Jorge Maa</div>
+                            <div class="profile_name">{{profile.givenName}}</div>
                             <div class="job">Recursos Humanos</div>
                         </div>
                         <i class='bx bx-log-out' id="log_out" (click)="logout()"></i>
@@ -73,43 +64,7 @@
 
         <router-outlet></router-outlet>
     </section>
-    <!-- <script>
-        let arrow = document.querySelectorAll(".arrow");
-        for(var i = 0; i < arrow.length; i++) {
-            arrow[i].addEventListener("click", (e)=>{
-                let arrowParent = e.target.parentElement.parentElement;
-                console.log(arrowParent);
-                arrowParent.classList.toggle("showMenu");
-            });
-        }
-
-        let sidebar = document.querySelector(".sidebar");
-        let sidebarBtn = document.querySelector(".bx-menu");
-        console.log(sidebarBtn)
-        sidebarBtn.addEventListener("click", ()=>{
-            sidebar.classList.toggle("close");
-        });
-    </script> -->
     
 </body>
 
 </html>
-
-
-
-
-
-<!-- 
-<script>
-    let btn = document.querySelector("btn");
-    let sidebar = document.querySelector(".sidebar");
-    let searchBtn = document.querySelector(".bx-search");
-
-    btn.onclick = function () {
-        console.log("Hola")
-        sidebar.classList.toggle("active");
-    }
-    searchBtn.onclick = function () {
-        sidebar.classList.toggle("active");
-    }
-</script> -->

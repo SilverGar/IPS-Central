@@ -9,8 +9,6 @@ import { DatabaseService } from './database.service';
   providedIn: 'root'
 })
 export class DataSharingService {
-  private messageSource = new BehaviorSubject('Default Message');
-  currentMessage = this.messageSource.asObservable();
 
   initTeams: Team360 = {} as Team360;
   private generatedTeams = new BehaviorSubject<Team360>(this.initTeams)
@@ -24,10 +22,6 @@ export class DataSharingService {
   constructor(
     private db: DatabaseService
   ) { }
-
-  changeMessage(message: string){
-    this.messageSource.next(message)
-  }
 
   changeLocalTeam(message: Team360){
     this.generatedTeams.next(message)
