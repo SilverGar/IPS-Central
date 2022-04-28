@@ -29,7 +29,6 @@ const routes: Routes = [
 export class SignInComponent implements OnInit {
 
   isIframe = false;
-  loginDisplay = false;
   private readonly _destroying$ = new Subject<void>();
 
   alert(){
@@ -67,7 +66,7 @@ export class SignInComponent implements OnInit {
       takeUntil(this._destroying$)
     )
     .subscribe(() => {
-      this.setLoginDisplay();
+
     })
   }
 
@@ -78,8 +77,6 @@ export class SignInComponent implements OnInit {
       this.authService.loginPopup({...this.msalGuardConfig.authRequest} as PopupRequest)
       .subscribe({
         next: (result) => {
-          console.log(result);
-          this.setLoginDisplay();
           this.router.navigateByUrl('/home/employee_home')
         },
         error: (error) => console.log(error)
@@ -93,10 +90,6 @@ export class SignInComponent implements OnInit {
     });
   }
 
-  setLoginDisplay() {
-    this.loginDisplay = this.authService.instance.getAllAccounts().length > 0;
-
-  }
 
   ngOnDestroy(): void {
     this._destroying$.next(undefined);
