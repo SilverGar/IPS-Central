@@ -35,6 +35,8 @@
                     <th>Como evaluo</th>
                     <th>Horas Totales</th>
                 </tr>
+
+                <!-- DATABASE -->
                 <tr *ngFor="let team of displayTeam">
                     <th>{{team.ID}}</th>
                     <th>{{team.name}}</th>
@@ -43,10 +45,16 @@
                     <th *ngIf="team.TipoEval == 2">Leader</th>
                     <th>{{team.hours}}</th>
                 </tr>
+
+                <!-- <tr *ngFor="let team of displayTeam?.relationships">
+                    <th>{{team.ID}}</th>
+                    <th>{{team.userName}}</th>
+                    <th>{{team.clientname}}</th>
+                    <th>{{team.hours}}</th>
+                </tr> -->
                 
             </table>
         </section>
-        <app-superuser-load-file></app-superuser-load-file>
     </section>
 </body>
 
