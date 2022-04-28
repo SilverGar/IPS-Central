@@ -32,6 +32,9 @@ export class SignInComponent implements OnInit {
   loginDisplay = false;
   private readonly _destroying$ = new Subject<void>();
 
+  alert(){
+    console.log("picao");
+  }
   // constructor(private ms_signin: MsSignInService, private authService: MsalService, private router: Router2) {}
 
   // ngOnInit(): void {

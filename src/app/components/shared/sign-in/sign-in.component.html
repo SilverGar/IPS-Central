@@ -1,29 +1,63 @@
-<link rel="stylesheet" href="./sign-in.component.css">
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>IPS Central | Login</title>
+</head>
+<body>
+  <main *ngIf="!loginDisplay">
 
-<main>
-  <div *ngIf="!loginDisplay">
+    <div class="text">
+      <div class="text-title">
+        <p>IPS Central | Inflection Point Systems</p>
+      </div>
+      <div class="text-header">
+        <p>Inflection Point Systems Central</p>
+      </div>
+      <div class="text-description">
+        <p>Somos expertos en transformación digital y trabajamos con empresas de sectores verticales como el financiero, la sanidad, la educación, la seguridad, la alta tecnología y la hostelería, entre otros. Nuestro equipo de diseñadores de UI/UX, analistas de negocio, consultores, desarrolladores de software e ingenieros de control de calidad trabaja estrechamente con nuestros clientes para entender su negocio y construir la tecnología y las plataformas para acelerar su innovación y crecimiento.</p>
+      </div>
+    </div>
+
+    <div  class="images">
+      <div class="logo-section">
+        <img src="https://yt3.ggpht.com/a/AGF-l79b_9Tw9iTZ9nM_qOeACpuCz3kUc1EWEsgKUQ=s900-mo-c-c0xffffffff-rj-k-no" title="IPS Logo">
+      </div>
+  
+      <div class="sign-in-section">
+        <input class="sign-in-button" type="image" src="http://localhost:4200/assets/loginAssets/ms-signin-button.svg" (click)="login()"> 
+      </div>
+
+    </div>
+
+
+
     
-  
-    <section class="logo-section">
-      <img src="https://yt3.ggpht.com/a/AGF-l79b_9Tw9iTZ9nM_qOeACpuCz3kUc1EWEsgKUQ=s900-mo-c-c0xffffffff-rj-k-no" alt="">
-    </section>
+  </main>
+  <!-- <footer>
+    <div *ngIf="!loginDisplay" class="footer">
+      <ul class="footer-logos">
+        <li><button onclick="alert()"><img src="http://localhost:4200/assets/footerAssets/facebook-logo.svg" alt=""></button></li>
+        <li><img src="http://localhost:4200/assets/footerAssets/linkedin-logo.svg" alt=""></li>
+        <li><img src="http://localhost:4200/assets/footerAssets/twitter-logo.svg" alt=""></li>
+      </ul>
+      
+      <ul class="footer-right">
+        <li>© 2022 Inflection Point</li>
+      </ul>
+    </div>
+  </footer> -->
+</body>
+</html>
 
-    <section class="sign-in-section">
-      <input class="sign-in-button" type="image" src="http://localhost:4200/assets/loginAssets/ms-signin-button.svg" (click)="login()"> 
-    </section>
-  </div>
-</main>
-<footer>
-  <div *ngIf="!loginDisplay">
-    <ul class="footer-left">
-      <li>Logo</li>
-      <li>Logo</li>
-      <li>Logo</li>
-    </ul>
-    <ul class="footer-right">
-      <li>© 2022 Inflection Point</li>
-    </ul>
-  </div>
-  
-</footer>
+
+
+
+
+
+
+
+
 
