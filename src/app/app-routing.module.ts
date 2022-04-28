@@ -23,10 +23,18 @@ import { MANAGEUSERSComponent } from './components/superuser/manage-users/manage
 import { SuperuserHomeComponent } from './components/superuser/superuser-home/superuser-home.component';
 import { HrDashboardComponent } from './components/humanresources/hr-dashboard/hr-dashboard.component';
 import { HrNotificationsComponent } from './components/humanresources/hr-notifications/hr-notifications.component';
+import { SignInComponent } from './components/shared/sign-in/sign-in.component';
 
 const routes: Routes = [
-  
-  
+  {
+    path: '',
+    redirectTo: '/login',
+    pathMatch: 'full'
+  },
+  {
+    path: 'login',
+    component: SignInComponent
+  },
   {
     path: 'employee_details',
     component: EmployeeDetailsComponent,

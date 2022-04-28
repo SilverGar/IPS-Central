@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MsSignInService } from 'src/app/services/ms-sign-in.service';
 
+
 type ProfileType = {
   givenName?: string;
   surname?: string,

@@ -52,7 +52,7 @@ export class MsSignInService {
 
   logout() {
     this.authService.logoutPopup({
-      mainWindowRedirectUri: "/"
+      mainWindowRedirectUri: "/login"
     });
   }
 
