@@ -7,7 +7,7 @@
   <title>IPS Central | Login</title>
 </head>
 <body>
-  <main>
+  <main *ngIf="!loginDisplay">
 
     <div class="text">
       <div class="text-title">
@@ -34,30 +34,29 @@
 
 
 
-    
-  </main>
-  <!-- <footer>
-    <div *ngIf="!loginDisplay" class="footer">
-      <ul class="footer-logos">
-        <li><button onclick="alert()"><img src="http://localhost:4200/assets/footerAssets/facebook-logo.svg" alt=""></button></li>
-        <li><img src="http://localhost:4200/assets/footerAssets/linkedin-logo.svg" alt=""></li>
-        <li><img src="http://localhost:4200/assets/footerAssets/twitter-logo.svg" alt=""></li>
-      </ul>
-      
-      <ul class="footer-right">
-        <li>© 2022 Inflection Point</li>
-      </ul>
-    </div>
-  </footer> -->
-</body>
-</html>
+<main>
+  <div *ngIf="!loginDisplay">
+    <section class="logo-section">
+      <img src="https://yt3.ggpht.com/a/AGF-l79b_9Tw9iTZ9nM_qOeACpuCz3kUc1EWEsgKUQ=s900-mo-c-c0xffffffff-rj-k-no" alt="">
+    </section>
 
+    <section class="sign-in-section">
+      <input class="sign-in-button" type="image" src="http://localhost:4200/assets/loginAssets/ms-signin-button.svg" (click)="login()"> 
+    </section>
+  </div>
+</main>
 
-
-
-
-
-
-
-
+<footer>
+  <div *ngIf="!loginDisplay">
+    <ul class="footer-left">
+      <li>Logo</li>
+      <li>Logo</li>
+      <li>Logo</li>
+    </ul>
+    <ul class="footer-right">
+      <li>© 2022 Inflection Point</li>
+    </ul>
+  </div>
+  
+</footer>
 
