@@ -22,7 +22,7 @@
                     </div>
         
                     <div class="add-user-button-right">
-                        <a class="add-user">Guardar</a>
+                        <a class="add-user">Confirmar equipo</a> 
                     </div>
                 </div>
             </div>
@@ -38,12 +38,12 @@
 
                 <!-- DATABASE -->
                 <tr *ngFor="let team of displayTeam">
-                    <th>{{team.ID}}</th>
-                    <th>{{team.name}}</th>
+                    <th>1</th>
+                    <th>{{team.Partner}}</th>
                     <th *ngIf="team.TipoEval == 0">Peer</th>
                     <th *ngIf="team.TipoEval == 1">Team</th>
                     <th *ngIf="team.TipoEval == 2">Leader</th>
-                    <th>{{team.hours}}</th>
+                    <th>{{team.Horas}}</th>
                 </tr>
 
                 <!-- <tr *ngFor="let team of displayTeam?.relationships">

@@ -342,12 +342,12 @@ export class SuperuserLoadFileComponent implements OnInit, OnDestroy {
 
 
 
-    // for(var i in mergedTeams){
-    //   console.log("ID: " +  mergedTeams[i].teamOwner.ID + " TeamOwner: " + mergedTeams[i].teamOwner.userName)
-    //   for (var j in mergedTeams[i].relationships){
-    //     console.log("  Persona: " + mergedTeams[i].relationships[j].userName)
-    //   }
-    // }
+    for(var i in mergedTeams){
+      console.log("ID: " +  mergedTeams[i].teamOwner.ID + " TeamOwner: " + mergedTeams[i].teamOwner.userName)
+      for (var j in mergedTeams[i].relationships){
+        console.log("  Persona: " + mergedTeams[i].relationships[j].userName)
+      }
+    }
 
     return mergedTeams
 

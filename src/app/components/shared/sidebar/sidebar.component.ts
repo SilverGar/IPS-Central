@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
-import { MsalService } from '@azure/msal-angular';
+import { MsSignInService } from 'src/app/services/ms-sign-in.service';
 
 @Component({
   selector: 'app-sidebar',
@@ -10,27 +9,14 @@ import { MsalService } from '@azure/msal-angular';
 export class SidebarComponent implements OnInit {
 
   constructor(
-    private router: Router,
-    private authService: MsalService
+    private msSignIn: MsSignInService
   ) { }
 
   ngOnInit(): void {
+    
   }
 
   logout() { // Add log out function here
-    this.authService.logoutPopup({
-      mainWindowRedirectUri: "/"
-    });
+    this.msSignIn.logout()
   }
-  }
-
-//   toggleSidebar(){
-//     let btn = document.querySelector("btn");
-//     let sidebar = document.querySelector(".sidebar");
-//     let searchBtn = document.querySelector(".bx-search");
-//     console.log("Test")
-
-    
-// }
-//   }
-
+}

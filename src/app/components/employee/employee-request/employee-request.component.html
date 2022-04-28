@@ -12,11 +12,11 @@
                 </div>
                 <div class="button-section">
                     <div class="add-user-button-center">
-                        <a class="add-user" routerLink="/home/employee_home">Cancelar</a>
+                        <a class="add-user" routerLink="/home/employee_home">Regresar</a>
                     </div>
         
                     <div class="add-user-button-right">
-                        <a class="add-user">Guardar</a>
+                        <a class="add-user">Realizar Peticion</a>
                     </div>
                 </div>
             </div>
@@ -34,8 +34,8 @@
                 <!-- Cicla por toda la informacion de displayTeam Es un Array en base a la interface DbUserTeam360 del codigo typescript -->
                 <tr *ngFor="let team of displayTeam">
                     <!-- Por cada objeto que se obtiene las caracteristias a desplegar -->
-                    <th>{{team.ID}}</th>
-                    <th>{{team.name}}</th>
+                    <th>1</th>
+                    <th>{{team.Partner}}</th>
 
                     <!-- Si es 0 -> Es evaluacion PEER, Si es 1 -> Es evaluacion TEAM, Si es 2 -> Es evaluacion LEADER -->
                     <th *ngIf="team.TipoEval == 0">Peer</th>
@@ -43,29 +43,35 @@
                     <th *ngIf="team.TipoEval == 2">Leader</th>
 
                     <!-- Despliega horas-->
-                    <th>{{team.hours}}</th>
+                    <th>{{team.Horas}}</th>
 
                     <!-- Columna para las CHECKBOXES -->
                     <th>
                         <!-- Input CHECKBOX, Se para el team.Check1 para determinar en que posicion esta el CHECKBOX -->
                         <!-- El CHANGE ayuda a invertir el valor para que se actualize el objeto displayTeam -->
                         <label class="switch">
-                            <input type="checkbox" value="{{team.Check1}}" [checked]="team.Check1" (change)="team.Check1 = !team.Check1; debugging()">
+                            <input type="checkbox" value="{{team.Check1}}" [checked]="team.Check1" (change)="team.Check1 = !team.Check1">
                             <span class="slider"></span>
                         </label>
 
                         <!-- En base al team.Check1, determina si despliega Conservar o Remover -->
                         <h3 *ngIf="team.Check1 == true">Conservar</h3>
-                        <h3 *ngIf="team.Check1 == false"> Remover</h3>
+                        <h3 *ngIf="team.Check1 == false">Remover</h3>
                     </th>
 
                     <!-- En base al team.Check1, determina si habilita o deshabilita la informacion -->
                     <th *ngIf="!team.Check1">
-                        <input type="text">
+                        <textarea class="enabledTextbox"></textarea>
                     </th>
                     <th *ngIf="team.Check1">
-                        <input type="text" disabled>
+                        <textarea class="disabledTextbox" disabled></textarea>
                     </th>
+                    <!-- <th *ngIf="!team.Check1">
+                        <input type="text" class="enabledTextbox">
+                    </th>
+                    <th *ngIf="team.Check1">
+                        <input type="text" class="disabledTextbox" disabled>
+                    </th> -->
                 </tr>
                 
             </table>

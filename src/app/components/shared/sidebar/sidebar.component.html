@@ -9,6 +9,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Apricot Sidebar</title>
 </head>
+
+
 <body>
     <div class="sidebar">
         <div class="logo-details">
@@ -19,10 +21,10 @@
             <li>
                 <a routerLink="/home/employee_home">
                     <i class='bx bx-grid-alt'></i>
-                    <span class="link_name">Dashboard</span>
+                    <span class="link_name">Inicio</span>
                 </a>
                 <ul class="sub-menu blank">
-                    <li><a class="link_name">Dashboard</a></li>
+                    <li><a class="link_name">Inicio</a></li>
                 </ul>
             </li>
             <li>
@@ -66,10 +68,12 @@
             </li>
         </ul>
     </div>
+    
     <section class="home-section">
+
         <router-outlet></router-outlet>
     </section>
-    <script>
+    <!-- <script>
         let arrow = document.querySelectorAll(".arrow");
         for(var i = 0; i < arrow.length; i++) {
             arrow[i].addEventListener("click", (e)=>{
@@ -85,9 +89,10 @@
         sidebarBtn.addEventListener("click", ()=>{
             sidebar.classList.toggle("close");
         });
-    </script>
+    </script> -->
     
 </body>
+
 </html>
 
 

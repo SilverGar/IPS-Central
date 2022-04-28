@@ -28,6 +28,7 @@ import { ProgressBarComponent } from './components/shared/progress-bar/progress-
 import { EmployeeNotificationsComponent } from './components/employee/employee-notifications/employee-notifications.component';
 import { SidebarHumanresourcesComponent } from './components/shared/sidebar-humanresources/sidebar-humanresources.component';
 import { SidebarSuperuserComponent } from './components/shared/sidebar-superuser/sidebar-superuser.component';
+import { ConfirmationDialogLogoutComponent } from './components/shared/ui/confirmation-dialog-logout/confirmation-dialog-logout.component';
 
 
 const isIE = window.navigator.userAgent.indexOf('MSIE ') > -1 || window.navigator.userAgent.indexOf('Trident/') > -1;
@@ -49,7 +50,8 @@ const isIE = window.navigator.userAgent.indexOf('MSIE ') > -1 || window.navigato
     ProgressBarComponent,
     EmployeeNotificationsComponent,
     SidebarHumanresourcesComponent,
-    SidebarSuperuserComponent
+    SidebarSuperuserComponent,
+    ConfirmationDialogLogoutComponent
   ],
   imports: [
     BrowserModule,

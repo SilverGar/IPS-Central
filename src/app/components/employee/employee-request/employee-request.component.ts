@@ -8,6 +8,7 @@ import { DataSharingService } from 'src/app/services/dataManagement/data-sharing
 
 import * as e from 'express';
 import { DbUserTeam360 } from 'src/app/models/db-user';
+import { DatabaseService } from 'src/app/services/dataManagement/database.service';
 
 const GRAPH_ENDPOINT = 'https://graph.microsoft.com/v1.0/me';
 const GRAPH_ENDPOINTPHOTO = 'https://graph.microsoft.com/v1.0/me/photo/$value';
@@ -39,7 +40,8 @@ export class EmployeeRequestComponent implements OnInit, OnDestroy {
   constructor(
     private http: HttpClient, 
     private msalBroadcastService: MsalBroadcastService,
-    private data: DataSharingService
+    private data: DataSharingService,
+    private db: DatabaseService
   ) { }
 
   ngOnInit(): void {
@@ -53,8 +55,18 @@ export class EmployeeRequestComponent implements OnInit, OnDestroy {
 
     this.getProfile();
 
-    //Carga la informacion
-    this.subscription = this.data.currentUserTeams.subscribe(message => this.displayTeam = message)
+    //Carga la informacion [Con DataSharingService]
+    //this.subscription = this.data.currentUserTeams.subscribe(message => this.displayTeam = message)
+
+    //Carga la informacion [Con Base de Datos directo]
+    this.db.getEmployeeTeam(1).subscribe(resp => {
+      this.displayTeam = resp;
+      for(let i in this.displayTeam){
+        if(this.displayTeam[i].Check1 == null){
+          this.displayTeam[i].Check1 = true
+        }
+      }
+    })
   }
 
   ngOnDestroy(): void {
@@ -75,10 +87,4 @@ export class EmployeeRequestComponent implements OnInit, OnDestroy {
         console.log(photo);
       })
   }
-
-  debugging(){
-    console.log(this.displayTeam)
-  }
-
-
 }

@@ -2,6 +2,8 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { DbUserTeam360 } from 'src/app/models/db-user';
 import { Team360 } from 'src/app/models/userModels';
+import { DatabaseService } from './database.service';
+
 
 @Injectable({
   providedIn: 'root'
@@ -14,12 +16,14 @@ export class DataSharingService {
   private generatedTeams = new BehaviorSubject<Team360>(this.initTeams)
   currentTeams = this.generatedTeams.asObservable();
 
-  initDataTeams: Array<DbUserTeam360> = []
-  private databaseUserTeams = new BehaviorSubject<Array<DbUserTeam360>>(this.loadTemporalData())
-  currentUserTeams = this.databaseUserTeams.asObservable()
+  // initDataTeams: Array<DbUserTeam360> = []
+  // private databaseUserTeams = new BehaviorSubject<Array<DbUserTeam360>>(this.initDataTeams)
+  // currentUserTeams = this.databaseUserTeams.asObservable()
 
 
-  constructor() { }
+  constructor(
+    private db: DatabaseService
+  ) { }
 
   changeMessage(message: string){
     this.messageSource.next(message)
@@ -29,49 +33,56 @@ export class DataSharingService {
     this.generatedTeams.next(message)
   }
 
-  changeUserTeam(message: Array<DbUserTeam360>){
-    this.databaseUserTeams.next(message)
-  }
+  // changeUserTeam(message: Array<DbUserTeam360>){
+  //   this.databaseUserTeams.next(message)
+  // }
 
-  loadTemporalData(): Array<DbUserTeam360>{
-    var user1: DbUserTeam360 = {
-      ID: 0,
-      name: 'Christian',
-      Check1: true,
-      Check2: false,
-      hours: 30,
-      TipoEval: 0
-    }
+  
+  // loadUserDataTest(){
+  //   this.db.testGetData(1).subscribe(resp =>{
+  //     this.changeUserTeam(resp)
+  //   })
+  // }
 
-    var user2: DbUserTeam360 = {
-      ID: 0,
-      name: 'Pedro',
-      Check1: true,
-      Check2: false,
-      hours: 30,
-      TipoEval: 1
-    }
+  // loadTemporalData(): Array<DbUserTeam360>{
+  //   var user1: DbUserTeam360 = {
+  //     ID: 0,
+  //     Partner: 'Christian',
+  //     Check1: true,
+  //     Check2: false,
+  //     Horas: 30,
+  //     TipoEval: 0
+  //   }
 
-    var user3: DbUserTeam360 = {
-      ID: 0,
-      name: 'Jorge',
-      Check1: true,
-      Check2: false,
-      hours: 30,
-      TipoEval: 2
-    }
+  //   var user2: DbUserTeam360 = {
+  //     ID: 0,
+  //     Partner: 'Pedro',
+  //     Check1: true,
+  //     Check2: false,
+  //     Horas: 30,
+  //     TipoEval: 1
+  //   }
 
-    var user4: DbUserTeam360 = {
-      ID: 0,
-      name: 'Silver',
-      Check1: true,
-      Check2: false,
-      hours: 30,
-      TipoEval: 0
-    }
+  //   var user3: DbUserTeam360 = {
+  //     ID: 0,
+  //     Partner: 'Jorge',
+  //     Check1: true,
+  //     Check2: false,
+  //     Horas: 30,
+  //     TipoEval: 2
+  //   }
+
+  //   var user4: DbUserTeam360 = {
+  //     ID: 0,
+  //     Partner: 'Silver',
+  //     Check1: true,
+  //     Check2: false,
+  //     Horas: 30,
+  //     TipoEval: 0
+  //   }
 
 
-    var newDisplay: Array<DbUserTeam360> = [user1, user2, user3, user4]
-    return newDisplay
-  }
+  //   var newDisplay: Array<DbUserTeam360> = [user1, user2, user3, user4]
+  //   return newDisplay
+  // }
 }

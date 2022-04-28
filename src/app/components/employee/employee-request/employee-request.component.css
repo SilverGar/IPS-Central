@@ -1,3 +1,4 @@
+@import url(https://fonts.googleapis.com/css?family=Montserrat);
 :root {
     --gray: #d7d7d7;
     --blue: #46647c;
@@ -253,4 +254,26 @@ input:checked + .slider:before {
 
 h1{
     font-size: 300%;
+}
+
+.enabledTextbox{
+    border: 2px solid lightsalmon;
+    border-radius: 4px;
+    height: 60px;
+    resize: none;
+    box-sizing: border-box;
+    width: 100%;
+    font-size: 12px;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: bolder;
+}
+
+.disabledTextbox{
+    border: 2px solid lightgray;
+    border-radius: 4px;
+    background-color: lightgray;
+    height: 60px;
+    resize: none;
+    box-sizing: border-box;
+    width: 100%;
 }

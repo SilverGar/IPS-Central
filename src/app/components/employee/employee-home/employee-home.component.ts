@@ -7,7 +7,10 @@ import { filter } from 'rxjs/operators';
 import { DataSharingService } from 'src/app/services/dataManagement/data-sharing.service';
 import { Router } from '@angular/router';
 import { DbUserTeam360 } from 'src/app/models/db-user';
-import { Team360 } from 'src/app/models/userModels';
+
+//BASE DE DATOS
+import { DatabaseService } from 'src/app/services/dataManagement/database.service';
+
 const GRAPH_ENDPOINT = 'https://graph.microsoft.com/v1.0/me';
 const GRAPH_ENDPOINTPHOTO = 'https://graph.microsoft.com/v1.0/me/photo/$value';
 
@@ -39,7 +42,8 @@ export class EmployeeHomeComponent implements OnInit, OnDestroy {
     private http: HttpClient, 
     private msalBroadcastService: MsalBroadcastService,
     private data: DataSharingService,
-    private router: Router
+    private router: Router,
+    private db: DatabaseService
     ) { }
 
   ngOnInit(): void {
@@ -54,9 +58,15 @@ export class EmployeeHomeComponent implements OnInit, OnDestroy {
 
     this.getProfile();
 
-    //Carga la informacion
-    this.subscription = this.data.currentUserTeams.subscribe(message => this.displayTeam = message)
+    //Carga la informacion [Con DataSharing Service]
+    // this.subscription = this.data.currentUserTeams.subscribe(message => this.displayTeam = message)
 
+    // this.data.loadUserDataTest()
+
+    //Carga la informacion [Directa a la base de datos]
+    this.db.getEmployeeTeam(1).subscribe(resp => {
+      this.displayTeam = resp
+    })
 
   }
 
@@ -71,11 +81,10 @@ export class EmployeeHomeComponent implements OnInit, OnDestroy {
       });
   }
 
-  getImage(){
-    this.http.get(GRAPH_ENDPOINTPHOTO)
-      .subscribe(photo =>{
-        console.log(photo);
-      })
+
+
+  displayDataTest(){
+
   }
 
   displayRequest(){
