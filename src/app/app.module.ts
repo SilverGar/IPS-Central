@@ -30,6 +30,7 @@ import { SidebarHumanresourcesComponent } from './components/shared/sidebar-huma
 import { SidebarSuperuserComponent } from './components/shared/sidebar-superuser/sidebar-superuser.component';
 import { ConfirmationDialogLogoutComponent } from './components/shared/ui/confirmation-dialog-logout/confirmation-dialog-logout.component';
 import { LoadInfoComponent } from './components/superuser/load-info/load-info.component';
+import { InvalidUserComponent } from './components/shared/invalid-user/invalid-user.component';
 
 
 const isIE = window.navigator.userAgent.indexOf('MSIE ') > -1 || window.navigator.userAgent.indexOf('Trident/') > -1;
@@ -53,7 +54,7 @@ const isIE = window.navigator.userAgent.indexOf('MSIE ') > -1 || window.navigato
     SidebarHumanresourcesComponent,
     SidebarSuperuserComponent,
     ConfirmationDialogLogoutComponent,
-    InvalidUserComponent
+    InvalidUserComponent,
     LoadInfoComponent
   ],
   imports: [
