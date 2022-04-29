@@ -24,7 +24,7 @@ import { SuperuserHomeComponent } from './components/superuser/superuser-home/su
 import { HrDashboardComponent } from './components/humanresources/hr-dashboard/hr-dashboard.component';
 import { HrNotificationsComponent } from './components/humanresources/hr-notifications/hr-notifications.component';
 import { SignInComponent } from './components/shared/sign-in/sign-in.component';
-import { InvalidUserComponent } from './components/shared/invalid-user/invalid-user.component';
+import { LoadInfoComponent } from './components/superuser/load-info/load-info.component';
 
 const routes: Routes = [
   {
@@ -49,9 +49,9 @@ const routes: Routes = [
     path: 'home',
     component: SidebarComponent,
     canActivate: [MsalGuard],
-    children:[
+    children: [
       {
-        path: 'employee_home', 
+        path: 'employee_home',
         component: EmployeeHomeComponent,
         canActivate: [MsalGuard]
       },
@@ -76,7 +76,7 @@ const routes: Routes = [
     path: 'superuser',
     component: SidebarSuperuserComponent,
     canActivate: [MsalGuard],
-    children:[
+    children: [
       {
         path: 'load-file',
         component: SuperuserLoadFileComponent,
@@ -91,6 +91,11 @@ const routes: Routes = [
         path: 'dashboard',
         component: SuperuserHomeComponent,
         canActivate: [MsalGuard]
+      },
+      {
+        path: 'confirm-load',
+        component: LoadInfoComponent,
+        canActivate: [MsalGuard]
       }
     ]
   },
@@ -98,7 +103,7 @@ const routes: Routes = [
     path: 'hr',
     component: SidebarHumanresourcesComponent,
     canActivate: [MsalGuard],
-    children:[
+    children: [
       {
         path: 'dashboard',
         component: HrDashboardComponent,

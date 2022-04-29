@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -9,6 +10,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Apricot Sidebar</title>
 </head>
+
 <body>
     <div class="sidebar">
         <div class="logo-details">
@@ -44,15 +46,24 @@
                 </ul>
             </li>
             <li>
+                <a routerLink="/superuser/confirm-load">
+                    <i class='bx bx-folder'></i>
+                    <span class="link_name">File Manager</span>
+                </a>
+                <ul class="sub-menu blank">
+                    <li><a class="link_name" href="#">Files</a></li>
+                </ul>
+            </li>
+            <li>
                 <div class="profile-details">
                     <div class="profile-content">
                         <img src="http://localhost:4200/assets/stock.jpeg" alt="">
                     </div>
-                        <div class="name-job">
-                            <div class="profile_name">{{profile?.givenName}}</div>
-                            <div class="job">Superusuario</div>
-                        </div>
-                        <i class='bx bx-log-out' id="log_out" (click)="logout()"></i>
+                    <div class="name-job">
+                        <div class="profile_name">Jorge Maa</div>
+                        <div class="job">Recursos Humanos</div>
+                    </div>
+                    <i class='bx bx-log-out' id="log_out" (click)="logout()"></i>
                 </div>
             </li>
         </ul>
@@ -62,8 +73,8 @@
     </section>
     <script>
         let arrow = document.querySelectorAll(".arrow");
-        for(var i = 0; i < arrow.length; i++) {
-            arrow[i].addEventListener("click", (e)=>{
+        for (var i = 0; i < arrow.length; i++) {
+            arrow[i].addEventListener("click", (e) => {
                 let arrowParent = e.target.parentElement.parentElement;
                 console.log(arrowParent);
                 arrowParent.classList.toggle("showMenu");
@@ -73,14 +84,11 @@
         let sidebar = document.querySelector(".sidebar");
         let sidebarBtn = document.querySelector(".bx-menu");
         console.log(sidebarBtn)
-        sidebarBtn.addEventListener("click", ()=>{
+        sidebarBtn.addEventListener("click", () => {
             sidebar.classList.toggle("close");
         });
     </script>
-    
+
 </body>
+
 </html>
-
-
-
-
