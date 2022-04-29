@@ -29,6 +29,7 @@ import { EmployeeNotificationsComponent } from './components/employee/employee-n
 import { SidebarHumanresourcesComponent } from './components/shared/sidebar-humanresources/sidebar-humanresources.component';
 import { SidebarSuperuserComponent } from './components/shared/sidebar-superuser/sidebar-superuser.component';
 import { ConfirmationDialogLogoutComponent } from './components/shared/ui/confirmation-dialog-logout/confirmation-dialog-logout.component';
+import { LoadInfoComponent } from './components/superuser/load-info/load-info.component';
 
 
 const isIE = window.navigator.userAgent.indexOf('MSIE ') > -1 || window.navigator.userAgent.indexOf('Trident/') > -1;
@@ -51,7 +52,8 @@ const isIE = window.navigator.userAgent.indexOf('MSIE ') > -1 || window.navigato
     EmployeeNotificationsComponent,
     SidebarHumanresourcesComponent,
     SidebarSuperuserComponent,
-    ConfirmationDialogLogoutComponent
+    ConfirmationDialogLogoutComponent,
+    LoadInfoComponent
   ],
   imports: [
     BrowserModule,
