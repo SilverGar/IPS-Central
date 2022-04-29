@@ -24,6 +24,7 @@ import { SuperuserHomeComponent } from './components/superuser/superuser-home/su
 import { HrDashboardComponent } from './components/humanresources/hr-dashboard/hr-dashboard.component';
 import { HrNotificationsComponent } from './components/humanresources/hr-notifications/hr-notifications.component';
 import { SignInComponent } from './components/shared/sign-in/sign-in.component';
+import { InvalidUserComponent } from './components/shared/invalid-user/invalid-user.component';
 
 const routes: Routes = [
   {
@@ -39,6 +40,10 @@ const routes: Routes = [
     path: 'employee_details',
     component: EmployeeDetailsComponent,
     canActivate: [MsalGuard]
+  },
+  {
+    path: 'userNotFound',
+    component: InvalidUserComponent,
   },
   {
     path: 'home',

@@ -1,17 +1,9 @@
-import { Component, OnInit, OnDestroy, Inject } from '@angular/core';
-import { MsalService, MsalBroadcastService, MSAL_GUARD_CONFIG, MsalGuardConfiguration } from '@azure/msal-angular';
-import { InteractionStatus, PopupRequest } from '@azure/msal-browser';
+import { Component, OnInit } from '@angular/core';
 import { Subject } from 'rxjs';
-import { filter, takeUntil } from 'rxjs/operators'
-
-import { NgModule } from '@angular/core';
 
 //Router
-import { Router } from 'express';
-import { Route, RouterModule, Routes } from '@angular/router';
+import { Routes } from '@angular/router';
 import { EmployeeHomeComponent } from '../../employee/employee-home/employee-home.component';
-import { Router as Router2 } from '@angular/router';
-import { ThisReceiver } from '@angular/compiler';
 import { MsSignInService } from 'src/app/services/ms-sign-in.service';
 
 const routes: Routes = [
@@ -31,66 +23,16 @@ export class SignInComponent implements OnInit {
   isIframe = false;
   private readonly _destroying$ = new Subject<void>();
 
-  alert(){
-    console.log("picao");
-  }
-  // constructor(private ms_signin: MsSignInService, private authService: MsalService, private router: Router2) {}
-
-  // ngOnInit(): void {
-  //   this.isIframe = window !== window.parent && !window.opener;
-  // }
-
-  // login(){
-  //   this.ms_signin.login();
-  // }
-  
-
-  // login(){
-  //   console.log("Test")
-  //   if(this.ms_signin.login()){
-  //     this.setLoginDisplay()
-  //     this.router.navigateByUrl('/sidebar')
-  //   }
-  // }
-
-
-
-  constructor(@Inject(MSAL_GUARD_CONFIG) private msalGuardConfig: MsalGuardConfiguration, private broadcastService: MsalBroadcastService, private authService: MsalService, private router: Router2) {}
+  constructor(
+    private msSignIn: MsSignInService) {}
 
   ngOnInit(): void {
-    this.isIframe = window !== window.parent && !window.opener;
-
-    this.broadcastService.inProgress$
-    .pipe(
-      filter((status: InteractionStatus) => status === InteractionStatus.None),
-      takeUntil(this._destroying$)
-    )
-    .subscribe(() => {
-
-    })
   }
 
   login(){
-    
-    if(this.msalGuardConfig.authRequest){
-      //this.router.navigate(['./employee_details'])
-      this.authService.loginPopup({...this.msalGuardConfig.authRequest} as PopupRequest)
-      .subscribe({
-        next: (result) => {
-          this.router.navigateByUrl('/home/employee_home')
-        },
-        error: (error) => console.log(error)
-      });
-    }
+    this.msSignIn.login()
   }
-
-  logout() { // Add log out function here
-    this.authService.logoutPopup({
-      mainWindowRedirectUri: "/"
-    });
-  }
-
-
+  
   ngOnDestroy(): void {
     this._destroying$.next(undefined);
     this._destroying$.complete();

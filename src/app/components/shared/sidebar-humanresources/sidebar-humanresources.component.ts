@@ -1,5 +1,13 @@
 import { Component, OnInit } from '@angular/core';
-import { MsalService } from '@azure/msal-angular';
+import { MsSignInService } from 'src/app/services/ms-sign-in.service';
+
+type ProfileType = {
+  givenName?: string;
+  surname?: string,
+  userPrincipalName?: string,
+  id?: string,
+  mail?: string
+};
 
 @Component({
   selector: 'app-sidebar-humanresources',
@@ -8,16 +16,18 @@ import { MsalService } from '@azure/msal-angular';
 })
 export class SidebarHumanresourcesComponent implements OnInit {
 
+  profile!: ProfileType
+
   constructor(
-    private authService: MsalService
+    private msSignIn: MsSignInService
   ) { }
 
   ngOnInit(): void {
+    this.msSignIn.getProfile().subscribe(resp => this.profile = resp);
+    this.msSignIn.verifyPage(1);
   }
 
   logout() { // Add log out function here
-    this.authService.logoutPopup({
-      mainWindowRedirectUri: "/"
-    });
+    this.msSignIn.logout()
   }
 }

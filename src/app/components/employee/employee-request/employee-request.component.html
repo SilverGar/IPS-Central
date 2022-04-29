@@ -12,10 +12,16 @@
                 </div>
                 <div class="button-section">
                     <div class="add-user-button-center">
+                        <figure class=".add-icon">
+                            <img src="http://localhost:4200/assets/backButton.png" alt="icono agregar usuario">
+                        </figure>
                         <a class="add-user" routerLink="/home/employee_home">Regresar</a>
                     </div>
         
-                    <div class="add-user-button-right">
+                    <div class="add-user-button-center">
+                        <figure class=".add-icon">
+                            <img src="http://localhost:4200/assets/confirmButton.png" alt="icono agregar usuario">
+                        </figure>
                         <a class="add-user">Realizar Peticion</a>
                     </div>
                 </div>
@@ -61,10 +67,10 @@
 
                     <!-- En base al team.Check1, determina si habilita o deshabilita la informacion -->
                     <th *ngIf="!team.Check1">
-                        <textarea class="enabledTextbox"></textarea>
+                        <textarea style="padding: 2%;" class="enabledTextbox" (input)="team.reason"></textarea>
                     </th>
                     <th *ngIf="team.Check1">
-                        <textarea class="disabledTextbox" disabled></textarea>
+                        <textarea class="disabledTextbox" disabled ></textarea>
                     </th>
                     <!-- <th *ngIf="!team.Check1">
                         <input type="text" class="enabledTextbox">

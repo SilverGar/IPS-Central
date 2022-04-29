@@ -22,9 +22,8 @@ export class SidebarComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.msSignIn.getProfile().subscribe(resp => {
-      this.profile = resp
-    })
+    this.msSignIn.getProfile().subscribe(resp => this.profile = resp)
+    this.msSignIn.verifyPage(0);
   }
 
   logout() { // Add log out function here

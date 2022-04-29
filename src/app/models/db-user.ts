@@ -12,4 +12,8 @@ export interface DbUserTeam360 {
     reason?: string
 }
 
+export interface UserType{
+    Tipo: number
+}
+
 //HUMAN RESOURCES

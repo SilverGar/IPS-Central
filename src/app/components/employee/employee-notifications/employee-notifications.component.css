@@ -1,0 +1,136 @@
+:root {
+    --gray: #d7d7d7;
+    --blue: #46647c;
+    --black: #333;
+    --orange: #e65624;
+    --deep-blue: #282c38;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    font-size: 62.5%;
+}
+
+
+.main-section {
+    width: 100%;
+    height: fit-content;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.main-section .title-section {
+    width: 70%;
+    display: flex;
+    align-items: center;
+    justify-content: left;
+}
+
+.main-section .title-section h1{
+    font-size: 3rem;
+    margin-bottom: 2.4rem;
+    align-self: left;
+}
+
+#hr-title {
+    width: 100%;
+    display: grid;
+    grid-template-areas: 'left right';
+    grid-template-columns: 35% 1fr;
+    margin-bottom: 1.2rem;
+    align-items: baseline;
+}
+
+.hr-users {
+    width: 98%;
+}
+
+h1{
+    font-size: 300%;
+}
+
+.paddingSidebar{
+    margin-left: 2%;
+    margin-top: 1%;
+}
+
+.employee-users .box-container {
+    width: 100%;
+    height: fit-content;
+    background-color: #d7d7d7;
+    border: 1px dotted #333;
+}
+
+.employee-users .box-container ul{
+    list-style: none;
+}
+
+.employee-table {
+    width: 100%;
+    border: 1px solid #dfe5eb;
+    border-collapse: collapse;
+}
+
+.employee-table tr:nth-child(1) {
+    background-color: #eff2f7;
+}
+
+.employee-table tr:nth-child(even){
+    background-color: #f9fafc;
+}
+
+.employee-table tr th{
+    padding: 1.5rem;
+    text-align: center;
+    border-bottom: 1px solid #dfe5eb;
+}
+
+.employee-table tr td{
+    padding: 1.5rem;
+    text-align: center;    
+    border-bottom: 1px solid #dfe5eb;
+}
+
+.rh-table {
+    width: 100%;
+    border: 1px solid #dfe5eb;
+    border-collapse: collapse;
+    margin-bottom: 2.4rem;
+}
+
+.rh-table tr:nth-child(1) {
+    background-color: #eff2f7;
+}
+
+.rh-table tr:nth-child(even){
+    background-color: #f9fafc;
+}
+
+.rh-table tr th{
+    padding: 1.5rem;
+    text-align: center;
+    border-bottom: 1px solid #dfe5eb;
+}
+
+.rh-table tr td{
+    padding: 1.5rem;
+    text-align: left;
+    border-bottom: 1px solid #dfe5eb;
+}
+
+.rh-table tr td:nth-child(4){
+    padding: 1.5rem;
+    text-align: center;
+    border-bottom: 1px solid #dfe5eb;
+}
+
+.noActive{
+    display: none;
+}
