@@ -19,10 +19,14 @@ html{
 main {
     width: 100%;
     height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
 }
 
 main .title-section {
-    width: 90%;
+    width: 95%;
     margin-bottom: 36px;
 }
 
@@ -31,7 +35,7 @@ main .title-section h1 {
 }
 
 main .content-section {
-    width: 100%;
+    width: 95%;
     height: 70%;
     display: flex;
     justify-content: center;

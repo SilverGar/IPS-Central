@@ -27,7 +27,7 @@ html {
 }
 
 .main-section .title-section {
-    width: 70%;
+    width: 95%;
     display: flex;
     align-items: center;
     justify-content: left;
@@ -45,7 +45,7 @@ html {
     grid-template-areas: 'left right';
     grid-template-columns: 1fr ;
     margin-bottom: 1.2rem;
-    align-items: baseline;
+    align-items: center;
 }
 
 #hr-title .add-user-button {
@@ -84,7 +84,7 @@ html {
 }
 
 .hr-users {
-    width: 70%;
+    width: 95%;
 }
 
 .rh-table {
@@ -172,7 +172,7 @@ input:checked + .slider:before {
 }
 
 .employee-users {
-    width: 70%;
+    width: 95%;
 }
 
 .employee-users h2 {
