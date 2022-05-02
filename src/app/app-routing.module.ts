@@ -25,6 +25,7 @@ import { HrDashboardComponent } from './components/humanresources/hr-dashboard/h
 import { HrNotificationsComponent } from './components/humanresources/hr-notifications/hr-notifications.component';
 import { SignInComponent } from './components/shared/sign-in/sign-in.component';
 import { LoadInfoComponent } from './components/superuser/load-info/load-info.component';
+import { InvalidUserComponent } from './components/shared/invalid-user/invalid-user.component';
 
 const routes: Routes = [
   {

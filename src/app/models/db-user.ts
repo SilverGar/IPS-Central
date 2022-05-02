@@ -1,19 +1,20 @@
 
 //REGULAR USERS
 export interface DbUserTeam360 {
-    ID?: number,
+    TeamOwnerID: number,
     TeamOwner: string,
+    PartnerID: number,
     Partner: string,
     Check1?: boolean,
     Check2?: boolean,
-    Horas: number,
-    TipoEval: number,
-    Approved: number,
+    Hours: number,
+    EvalType: number,
+    Approved?: boolean,
     reason?: string
 }
 
 export interface UserType{
-    Tipo: number
+    Type: number
 }
 
 //HUMAN RESOURCES

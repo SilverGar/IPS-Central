@@ -10,6 +10,7 @@ import { DbUserTeam360 } from 'src/app/models/db-user';
 
 //BASE DE DATOS
 import { DatabaseService } from 'src/app/services/dataManagement/database.service';
+import { MsSignInService } from 'src/app/services/ms-sign-in.service';
 
 const GRAPH_ENDPOINT = 'https://graph.microsoft.com/v1.0/me';
 const GRAPH_ENDPOINTPHOTO = 'https://graph.microsoft.com/v1.0/me/photo/$value';
@@ -18,7 +19,8 @@ type ProfileType = {
   givenName?: string;
   surname?: string,
   userPrincipalName?: string,
-  id?: string
+  id?: string,
+  mail?: string
 };
 @Component({
   selector: 'app-employee-home',
@@ -28,10 +30,10 @@ type ProfileType = {
 export class EmployeeHomeComponent implements OnInit, OnDestroy {
 
   profile!: ProfileType;
-  loginDisplay = false;
+  allowEditing: Boolean = false
 
   displayTeam?: Array<DbUserTeam360>;
-  //displayTeam?: Team360;
+  loadingScreen: boolean = true
 
 
 
@@ -39,53 +41,44 @@ export class EmployeeHomeComponent implements OnInit, OnDestroy {
   subscription?: Subscription;
 
   constructor(
-    private http: HttpClient, 
-    private msalBroadcastService: MsalBroadcastService,
-    private data: DataSharingService,
     private router: Router,
-    private db: DatabaseService
+    private db: DatabaseService,
+    private msSignIn: MsSignInService
     ) { }
 
   ngOnInit(): void {
 
-    this.msalBroadcastService.msalSubject$
-      .pipe(
-        filter((msg: EventMessage) => msg.eventType === EventType.LOGIN_SUCCESS),
-      )
-      .subscribe((result: EventMessage) => {
-        //console.log(result);
-      });
+    //Obtenemos el perfil de Microsoft, con esto obtenemos el Correo, con el cual cuando se obtiene una respuesta
+    //se llama a la funcion this.db.getEmployeeTeam(), esto obtiene el equipo 360 del empleado con el correo correspondiente.
+    this.msSignIn.getProfile().subscribe(resp => {
+      this.profile = resp
 
-    this.getProfile();
+      //Obtenemos el equipo360 de la base de datos
+      this.db.getEmployeeTeam(resp.mail ?? '').subscribe(resp => {
+        this.displayTeam = resp
+      })
 
-    //Carga la informacion [Con DataSharing Service]
-    // this.subscription = this.data.currentUserTeams.subscribe(message => this.displayTeam = message)
-
-    // this.data.loadUserDataTest()
-
-    //Carga la informacion [Directa a la base de datos]
-    this.db.getEmployeeTeam(1).subscribe(resp => {
-      this.displayTeam = resp
+      //Si ya confirmo su equipo, no puede realizar mas cambios y no se presentan los botones.
+      this.db.getEmployeeEditing(resp.mail ?? '').subscribe(resp =>{
+          this.allowEditing = resp
+          this.loadingScreen = false
+      })
     })
+  }
 
+  confirmTeam(){
+    this.db.postEmployeeTeam360(this.displayTeam ?? [], 1).subscribe(resp => {
+      this.db.getEmployeeEditing(this.profile.mail ?? '').subscribe(resp => {
+        this.allowEditing = resp
+      })
+    })
+    
   }
 
   ngOnDestroy(): void {
     this.subscription?.unsubscribe()
   }
 
-  getProfile(){
-    this.http.get(GRAPH_ENDPOINT)
-      .subscribe(profile =>{
-        this.profile = profile;
-      });
-  }
-
-
-
-  displayDataTest(){
-
-  }
 
   displayRequest(){
     this.router.navigateByUrl('/home/request')

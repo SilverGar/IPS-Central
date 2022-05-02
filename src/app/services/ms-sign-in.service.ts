@@ -1,13 +1,12 @@
 import { Injectable } from '@angular/core';
-import { Component, OnInit, OnDestroy, Inject } from '@angular/core';
+import { Inject } from '@angular/core';
 import { MsalService, MsalBroadcastService, MSAL_GUARD_CONFIG, MsalGuardConfiguration } from '@azure/msal-angular';
 import { InteractionStatus, PopupRequest } from '@azure/msal-browser';
-import { BehaviorSubject, Subject } from 'rxjs';
+import { Subject } from 'rxjs';
 import { filter, map, takeUntil } from 'rxjs/operators'
 import { Router as Router2 } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { DatabaseService } from './dataManagement/database.service';
-import { UserType } from '../models/db-user';
 
 const GRAPH_ENDPOINT = 'https://graph.microsoft.com/v1.0/me';
 const GRAPH_ENDPOINTPHOTO = 'https://graph.microsoft.com/v1.0/me/photo/$value'
@@ -61,7 +60,7 @@ export class MsSignInService {
         next: (resp) => {
           this.getProfile().subscribe(resp => {
             this.db.getUserType(resp.mail ?? '').subscribe(resp =>{
-              this.redirect(resp[0].Tipo)
+              this.redirect(resp[0].Type)
             })
           })
         },
@@ -73,8 +72,8 @@ export class MsSignInService {
   verifyPage(currentPage: number){
     this.getProfile().subscribe(resp => {
       this.db.getUserType(resp.mail ?? '').subscribe(resp => {
-        if(resp[0].Tipo != currentPage){
-          this.redirect(resp[0].Tipo)
+        if(resp[0].Type != currentPage){
+          this.redirect(resp[0].Type)
         }
       })
     })

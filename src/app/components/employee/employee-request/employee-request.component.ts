@@ -9,6 +9,10 @@ import { DataSharingService } from 'src/app/services/dataManagement/data-sharing
 import * as e from 'express';
 import { DbUserTeam360 } from 'src/app/models/db-user';
 import { DatabaseService } from 'src/app/services/dataManagement/database.service';
+import { MsSignInService } from 'src/app/services/ms-sign-in.service';
+import { Router } from '@angular/router';
+
+
 
 const GRAPH_ENDPOINT = 'https://graph.microsoft.com/v1.0/me';
 const GRAPH_ENDPOINTPHOTO = 'https://graph.microsoft.com/v1.0/me/photo/$value';
@@ -28,20 +32,21 @@ type ProfileType = {
 export class EmployeeRequestComponent implements OnInit, OnDestroy {
 
   profile!: ProfileType;
-  loginDisplay = false;
   displayTeam?: Array<DbUserTeam360>;
 
 
   //Data Sharing Service
   subscription?: Subscription;
 
-  //Checkbox
+  allowEditing: boolean = false
+  loadingScreen: boolean = true
 
   constructor(
     private http: HttpClient, 
     private msalBroadcastService: MsalBroadcastService,
-    private data: DataSharingService,
-    private db: DatabaseService
+    private router: Router,
+    private db: DatabaseService,
+    private msSignIn: MsSignInService
   ) { }
 
   ngOnInit(): void {
@@ -53,38 +58,54 @@ export class EmployeeRequestComponent implements OnInit, OnDestroy {
         //console.log(result);
       });
 
-    this.getProfile();
+    this.msSignIn.getProfile().subscribe(resp => {
+      this.profile = resp
+      this.db.getEmployeeTeam(resp.mail ?? '').subscribe(resp => {
+        this.displayTeam = resp;
+        console.log(resp)
+        for(let i in this.displayTeam){
+          if(this.displayTeam[i].Check1 == null){
+            this.displayTeam[i].Check1 = true
+          }
+        }
+      })
+
+      //Si ya confirmo su equipo, no se desplegara la informacion. Esto evitara entrar a la pagina y querer hacer clicks para hacer cambios.
+      //La UI no se presentara hasta que sepa el programa si puede editar.
+      this.db.getEmployeeEditing(resp.mail ?? '').subscribe(resp =>{
+        this.allowEditing = resp
+        if(!this.allowEditing){
+          this.router.navigateByUrl('/home/employee_home')
+        }
+        else{
+          this.loadingScreen = false
+        }
+      })
+    })
 
     //Carga la informacion [Con DataSharingService]
     //this.subscription = this.data.currentUserTeams.subscribe(message => this.displayTeam = message)
 
     //Carga la informacion [Con Base de Datos directo]
-    this.db.getEmployeeTeam(1).subscribe(resp => {
-      this.displayTeam = resp;
-      for(let i in this.displayTeam){
-        if(this.displayTeam[i].Check1 == null){
-          this.displayTeam[i].Check1 = true
-        }
-      }
+    
+  }
+
+  postEmployeeChanges(){
+    this.db.postEmployeeTeam360(this.displayTeam ?? [], 0).subscribe(resp => {
+      this.router.navigateByUrl('/home/employee_home')
     })
   }
+  
 
   ngOnDestroy(): void {
     this.subscription?.unsubscribe()
   }
 
 
-  getProfile(){
-    this.http.get(GRAPH_ENDPOINT)
-      .subscribe(profile =>{
-        this.profile = profile;
-      });
-  }
-
-  getImage(){
-    this.http.get(GRAPH_ENDPOINTPHOTO)
-      .subscribe(photo =>{
-        console.log(photo);
-      })
-  }
+  // getProfile(){
+  //   this.http.get(GRAPH_ENDPOINT)
+  //     .subscribe(profile =>{
+  //       this.profile = profile;
+  //     });
+  // }
 }

@@ -13,8 +13,8 @@ export class DatabaseService {
     private http: HttpClient
   ) { }
 
-  getEmployeeTeam(user: number){
-    var URL = `http://localhost:4000/api/user_getTeam/` + user
+  getEmployeeTeam(email: string){
+    var URL = `http://localhost:4000/api/user_getTeam/` + email
     return this.http.get<Array<DbUserTeam360>>(URL)
     .pipe(
       map(resp => {
@@ -28,11 +28,31 @@ export class DatabaseService {
     return this.http.get<Array<UserType>>(URL)
     .pipe(
       map(resp => {
-        console.log("DATABASE SERVICE")
+        return resp
+      })
+    )
+  }
+
+  getEmployeeEditing(email: string){
+    var URL = `http://localhost:4000/api/getEmployeeEditing/` + email
+    return this.http.get<boolean>(URL)
+    .pipe(
+      map(resp => {
+        return resp
+      })
+    )
+  }
+
+  postEmployeeTeam360(input: Array<DbUserTeam360>, publish: number){
+    var URL = `http://localhost:4000/api/postEmployeeTeam360/` + publish
+    return this.http.post<any>(URL, input).pipe(
+      map(resp => {
         console.log(resp)
         return resp
       })
     )
   }
+
+
 
 }

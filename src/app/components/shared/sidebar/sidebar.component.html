@@ -12,7 +12,9 @@
 </head>
 
 
+
 <body>
+    
     <div class="sidebar">
         <div class="logo-details">
             <i class='bx bxl-windows'></i>
@@ -47,21 +49,12 @@
                 </ul>
             </li>
             <li>
-                <a routerLink="/superuser/confirm-load">
-                    <i class='bx bx-folder'></i>
-                    <span class="link_name">File Manager</span>
-                </a>
-                <ul class="sub-menu blank">
-                    <li><a class="link_name" href="#">Files</a></li>
-                </ul>
-            </li>
-            <li>
                 <div class="profile-details">
                     <div class="profile-content">
                         <img src="http://localhost:4200/assets/stock.jpeg" alt="">
                     </div>
                     <div class="name-job">
-                        <div class="profile_name">{{profile.givenName}}</div>
+                        <div class="profile_name">{{profile?.givenName}}</div>
                         <div class="job">Recursos Humanos</div>
                     </div>
                     <i class='bx bx-log-out' id="log_out" (click)="logout()"></i>
@@ -71,7 +64,6 @@
     </div>
 
     <section class="home-section">
-
         <router-outlet></router-outlet>
     </section>
 
