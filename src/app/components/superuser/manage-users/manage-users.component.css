@@ -92,6 +92,7 @@ html {
     border: 1px solid #dfe5eb;
     border-collapse: collapse;
     margin-bottom: 2.4rem;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
 }
 
 .rh-table tr:nth-child(1) {
@@ -194,6 +195,7 @@ input:checked + .slider:before {
     width: 100%;
     border: 1px solid #dfe5eb;
     border-collapse: collapse;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
 }
 
 .employee-table tr:nth-child(1) {
