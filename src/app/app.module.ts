@@ -31,7 +31,8 @@ import { SidebarSuperuserComponent } from './components/shared/sidebar-superuser
 import { ConfirmationDialogLogoutComponent } from './components/shared/ui/confirmation-dialog-logout/confirmation-dialog-logout.component';
 import { LoadInfoComponent } from './components/superuser/load-info/load-info.component';
 import { InvalidUserComponent } from './components/shared/invalid-user/invalid-user.component';
-
+import { MatDialogModule } from '@angular/material/dialog';
+import { PopUpLoadInfoComponent } from './components/superuser/pop-up-load-info/pop-up-load-info.component';
 
 const isIE = window.navigator.userAgent.indexOf('MSIE ') > -1 || window.navigator.userAgent.indexOf('Trident/') > -1;
 
@@ -55,7 +56,8 @@ const isIE = window.navigator.userAgent.indexOf('MSIE ') > -1 || window.navigato
     SidebarSuperuserComponent,
     ConfirmationDialogLogoutComponent,
     InvalidUserComponent,
-    LoadInfoComponent
+    LoadInfoComponent,
+    PopUpLoadInfoComponent,
   ],
   imports: [
     BrowserModule,
@@ -69,6 +71,7 @@ const isIE = window.navigator.userAgent.indexOf('MSIE ') > -1 || window.navigato
     AppRoutingModule,
     FormsModule,
     ReactiveFormsModule,
+    MatDialogModule,
     MsalModule.forRoot(new PublicClientApplication({
       auth: {
         //clientId: '01f29e73-b3dc-4096-9f42-51fed93bedc5',
@@ -100,6 +103,9 @@ const isIE = window.navigator.userAgent.indexOf('MSIE ') > -1 || window.navigato
     },
     MsalGuard
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  entryComponents: [
+    PopUpLoadInfoComponent
+  ]
 })
 export class AppModule { }
