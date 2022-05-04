@@ -1,19 +1,11 @@
-import { HttpClient } from '@angular/common/http';
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { MsalBroadcastService, MsalService } from '@azure/msal-angular';
-import { EventMessage, EventType, InteractionStatus } from '@azure/msal-browser';
 import { Subscription } from 'rxjs';
-import { filter } from 'rxjs/operators';
-import { DataSharingService } from 'src/app/services/dataManagement/data-sharing.service';
 import { Router } from '@angular/router';
 import { DbUserTeam360 } from 'src/app/models/db-user';
 
 //BASE DE DATOS
 import { DatabaseService } from 'src/app/services/dataManagement/database.service';
 import { MsSignInService } from 'src/app/services/ms-sign-in.service';
-
-const GRAPH_ENDPOINT = 'https://graph.microsoft.com/v1.0/me';
-const GRAPH_ENDPOINTPHOTO = 'https://graph.microsoft.com/v1.0/me/photo/$value';
 
 type ProfileType = {
   givenName?: string;
@@ -35,6 +27,8 @@ export class EmployeeHomeComponent implements OnInit, OnDestroy {
   displayTeam?: Array<DbUserTeam360>;
   loadingScreen: boolean = true
 
+  imagePath: string = ""
+  textStatus: string = ""
 
 
   //Data Sharing Service
@@ -56,20 +50,48 @@ export class EmployeeHomeComponent implements OnInit, OnDestroy {
       //Obtenemos el equipo360 de la base de datos
       this.db.getEmployeeTeam(resp.mail ?? '').subscribe(resp => {
         this.displayTeam = resp
-      })
-
-      //Si ya confirmo su equipo, no puede realizar mas cambios y no se presentan los botones.
-      this.db.getEmployeeEditing(resp.mail ?? '').subscribe(resp =>{
+        var rhApproved = true
+        for(var i in this.displayTeam){
+          if(!this.displayTeam[i].Approved || this.displayTeam[i].Approved == null){
+            rhApproved = false
+          }
+          if(this.displayTeam[i].Check1 == null){
+            this.displayTeam[i].Check1 = true
+          }
+        }
+        //Si ya confirmo su equipo, no puede realizar mas cambios y no se presentan los botones.
+        this.db.getEmployeeEditing(this.profile.mail ?? '').subscribe(resp =>{
           this.allowEditing = resp
           this.loadingScreen = false
+          if(!rhApproved){
+            if(this.allowEditing){
+              this.imagePath = "warningIcon.png"
+              this.textStatus = "Todavia no has confirmado tu equipo."
+            }
+            else{
+              this.imagePath = "confirmedIcon.png"
+              this.textStatus = "Ya confirmaste tu equipo. Espera a que recursos humanos revise tu equipo."
+            }
+          }
+          else{
+            this.imagePath = "approvedTeamIcon.png"
+            this.textStatus = "Ya puedes empezar tu Evaluación360."
+          }
+          
       })
+        
+        
+      })
+
+      
     })
   }
 
   confirmTeam(){
     this.db.postEmployeeTeam360(this.displayTeam ?? [], 1).subscribe(resp => {
       this.db.getEmployeeEditing(this.profile.mail ?? '').subscribe(resp => {
-        this.allowEditing = resp
+        this.allowEditing = false
+        this.router.navigateByUrl('/home/request')
       })
     })
     

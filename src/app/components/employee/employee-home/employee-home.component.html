@@ -1,6 +1,3 @@
-<!-- <div *ngIf="loginDisplay">
-    <p>Login successful!</p>
-</div> -->
 <body *ngIf="loadingScreen"> 
     <section class="paddingSidebar">
         <h1>Cargando...</h1>
@@ -23,14 +20,14 @@
                 <div *ngIf="allowEditing" class="button-section">
                     <div class="add-user-button-center">
                         <figure class=".add-icon">
-                            <img src="https://cdn.onlinewebfonts.com/svg/img_529925.png" alt="icono agregar usuario">
+                            <img src="http://localhost:4200/assets/icons/editIcon.png" alt="icono agregar usuario">
                         </figure>
-                        <a class="add-user" (click)="displayRequest()">Nueva peticion</a>
+                        <a class="add-user" (click)="displayRequest()">Modificar equipo</a>
                     </div>
         
                     <div class="add-user-button-center">
                         <figure class=".add-icon">
-                            <img src="http://localhost:4200/assets/confirmButton.png" alt="icono agregar usuario">
+                            <img src="http://localhost:4200/assets/icons/confirmButton.png" alt="icono agregar usuario">
                         </figure>
                         <a class="add-user" (click)="confirmTeam()">Confirmar equipo</a> 
                     </div>
@@ -44,39 +41,52 @@
                     <th>Usuario</th>
                     <th>Como evaluo</th>
                     <th>Horas Totales</th>
+                    <th *ngIf="allowEditing">Mi Decisión</th>
                 </tr>
 
                 <!-- DATABASE -->
                 <tr *ngFor="let team of displayTeam">
-                    <th>1</th>
+                    <th>{{team.PartnerID}}</th>
                     <th>{{team.Partner}}</th>
                     <th *ngIf="team.EvalType == 0">Peer</th>
                     <th *ngIf="team.EvalType == 1">Team</th>
                     <th *ngIf="team.EvalType == 2">Leader</th>
                     <th>{{team.Hours}}</th>
+                    <th *ngIf="allowEditing">
+                        <div *ngIf="!team.Approved">
+                            <div *ngIf="team.Check1 != null">
+                                <div *ngIf="!team.Check1" class="tooltip">
+                                    <figure>
+                                        <img src="http://localhost:4200/assets/icons/removeIcon.png" alt="icono agregar usuario" style="width: auto; height: 35px; margin: -10px;">
+                                    </figure>
+                                    <span class="tooltiptext">{{team?.Reason}}</span>
+                                </div>
+                               
+                                <figure *ngIf="team.Check1">
+                                    <img src="http://localhost:4200/assets/icons/addIcon.png" alt="icono agregar usuario" style="width: auto; height: 35px; margin: -10px;">
+                                </figure>
+                            </div>
+                            <div *ngIf="team.Check1 == null">
+                                <figure *ngIf="!team.Check1">
+                                    <img src="http://localhost:4200/assets/icons/addIcon.png" alt="icono agregar usuario" style="width: auto; height: 35px; margin: -10px;">
+                                </figure>
+                            </div>
+                        </div>
+                        
+                        
+                    </th>
                 </tr>
-
-                <!-- <tr *ngFor="let team of displayTeam?.relationships">
-                    <th>{{team.ID}}</th>
-                    <th>{{team.userName}}</th>
-                    <th>{{team.clientname}}</th>
-                    <th>{{team.hours}}</th>
-                </tr> -->
                 
             </table>
-            <h2 *ngIf="allowEditing">Todavia no has confirmado tu equipo.</h2>
-            <h2 *ngIf="!allowEditing">Ya confirmaste a tu equipo.</h2>
+            <div id="container">
+                <figure id="iconStatus">
+                    <img src="http://localhost:4200/assets/icons/{{imagePath}}" alt="icono agregar usuario" style="width: auto; height: 35px; margin: -10px;">
+                </figure>
+                <h2 id="textStatus">{{textStatus}}</h2>
+                
+            </div>
+           
 
         </section>
     </section>
 </body>
-
-
-
-<!-- <div>
-    <p><strong>First Name: </strong> {{profile?.givenName}}</p>
-    <p><strong>Last Name: </strong> {{profile?.surname}}</p>
-    <p><strong>Email: </strong> {{profile?.userPrincipalName}}</p>
-    <p><strong>Id: </strong> {{profile?.id}}</p>
-    <button (click)="logout()">Log out</button>
-</div> -->

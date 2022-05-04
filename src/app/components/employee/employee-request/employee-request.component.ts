@@ -29,40 +29,31 @@ type ProfileType = {
   templateUrl: './employee-request.component.html',
   styleUrls: ['./employee-request.component.css']
 })
-export class EmployeeRequestComponent implements OnInit, OnDestroy {
+export class EmployeeRequestComponent implements OnInit {
 
+  //EQUIPOS
   profile!: ProfileType;
   displayTeam?: Array<DbUserTeam360>;
 
-
-  //Data Sharing Service
-  subscription?: Subscription;
-
+  //HTML UI
   allowEditing: boolean = false
   loadingScreen: boolean = true
 
+
+
   constructor(
-    private http: HttpClient, 
-    private msalBroadcastService: MsalBroadcastService,
     private router: Router,
     private db: DatabaseService,
     private msSignIn: MsSignInService
   ) { }
 
   ngOnInit(): void {
-    this.msalBroadcastService.msalSubject$
-      .pipe(
-        filter((msg: EventMessage) => msg.eventType === EventType.LOGIN_SUCCESS),
-      )
-      .subscribe((result: EventMessage) => {
-        //console.log(result);
-      });
 
     this.msSignIn.getProfile().subscribe(resp => {
       this.profile = resp
       this.db.getEmployeeTeam(resp.mail ?? '').subscribe(resp => {
         this.displayTeam = resp;
-        console.log(resp)
+        console.log(this.displayTeam)
         for(let i in this.displayTeam){
           if(this.displayTeam[i].Check1 == null){
             this.displayTeam[i].Check1 = true
@@ -97,9 +88,7 @@ export class EmployeeRequestComponent implements OnInit, OnDestroy {
   }
   
 
-  ngOnDestroy(): void {
-    this.subscription?.unsubscribe()
-  }
+
 
 
   // getProfile(){

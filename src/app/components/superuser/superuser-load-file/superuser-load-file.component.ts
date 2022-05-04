@@ -6,6 +6,7 @@ import { NgxCsvParser, NgxCSVParserError } from 'ngx-csv-parser';
 import { Subscription } from 'rxjs';
 import { User, Regular_Team, Team360 } from 'src/app/models/userModels';
 import { DataSharingService } from 'src/app/services/dataManagement/data-sharing.service';
+import { DatabaseService } from 'src/app/services/dataManagement/database.service';
 
 @Component({
   selector: 'app-superuser-load-file',
@@ -18,7 +19,7 @@ export class SuperuserLoadFileComponent implements OnInit, OnDestroy {
   csvRecords: any;
   userInput: Array<Array<string>> = [[]]
   header: boolean = false;
-  file: any;
+  file: File = {} as File;
 
 
   //Create user variables
@@ -42,6 +43,7 @@ export class SuperuserLoadFileComponent implements OnInit, OnDestroy {
   constructor(
     private ngxCsvParser: NgxCsvParser,
     private data: DataSharingService, 
+    private db: DatabaseService
   ) { }
 
   // @ViewChild('fileImportInput') fileImportInput: any;
@@ -119,33 +121,38 @@ export class SuperuserLoadFileComponent implements OnInit, OnDestroy {
   }
 
   createData() {
-    this.ngxCsvParser.parse(this.file, {header: this.header, delimiter: ','})
-    .pipe().subscribe({
-      next: (result): void =>{
-        //console.log('Result', result);
-        this.csvRecords = result
-        try{
-          this.userInput = this.csvRecords
-
-          //Crea empleados en base al CSV
-          this.allUsers = this.createUser(this.userInput)
-          this.temporalTeam360 = this.getTeams(this.allUsers)
-          this.allTeam360 = this.mergeTeams(this.temporalTeam360)
-
-          //Guarda los equipos localmente
-          this.data.changeLocalTeam(this.allTeam360[1])
-          
-        }
-        catch{
-          console.log("Archivo no valido")
-        }
-        
-        
-      },
-      error: (error: NgxCSVParserError): void =>{
-        console.log('Error', error)
-      }
+    this.db.processFile(this.file).subscribe(resp =>{
+      console.log(resp)
     })
+
+    // PARSING!
+    // this.ngxCsvParser.parse(this.file, {header: this.header, delimiter: ','})
+    // .pipe().subscribe({
+    //   next: (result): void =>{
+    //     //console.log('Result', result);
+    //     this.csvRecords = result
+    //     try{
+    //       this.userInput = this.csvRecords
+
+    //       //Crea empleados en base al CSV
+    //       this.allUsers = this.createUser(this.userInput)
+    //       this.temporalTeam360 = this.getTeams(this.allUsers)
+    //       this.allTeam360 = this.mergeTeams(this.temporalTeam360)
+
+    //       //Guarda los equipos localmente
+    //       this.data.changeLocalTeam(this.allTeam360[1])
+          
+    //     }
+    //     catch{
+    //       console.log("Archivo no valido")
+    //     }
+        
+        
+    //   },
+    //   error: (error: NgxCSVParserError): void =>{
+    //     console.log('Error', error)
+    //   }
+    // })
   }
 
   createUser(input: Array<Array<string>>): User[]{

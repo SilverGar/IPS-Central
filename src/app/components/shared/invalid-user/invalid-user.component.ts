@@ -26,8 +26,8 @@ export class InvalidUserComponent implements OnInit {
 
   async logout(){
     await this.delay(5000)
-    this.image = true
-    await this.delay(2000)
+    //this.image = true
+    //await this.delay(2000)
     this.router.navigateByUrl('/')
     this.MsSignIn.logout()
     

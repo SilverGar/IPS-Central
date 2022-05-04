@@ -60,7 +60,13 @@ export class MsSignInService {
         next: (resp) => {
           this.getProfile().subscribe(resp => {
             this.db.getUserType(resp.mail ?? '').subscribe(resp =>{
-              this.redirect(resp[0].Type)
+              try{
+                this.redirect(resp[0].Type)
+              }
+              catch{
+                this.redirect(-1)
+              }
+              
             })
           })
         },
@@ -72,9 +78,15 @@ export class MsSignInService {
   verifyPage(currentPage: number){
     this.getProfile().subscribe(resp => {
       this.db.getUserType(resp.mail ?? '').subscribe(resp => {
-        if(resp[0].Type != currentPage){
-          this.redirect(resp[0].Type)
+        try{
+          if(resp[0].Type != currentPage){
+            this.redirect(resp[0].Type)
+          }
         }
+        catch{
+          this.redirect(-1)
+        }
+        
       })
     })
   }

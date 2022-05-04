@@ -19,14 +19,14 @@
                 <div class="button-section">
                     <div class="add-user-button-center">
                         <figure class=".add-icon">
-                            <img src="http://localhost:4200/assets/backButton.png" alt="icono agregar usuario">
+                            <img src="http://localhost:4200/assets/icons/backButton.png" alt="icono agregar usuario">
                         </figure>
                         <a class="add-user" routerLink="/home/employee_home">Regresar</a>
                     </div>
         
                     <div class="add-user-button-center">
                         <figure class=".add-icon">
-                            <img src="http://localhost:4200/assets/confirmButton.png" alt="icono agregar usuario">
+                            <img src="http://localhost:4200/assets/icons/saveButton.png" alt="icono agregar usuario">
                         </figure>
                         <a class="add-user" (click)="postEmployeeChanges()">Guardar Cambios</a>
                     </div>
@@ -76,8 +76,8 @@
 
                     <!-- En base al team.Check1, determina si habilita o deshabilita la informacion -->
                     <th *ngIf="!team.Check1">
-                        <textarea *ngIf="!team.Approved" style="padding: 2%;" class="enabledTextbox" placeholder="Motivo" [(ngModel)]="team.reason"></textarea>
-                        <textarea *ngIf="team.Approved" style="padding: 2%;" class="enabledTextbox" placeholder="Motivo" [(ngModel)]="team.reason" disabled style="filter: grayscale(100%);"></textarea>
+                        <textarea *ngIf="!team.Approved" style="padding: 2%;" class="enabledTextbox" placeholder="Motivo" [(ngModel)]="team.Reason"></textarea>
+
                     </th>
                     <th *ngIf="team.Check1">
                         <textarea class="disabledTextbox" disabled ></textarea>
