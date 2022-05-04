@@ -93,6 +93,7 @@ main .content-section .message .button-content button {
     border: none;
     cursor: pointer;
     border-radius: 5px;
+    transition: all 0.2s ease-in-out;
 }
 
 main .content-section .message .button-content button:hover {

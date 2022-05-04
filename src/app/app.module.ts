@@ -33,6 +33,7 @@ import { LoadInfoComponent } from './components/superuser/load-info/load-info.co
 import { InvalidUserComponent } from './components/shared/invalid-user/invalid-user.component';
 import { MatDialogModule } from '@angular/material/dialog';
 import { PopUpLoadInfoComponent } from './components/superuser/pop-up-load-info/pop-up-load-info.component';
+import { PopUpAddUserComponent } from './components/superuser/pop-up-add-user/pop-up-add-user.component';
 
 const isIE = window.navigator.userAgent.indexOf('MSIE ') > -1 || window.navigator.userAgent.indexOf('Trident/') > -1;
 
@@ -58,6 +59,7 @@ const isIE = window.navigator.userAgent.indexOf('MSIE ') > -1 || window.navigato
     InvalidUserComponent,
     LoadInfoComponent,
     PopUpLoadInfoComponent,
+    PopUpAddUserComponent,
   ],
   imports: [
     BrowserModule,
@@ -105,7 +107,8 @@ const isIE = window.navigator.userAgent.indexOf('MSIE ') > -1 || window.navigato
   ],
   bootstrap: [AppComponent],
   entryComponents: [
-    PopUpLoadInfoComponent
+    PopUpLoadInfoComponent,
+    PopUpAddUserComponent
   ]
 })
 export class AppModule { }

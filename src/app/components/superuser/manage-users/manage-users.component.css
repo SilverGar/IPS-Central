@@ -37,6 +37,7 @@ html {
     font-size: 3rem;
     margin-bottom: 2.4rem;
     align-self: left;
+    margin-top: 24px;
 }
 
 #hr-title {
@@ -58,6 +59,7 @@ html {
     padding: 5px;
     cursor: pointer;
     grid-area: 'add-user';
+    transition: all 0.2s ease-in-out;
 }
 
 #hr-title .add-user-button:hover {
@@ -99,6 +101,7 @@ html {
     padding: 5px;
     grid-area: 'save';
     cursor: pointer;
+    transition: all 0.2s ease-in-out;
 }
 
 #hr-title .save-button a {
