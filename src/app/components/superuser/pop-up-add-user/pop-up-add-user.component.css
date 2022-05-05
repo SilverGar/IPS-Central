@@ -103,6 +103,8 @@ input:checked + .slider:before {
 }
 
 .pop-up .inputs form .submit {
+    width: 4rem;
+    height: 4.5rem;
     margin-left: 12px;
     background: #dfe5eb ;
     border: 1px solid #d7d7d7;

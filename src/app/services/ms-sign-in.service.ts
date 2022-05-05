@@ -29,13 +29,13 @@ export class MsSignInService {
   profile!: ProfileType
 
   constructor(
-    @Inject(MSAL_GUARD_CONFIG) 
-    private msalGuardConfig: MsalGuardConfiguration, 
-    private broadcastService: MsalBroadcastService, 
-    private authService: MsalService, 
+    @Inject(MSAL_GUARD_CONFIG)
+    private msalGuardConfig: MsalGuardConfiguration,
+    private broadcastService: MsalBroadcastService,
+    private authService: MsalService,
     private router: Router2,
     private http: HttpClient,
-    private db: DatabaseService) {}
+    private db: DatabaseService) { }
 
 
   ngOnInit(): void {
@@ -43,44 +43,44 @@ export class MsSignInService {
 
     this.setLoginDisplay()
     this.broadcastService.inProgress$
-    .pipe(
-      filter((status: InteractionStatus) => status === InteractionStatus.None),
-      takeUntil(this._destroying$)
-    )
-    .subscribe(() => {
-      this.setLoginDisplay();
-    })
+      .pipe(
+        filter((status: InteractionStatus) => status === InteractionStatus.None),
+        takeUntil(this._destroying$)
+      )
+      .subscribe(() => {
+        this.setLoginDisplay();
+      })
   }
 
-  login(){
-    if(this.msalGuardConfig.authRequest){
+  login() {
+    if (this.msalGuardConfig.authRequest) {
       //this.router.navigate(['./employee_details'])
-      this.authService.loginPopup({...this.msalGuardConfig.authRequest} as PopupRequest)
-      .subscribe({
-        next: (resp) => {
-          this.getProfile().subscribe(resp => {
-            this.db.getUserType(resp.mail ?? '').subscribe(resp =>{
-              this.redirect(resp[0].Type)
+      this.authService.loginPopup({ ...this.msalGuardConfig.authRequest } as PopupRequest)
+        .subscribe({
+          next: (resp) => {
+            this.getProfile().subscribe(resp => {
+              this.db.getUserType(resp.mail ?? '').subscribe(resp => {
+                this.redirect(resp[0].Type)
+              })
             })
-          })
-        },
-        error: (error) => console.log(error)
-      });
+          },
+          error: (error) => console.log(error)
+        });
     }
   }
 
-  verifyPage(currentPage: number){
+  verifyPage(currentPage: number) {
     this.getProfile().subscribe(resp => {
       this.db.getUserType(resp.mail ?? '').subscribe(resp => {
-        if(resp[0].Type != currentPage){
+        if (resp[0].Type != currentPage) {
           this.redirect(resp[0].Type)
         }
       })
     })
   }
 
-  redirect(type: number){
-    switch(type){
+  redirect(type: number) {
+    switch (type) {
       case 0: {
         this.router.navigateByUrl('/home/employee_home')
         break;
@@ -89,7 +89,7 @@ export class MsSignInService {
         this.router.navigateByUrl('/hr/dashboard')
         break;
       }
-      case 2:{
+      case 2: {
         this.router.navigateByUrl('/superuser/dashboard')
         break;
       }

@@ -13,8 +13,15 @@ export interface DbUserTeam360 {
     reason?: string
 }
 
-export interface UserType{
+export interface UserType {
     Type: number
+}
+
+export interface ManageUsers {
+    id: number,
+    name: string,
+    email: string,
+    userType: boolean
 }
 
 //HUMAN RESOURCES

@@ -69,6 +69,8 @@ main .content-section .message .message-content p {
     margin: 25px 0;
     font-size: 1.5rem;
     color: white;
+    text-align: center;
+    line-height: 1.5rem;
 }
 
 main .content-section .message .message-content p:nth-child(3) {

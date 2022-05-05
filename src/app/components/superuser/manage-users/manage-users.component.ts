@@ -5,6 +5,8 @@ import { DataSharingService } from 'src/app/services/dataManagement/data-sharing
 import { Subscription } from 'rxjs';
 import { MatDialog } from '@angular/material/dialog'
 import { PopUpAddUserComponent } from '../pop-up-add-user/pop-up-add-user.component';
+import { DatabaseService } from 'src/app/services/dataManagement/database.service';
+import { ManageUsers } from 'src/app/models/db-user';
 
 @Component({
   selector: 'app-manage-users',
@@ -13,16 +15,20 @@ import { PopUpAddUserComponent } from '../pop-up-add-user/pop-up-add-user.compon
 })
 export class MANAGEUSERSComponent implements OnInit, OnDestroy {
 
+  users?: Array<ManageUsers>;
   // message?: string;
   // subscription?: Subscription;
 
   constructor(
     private data: DataSharingService,
-    private dialog: MatDialog
+    private dialog: MatDialog,
+    private db: DatabaseService
   ) { }
 
   ngOnInit(): void {
-    // this.subscription = this.data.currentMessage.subscribe(message => this.message = message)
+    this.db.getUsers().subscribe(resp => {
+      this.users = resp;
+    })
   }
 
   ngOnDestroy(): void {
