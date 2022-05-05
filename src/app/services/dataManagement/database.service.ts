@@ -1,8 +1,9 @@
 import { HttpClient } from '@angular/common/http';
 import { HttpParams, HttpRequest, HttpEvent } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { DbUserTeam360, UserType, User } from 'src/app/models/db-user';
+import { DbUserTeam360, UserType, User, ManageUsers } from 'src/app/models/db-user';
 import { map } from 'rxjs';
+import { response } from 'express';
 
 
 @Injectable({
@@ -14,21 +15,20 @@ export class DatabaseService {
     private http: HttpClient
   ) { }
 
-  
-  //SUPERUSUARIO
-  getUserType(email: string){
+
+  getUserType(email: string) {
     var URL = `http://localhost:4000/api/user_getType/` + email
     return this.http.get<Array<UserType>>(URL)
-    .pipe(
-      map(resp => {
-        return resp
-      })
-    )
+      .pipe(
+        map(resp => {
+          return resp
+        })
+      )
   }
 
-  processFile(file: File){
+  processFile(file: File) {
     console.log(file)
-    
+
     let formData = new FormData()
     formData.append('file', file)
     let params = new HttpParams()
@@ -51,27 +51,27 @@ export class DatabaseService {
 
   //EMPLEADOS
 
-  getEmployeeEditing(email: string){
+  getEmployeeEditing(email: string) {
     var URL = `http://localhost:4000/api/getEmployeeEditing/` + email
     return this.http.get<boolean>(URL)
-    .pipe(
-      map(resp => {
-        return resp
-      })
-    )
+      .pipe(
+        map(resp => {
+          return resp
+        })
+      )
   }
 
-  getEmployeeTeam(email: string){
+  getEmployeeTeam(email: string) {
     var URL = `http://localhost:4000/api/user_getTeam/` + email
     return this.http.get<Array<DbUserTeam360>>(URL)
-    .pipe(
-      map(resp => {
-        return resp
-      })
-    )
+      .pipe(
+        map(resp => {
+          return resp
+        })
+      )
   }
 
-  postEmployeeTeam360(input: Array<DbUserTeam360>, publish: number){
+  postEmployeeTeam360(input: Array<DbUserTeam360>, publish: number) {
     var URL = `http://localhost:4000/api/postEmployeeTeam360/` + publish
     return this.http.post<any>(URL, input).pipe(
       map(resp => {
@@ -82,17 +82,23 @@ export class DatabaseService {
   }
 
   //RECURSOS HUMANOS
-
-  getUsers(){
-    var URL = `http://localhost:4000/api/hr/getUsers`
-    return this.http.get<Array<User>>(URL)
-    .pipe(
-      map(resp => {
-        return resp
-      })
-    )
+  getUsersSu() {
+    var URL = `http://localhost:4000/api/user_getUsers`
+    return this.http.get<Array<ManageUsers>>(URL)
+      .pipe(
+        map(resp => {
+          return resp
+        })
+      )
   }
 
-
-
+  getUsers() {
+    var URL = `http://localhost:4000/api/hr/getUsers`
+    return this.http.get<Array<User>>(URL)
+      .pipe(
+        map(resp => {
+          return resp
+        })
+      )
+  }
 }

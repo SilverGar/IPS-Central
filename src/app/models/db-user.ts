@@ -13,11 +13,11 @@ export interface DbUserTeam360 {
     Reason?: string
 }
 
-export interface UserType{
+export interface UserType {
     Type: number
 }
 
-export interface User{
+export interface User {
     id?: number,
     name?: string,
     email?: string

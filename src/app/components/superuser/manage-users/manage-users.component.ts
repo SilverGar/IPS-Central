@@ -3,31 +3,49 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 //Data service
 import { DataSharingService } from 'src/app/services/dataManagement/data-sharing.service';
 import { Subscription } from 'rxjs';
+import { MatDialog } from '@angular/material/dialog'
+import { PopUpAddUserComponent } from '../pop-up-add-user/pop-up-add-user.component';
+import { DatabaseService } from 'src/app/services/dataManagement/database.service';
+import { ManageUsers } from 'src/app/models/db-user';
+
 @Component({
   selector: 'app-manage-users',
   templateUrl: './manage-users.component.html',
   styleUrls: ['./manage-users.component.css']
 })
-export class MANAGEUSERSComponent implements OnInit, OnDestroy{
+export class MANAGEUSERSComponent implements OnInit, OnDestroy {
 
+  users?: Array<ManageUsers>;
   // message?: string;
   // subscription?: Subscription;
 
   constructor(
-    private data: DataSharingService
+    private data: DataSharingService,
+    private dialog: MatDialog,
+    private db: DatabaseService
   ) { }
 
   ngOnInit(): void {
-    // this.subscription = this.data.currentMessage.subscribe(message => this.message = message)
+    this.db.getUsersSu().subscribe(resp => {
+      this.users = resp;
+    })
   }
 
   ngOnDestroy(): void {
     // this.subscription?.unsubscribe();
   }
 
-  // Variables
-  // newMessage(){
-  //   this.data.changeMessage("Hello new message")
-  // }
-
+  openDialog(): void {
+    this.dialog.open(PopUpAddUserComponent, {
+      width: '30%'
+    });
+  }
 }
+
+// @Component({
+//   selector: 'pop-up-add-user',
+//   templateUrl: '../pop-up-add-user/pop-up-add-user.component.html'
+// })
+// export class PopUpAddUserComponent {
+//   constructor
+// }

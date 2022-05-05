@@ -27,7 +27,7 @@ html {
 }
 
 .main-section .title-section {
-    width: 70%;
+    width: 95%;
     display: flex;
     align-items: center;
     justify-content: left;
@@ -37,15 +37,16 @@ html {
     font-size: 3rem;
     margin-bottom: 2.4rem;
     align-self: left;
+    margin-top: 2.4rem;
 }
 
 #hr-title {
     width: 100%;
     display: grid;
-    grid-template-areas: 'left right';
+    grid-template-areas: 'left add-user save';
     grid-template-columns: 1fr ;
     margin-bottom: 1.2rem;
-    align-items: baseline;
+    align-items: center;
 }
 
 #hr-title .add-user-button {
@@ -57,11 +58,12 @@ html {
     justify-content: center;
     padding: 5px;
     cursor: pointer;
-    grid-area: right;
+    grid-area: 'add-user';
+    transition: all 0.2s ease-in-out;
 }
 
 #hr-title .add-user-button:hover {
-    box-shadow: 0 1px 5px 0 #5f6367;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
 }
 
 #hr-title .add-user-button figure {
@@ -83,8 +85,32 @@ html {
     text-decoration: none;
 }
 
+#hr-title .save-button:hover {
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+}
+
+#hr-title .save-button {
+    margin-left: 12px;
+    background: #dfe5eb ;
+    border: 1px solid #d7d7d7;
+    width: fit-content;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 5px;
+    grid-area: 'save';
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+}
+
+#hr-title .save-button a {
+    text-decoration: none;
+    color: #333;
+}
+
 .hr-users {
-    width: 70%;
+    width: 95%;
 }
 
 .rh-table {
@@ -92,6 +118,7 @@ html {
     border: 1px solid #dfe5eb;
     border-collapse: collapse;
     margin-bottom: 2.4rem;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
 }
 
 .rh-table tr:nth-child(1) {
@@ -172,7 +199,7 @@ input:checked + .slider:before {
 }
 
 .employee-users {
-    width: 70%;
+    width: 95%;
 }
 
 .employee-users h2 {
@@ -194,6 +221,8 @@ input:checked + .slider:before {
     width: 100%;
     border: 1px solid #dfe5eb;
     border-collapse: collapse;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+    margin-bottom: 24px;
 }
 
 .employee-table tr:nth-child(1) {

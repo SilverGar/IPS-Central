@@ -21,34 +21,40 @@ main {
     height: 100%;
     display: flex;
     flex-direction: column;
-    justify-content: flex-start;
     align-items: center;
+    justify-content: flex-start;
 }
 
 main .title-section {
-    width: 70%;
-    height: 30%;
+    width: 95%;
     margin-bottom: 36px;
 }
 
 main .title-section h1 {
-    font-size: 2rem;
+    font-size: 3rem;
+    margin-top: 2.4rem;
 }
 
 main .content-section {
-    width: 100%;
+    width: 95%;
     height: 70%;
     display: flex;
     justify-content: center;
     align-items: center;
+    flex-direction: column;
 }
 
 main .content-section .message {
-    width: 70%;
-    height: 500px;
+    width: 100%;
+    height: fit-content;
     background-color: #46647c;
-    position: relative;
     border-radius: 5px;
+    padding-bottom: 24px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
 }
 
 main .content-section .message .message-content {
@@ -60,9 +66,11 @@ main .content-section .message .message-content {
 }
 
 main .content-section .message .message-content p {
-    margin: 10px 0;
+    margin: 25px 0;
     font-size: 1.5rem;
     color: white;
+    text-align: center;
+    line-height: 1.5rem;
 }
 
 main .content-section .message .message-content p:nth-child(3) {
@@ -72,7 +80,6 @@ main .content-section .message .message-content p:nth-child(3) {
 
 main .content-section .message .button-content {
     width: 100%;
-    position: absolute;
     bottom: 50px;
     display: flex;
     justify-content: center;
@@ -88,6 +95,7 @@ main .content-section .message .button-content button {
     border: none;
     cursor: pointer;
     border-radius: 5px;
+    transition: all 0.2s ease-in-out;
 }
 
 main .content-section .message .button-content button:hover {
