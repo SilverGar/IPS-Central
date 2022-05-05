@@ -31,6 +31,7 @@ import { SidebarSuperuserComponent } from './components/shared/sidebar-superuser
 import { ConfirmationDialogLogoutComponent } from './components/shared/ui/confirmation-dialog-logout/confirmation-dialog-logout.component';
 import { LoadInfoComponent } from './components/superuser/load-info/load-info.component';
 import { InvalidUserComponent } from './components/shared/invalid-user/invalid-user.component';
+import { HrApproveteamsComponent } from './components/humanresources/hr-approveteams/hr-approveteams.component';
 
 
 const isIE = window.navigator.userAgent.indexOf('MSIE ') > -1 || window.navigator.userAgent.indexOf('Trident/') > -1;
@@ -55,7 +56,8 @@ const isIE = window.navigator.userAgent.indexOf('MSIE ') > -1 || window.navigato
     SidebarSuperuserComponent,
     ConfirmationDialogLogoutComponent,
     InvalidUserComponent,
-    LoadInfoComponent
+    LoadInfoComponent,
+    HrApproveteamsComponent
   ],
   imports: [
     BrowserModule,

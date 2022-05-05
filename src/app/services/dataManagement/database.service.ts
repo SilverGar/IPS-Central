@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { HttpParams, HttpRequest, HttpEvent } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { DbUserTeam360, UserType } from 'src/app/models/db-user';
+import { DbUserTeam360, UserType, User } from 'src/app/models/db-user';
 import { map } from 'rxjs';
 
 
@@ -76,6 +76,18 @@ export class DatabaseService {
     return this.http.post<any>(URL, input).pipe(
       map(resp => {
         console.log(resp)
+        return resp
+      })
+    )
+  }
+
+  //RECURSOS HUMANOS
+
+  getUsers(){
+    var URL = `http://localhost:4000/api/hr/getUsers`
+    return this.http.get<Array<User>>(URL)
+    .pipe(
+      map(resp => {
         return resp
       })
     )

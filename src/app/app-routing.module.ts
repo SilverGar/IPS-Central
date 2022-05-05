@@ -26,6 +26,7 @@ import { HrNotificationsComponent } from './components/humanresources/hr-notific
 import { SignInComponent } from './components/shared/sign-in/sign-in.component';
 import { LoadInfoComponent } from './components/superuser/load-info/load-info.component';
 import { InvalidUserComponent } from './components/shared/invalid-user/invalid-user.component';
+import { HrApproveteamsComponent } from './components/humanresources/hr-approveteams/hr-approveteams.component';
 
 const routes: Routes = [
   {
@@ -113,6 +114,11 @@ const routes: Routes = [
       {
         path: 'notifications',
         component: HrNotificationsComponent,
+        canActivate: [MsalGuard]
+      },
+      {
+        path: 'team-management',
+        component: HrApproveteamsComponent,
         canActivate: [MsalGuard]
       }
     ]
