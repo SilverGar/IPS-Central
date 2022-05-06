@@ -44,6 +44,11 @@ export class EmployeeHomeComponent implements OnInit, OnDestroy {
 
     //Obtenemos el perfil de Microsoft, con esto obtenemos el Correo, con el cual cuando se obtiene una respuesta
     //se llama a la funcion this.db.getEmployeeTeam(), esto obtiene el equipo 360 del empleado con el correo correspondiente.
+    this.loadData()
+    
+  }
+
+  loadData(){
     this.msSignIn.getProfile().subscribe(resp => {
       this.profile = resp
 
@@ -86,12 +91,12 @@ export class EmployeeHomeComponent implements OnInit, OnDestroy {
       
     })
   }
-
+   
   confirmTeam(){
     this.db.postEmployeeTeam360(this.displayTeam ?? [], 1).subscribe(resp => {
       this.db.getEmployeeEditing(this.profile.mail ?? '').subscribe(resp => {
         this.allowEditing = false
-        this.router.navigateByUrl('/home/request')
+        this.loadData()
       })
     })
     

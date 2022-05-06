@@ -36,6 +36,7 @@ import { HrApproveteamsComponent } from './components/humanresources/hr-approvet
 import { MatDialogModule } from '@angular/material/dialog';
 import { PopUpLoadInfoComponent } from './components/superuser/pop-up-load-info/pop-up-load-info.component';
 import { PopUpAddUserComponent } from './components/superuser/pop-up-add-user/pop-up-add-user.component';
+import { SuperuserVisualizeTeamsComponent } from './components/superuser/superuser-visualize-teams/superuser-visualize-teams.component';
 
 const isIE = window.navigator.userAgent.indexOf('MSIE ') > -1 || window.navigator.userAgent.indexOf('Trident/') > -1;
 
@@ -62,7 +63,8 @@ const isIE = window.navigator.userAgent.indexOf('MSIE ') > -1 || window.navigato
     LoadInfoComponent,
     HrApproveteamsComponent,
     PopUpLoadInfoComponent,
-    PopUpAddUserComponent
+    PopUpAddUserComponent,
+    SuperuserVisualizeTeamsComponent
   ],
   imports: [
     BrowserModule,

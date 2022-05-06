@@ -39,13 +39,16 @@ export class DatabaseService {
     var URL = `http://localhost:4000/api/processFile`
     const req = new HttpRequest('POST', URL, formData, options)
     return this.http.request(req)
-    // return this.http.post<any>(URL, file)
-    // .pipe(
-    //   map(resp => {
-    //     console.log(resp)
-    //     return resp;
-    //   })
-    // )
+  }
+
+  getProccessProgress(){
+    var URL = `http://localhost:4000/api/getUploadProgress`
+    return this.http.get<number>(URL)
+      .pipe(
+        map(resp => {
+          return resp
+        })
+      )
   }
 
 

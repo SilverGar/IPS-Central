@@ -10,7 +10,9 @@ export interface DbUserTeam360 {
     Hours?: number,
     EvalType?: number,
     Approved?: boolean,
-    Reason?: string
+    Reason?: string,
+    ProjectID?: number,
+    Project?: string,
 }
 
 export interface UserType {

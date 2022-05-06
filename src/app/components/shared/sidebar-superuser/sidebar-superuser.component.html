@@ -28,21 +28,30 @@
                 </ul>
             </li>
             <li>
-                <a routerLink="/superuser/manage-users">
-                    <i class='bx bx-folder'></i>
-                    <span class="link_name">Mi Usuario</span>
+                <a routerLink="/superuser/visualize-teams">
+                    <i class='bx bx-grid-alt'></i>
+                    <span class="link_name">Ver Equipos</span>
                 </a>
                 <ul class="sub-menu blank">
-                    <li><a class="link_name">Mi Usuario</a></li>
+                    <li><a class="link_name">Ver Equipos</a></li>
+                </ul>
+            </li>
+            <li>
+                <a routerLink="/superuser/manage-users">
+                    <i class='bx bx-folder'></i>
+                    <span class="link_name">Administrar Usuarios</span>
+                </a>
+                <ul class="sub-menu blank">
+                    <li><a class="link_name">Administrar Usuarios</a></li>
                 </ul>
             </li>
             <li>
                 <a routerLink="/superuser/load-file">
                     <i class='bx bx-folder'></i>
-                    <span class="link_name">File Manager</span>
+                    <span class="link_name">Cargar Información</span>
                 </a>
                 <ul class="sub-menu blank">
-                    <li><a class="link_name" href="#">Files</a></li>
+                    <li><a class="link_name" href="#">Cargar Información</a></li>
                 </ul>
             </li>
             <li>
@@ -60,7 +69,7 @@
                         <img src="http://localhost:4200/assets/stock.jpeg" alt="">
                     </div>
                     <div class="name-job">
-                        <div class="profile_name">Jorge Maa</div>
+                        <div class="profile_name">{{profile?.givenName}}</div>
                         <div class="job">Recursos Humanos</div>
                     </div>
                     <i class='bx bx-log-out' id="log_out" (click)="logout()"></i>

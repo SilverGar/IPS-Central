@@ -3,15 +3,16 @@ import { DbUserTeam360, User } from 'src/app/models/db-user';
 import { DatabaseService } from 'src/app/services/dataManagement/database.service';
 
 @Component({
-  selector: 'app-hr-approveteams',
-  templateUrl: './hr-approveteams.component.html',
-  styleUrls: ['./hr-approveteams.component.css']
+  selector: 'app-superuser-visualize-teams',
+  templateUrl: './superuser-visualize-teams.component.html',
+  styleUrls: ['./superuser-visualize-teams.component.css']
 })
-export class HrApproveteamsComponent implements OnInit {
-
+export class SuperuserVisualizeTeamsComponent implements OnInit {
   userList?: Array<User>
   userTeam?: Array<DbUserTeam360>
   currentUser: string = ""
+  displayPage: boolean = false
+
 
   constructor(
     private db: DatabaseService
@@ -20,9 +21,8 @@ export class HrApproveteamsComponent implements OnInit {
   ngOnInit(): void {
     this.db.getUsers().subscribe(resp =>{
       this.userList = resp
+      this.displayPage = true
     })
-
-    this.getTeam("A01232528@tec.mx")
   }
 
 

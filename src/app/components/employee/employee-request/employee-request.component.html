@@ -1,13 +1,16 @@
-<body *ngIf="loadingScreen">
-    <section class="paddingSidebar">
-        <h1>Cargando...</h1>
-    </section>
+<body *ngIf="loadingScreen"> 
+    <div class="container">
+        <div class="center">
+            <div class="loader"></div>
+        </div>
+        
+    </div>
 </body>
 
 <body *ngIf="allowEditing">
     <section class="paddingSidebar">
         <div class="title-selection">
-            <h1>Editar Evaluacion de {{profile?.givenName}} {{profile?.surname}}</h1>
+            <h1>Editar Evaluación de {{profile?.givenName}} {{profile?.surname}}</h1>
         </div>
         <section class="hr-users">
     

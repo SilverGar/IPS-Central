@@ -1,7 +1,10 @@
 <body *ngIf="loadingScreen"> 
-    <section class="paddingSidebar">
-        <h1>Cargando...</h1>
-    </section>
+    <div class="container">
+        <div class="center">
+            <div class="loader"></div>
+        </div>
+        
+    </div>
 </body>
 
 
@@ -57,18 +60,18 @@
                             <div *ngIf="team.Check1 != null">
                                 <div *ngIf="!team.Check1" class="tooltip">
                                     <figure>
-                                        <img src="http://localhost:4200/assets/icons/removeIcon.png" alt="icono agregar usuario" style="width: auto; height: 35px; margin: -10px;">
+                                        <img src="http://localhost:4200/assets/icons/removeIcon.png" alt="icono agregar usuario" style="width: auto; height: 25px; margin: -10px;">
                                     </figure>
                                     <span class="tooltiptext">{{team?.Reason}}</span>
                                 </div>
                                
                                 <figure *ngIf="team.Check1">
-                                    <img src="http://localhost:4200/assets/icons/addIcon.png" alt="icono agregar usuario" style="width: auto; height: 35px; margin: -10px;">
+                                    <img src="http://localhost:4200/assets/icons/addIcon.png" alt="icono agregar usuario" style="width: auto; height: 25px; margin: -10px;">
                                 </figure>
                             </div>
                             <div *ngIf="team.Check1 == null">
                                 <figure *ngIf="!team.Check1">
-                                    <img src="http://localhost:4200/assets/icons/addIcon.png" alt="icono agregar usuario" style="width: auto; height: 35px; margin: -10px;">
+                                    <img src="http://localhost:4200/assets/icons/addIcon.png" alt="icono agregar usuario" style="width: auto; height: 25px; margin: -10px;">
                                 </figure>
                             </div>
                         </div>
