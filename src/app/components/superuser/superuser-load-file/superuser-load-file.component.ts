@@ -1,8 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnDestroy, OnInit, ViewChild, ElementRef } from '@angular/core';
-import { Data, Router } from '@angular/router';
-import { error } from 'console';
-import { NgxCsvParser, NgxCSVParserError } from 'ngx-csv-parser';
+import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { User, Regular_Team, Team360 } from 'src/app/models/userModels';
 import { DataSharingService } from 'src/app/services/dataManagement/data-sharing.service';
@@ -56,7 +54,6 @@ export class SuperuserLoadFileComponent implements OnInit, OnDestroy {
   }
 
   constructor(
-    private ngxCsvParser: NgxCsvParser,
     private data: DataSharingService, 
     private db: DatabaseService,
     private router: Router

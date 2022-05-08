@@ -20,18 +20,18 @@
                     <h2 class="subtitle">Mi Evaluación360</h2>
                 </div>
                 <div class="button-section">
-                    <div class="add-user-button-center">
+                    <div class="add-user-button-center" routerLink="/home/employee_home">
                         <figure class=".add-icon">
                             <img src="http://localhost:4200/assets/icons/backButton.png" alt="icono agregar usuario">
                         </figure>
-                        <a class="add-user" routerLink="/home/employee_home">Regresar</a>
+                        <a class="add-user">Regresar</a>
                     </div>
         
-                    <div class="add-user-button-center">
+                    <div class="add-user-button-center" (click)="postEmployeeChanges()">
                         <figure class=".add-icon">
                             <img src="http://localhost:4200/assets/icons/saveButton.png" alt="icono agregar usuario">
                         </figure>
-                        <a class="add-user" (click)="postEmployeeChanges()">Guardar Cambios</a>
+                        <a class="add-user">Guardar Cambios</a>
                     </div>
                 </div>
             </div>

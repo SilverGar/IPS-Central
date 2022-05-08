@@ -20,22 +20,24 @@
                 <div>
                     <h2 class="subtitle">Mi Evaluación360</h2>
                 </div>
+                
                 <div *ngIf="allowEditing" class="button-section">
-                    <div class="add-user-button-center">
+                    <div class="add-user-button-center" (click)="displayRequest()">
                         <figure class=".add-icon">
                             <img src="http://localhost:4200/assets/icons/editIcon.png" alt="icono agregar usuario">
                         </figure>
-                        <a class="add-user" (click)="displayRequest()">Modificar equipo</a>
+                        <a class="add-user">Modificar equipo</a>
                     </div>
         
-                    <div class="add-user-button-center">
+                    <div class="add-user-button-center" (click)="confirmTeam()">
                         <figure class=".add-icon">
                             <img src="http://localhost:4200/assets/icons/confirmButton.png" alt="icono agregar usuario">
                         </figure>
-                        <a class="add-user" (click)="confirmTeam()">Confirmar equipo</a> 
+                        <a class="add-user">Confirmar equipo</a> 
                     </div>
                 </div>
             </div>
+
     
                 
             <table class="rh-table">
@@ -81,14 +83,13 @@
                 </tr>
                 
             </table>
+            
             <div id="container">
                 <figure id="iconStatus">
                     <img src="http://localhost:4200/assets/icons/{{imagePath}}" alt="icono agregar usuario" style="width: auto; height: 35px; margin: -10px;">
                 </figure>
                 <h2 id="textStatus">{{textStatus}}</h2>
-                
             </div>
-           
 
         </section>
     </section>

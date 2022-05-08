@@ -1,15 +1,114 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <link rel="stylesheet" href="./sidebar-humanresources.component.css">
     <!-- Boxicons CDN Link -->
     <link href='https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css' rel='stylesheet'>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Apricot Sidebar</title>
 </head>
 <body>
+    <div class="sidebar">
+        <!-- <img src="/UI-final-Angular/src/assets/images/InflectionPoint.jpg" alt="profile"> -->
+        <!-- <img [src]="imageSrc" [alt]="imageAlt" /> -->
+        <div class="image-details">
+            <img src="{{imageSrc}}" alt="{{imageAlt}}" />
+        </div>
+        <!-- <div class="logo-details">
+            <i class='bx bxl-windows'></i>
+            <i class='bx bx-menu' ></i>
+            <span class="logo_name">Inflection Point</span>
+        </div> -->
+        <ul class="nav-links">
+            <li>
+                <a routerLink="/hr/dashboard">
+                    <i class='bx bx-grid-alt'></i>
+                    <span class="link_name">Dashboard</span>
+                </a>
+                <ul class="sub-menu blank">
+                    <li><a class="link_name" routerLink="/hr/dashboard">Dashboard</a></li>
+                </ul>
+            </li>
+            <li>
+                <div class="icon-link" clickOutside (clickOutside)="clickedOutside()" (click)="toggleMenu()">
+                    <a>
+                        <i class='bx bx-user'></i>
+                        <span class="link_name">Equipos</span>
+                    </a>
+                    <i class="bx bxs-chevron-down arrow"></i>
+                </div>
+                <ul class="sub-menu" *ngIf="isMenuOpened">
+                    <li><a>Crear Equipo</a></li>
+                    <li><a routerLink="/hr/team-management">Editar Equipo</a></li>
+                    <li><a>Visualizar Equipos</a></li>
+                </ul>
+            </li>
+            <li>
+                <a routerLink="/hr/notifications">
+                    <i class='bx bx-chat'></i>
+                    <span class="link_name">Notificaciones</span>
+                </a>
+                <ul class="sub-menu blank">
+                    <li><a class="link_name" routerLink="/hr/notifications">Notificaciones</a></li>
+                </ul>
+            </li>
+            <li>
+                <a>
+                    <i class='bx bx-folder'></i>
+                    <span class="link_name">Administrar Usuarios</span>
+                </a>
+                <ul class="sub-menu blank">
+                    <li><a class="link_name">Administrar Usuarios</a></li>
+                </ul>
+            </li>
+            <li>
+                <a>
+                    <i class='bx bx-cog'></i>
+                    <span class="link_name">Configuración</span>
+                </a>
+                <ul class="sub-menu blank">
+                    <li><a class="link_name">Configuración</a></li>
+                </ul>
+            </li>
+            <li>
+                <div class="profile-details">
+                    <div class="profile-content">
+                        <img src="http://localhost:4200/assets/stock.jpeg" alt="profile">
+                    </div>
+                        <div class="name-job">
+                            <div class="profile_name">{{profile?.givenName}}</div>
+                            <div class="job">Recursos Humanos</div>
+                        </div>
+                        <i class='bx bx-log-out' id="log_out" (click)="logout()"></i>
+                </div>
+            </li>
+        </ul>
+    </div>
+    <section class="home-section">
+        <router-outlet></router-outlet>
+    </section>
+</body>
+</html>
+
+
+
+
+
+
+<!-- <!DOCTYPE html>
+<html lang="en"> -->
+<!-- <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link rel="stylesheet" href="./sidebar-humanresources.component.css"> -->
+    <!-- Boxicons CDN Link -->
+    <!-- <link href='https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css' rel='stylesheet'>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Apricot Sidebar</title>
+</head> -->
+<!-- <body>
     <div class="sidebar">
         <div class="logo-details">
             <i class='bx bxl-windows'></i>
@@ -83,4 +182,4 @@
 
 
 
-
+ -->

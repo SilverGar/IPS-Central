@@ -17,9 +17,25 @@ type ProfileType = {
 })
 export class SidebarComponent implements OnInit {
   profile!: ProfileType
+  imageSrc = 'https://yt3.ggpht.com/a/AGF-l79b_9Tw9iTZ9nM_qOeACpuCz3kUc1EWEsgKUQ=s900-mo-c-c0xffffffff-rj-k-no'  
+  imageAlt = 'Inflection Point'
+
+
+  isMenuOpened: boolean = false;
+
   constructor(
     private msSignIn: MsSignInService
   ) { }
+
+
+  
+  toggleMenu(): void{
+    this.isMenuOpened = !this.isMenuOpened;
+  }
+
+  clickedOutside(): void{
+    this.isMenuOpened = false;
+  }
 
   ngOnInit(): void {
     this.msSignIn.getProfile().subscribe(resp => this.profile = resp)
