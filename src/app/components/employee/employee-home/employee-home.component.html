@@ -1,4 +1,4 @@
-<body *ngIf="loadingScreen"> 
+<body *ngIf="statusDisplay == 0"> 
     <div class="container">
         <div class="center">
             <div class="loader"></div>
@@ -7,8 +7,17 @@
     </div>
 </body>
 
+<body *ngIf="statusDisplay == 1"> 
+    <div class="container">
+        <div class="center">
+            <h1>No tienes integrantes en tu equipo.</h1>
+        </div>
+        
+    </div>
+</body>
 
-<body *ngIf="!loadingScreen">
+
+<body *ngIf="statusDisplay == 2">
     <section class="paddingSidebar">
         <div class="title-selection">
             <h1>Bienvenido {{profile?.givenName}} {{profile?.surname}}</h1>

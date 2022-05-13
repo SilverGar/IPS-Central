@@ -16,6 +16,7 @@ export class DatabaseService {
   ) { }
 
 
+  //SUPERUSUARIO
   getUserType(email: string) {
     var URL = `http://localhost:4000/api/user_getType/` + email
     return this.http.get<Array<UserType>>(URL)
@@ -104,4 +105,26 @@ export class DatabaseService {
         })
       )
   }
+
+  //GENERAL
+  getEmployeeUpdate(email: string){
+    var URL  = `http://localhost:4000/api/getAppUpdate/` + email
+    return this.http.get<number>(URL)
+      .pipe(
+        map(resp =>{
+          return resp
+        })
+      )
+  } 
+
+  getReceivedUpdate(email: string){
+    var URL  = `http://localhost:4000/api/getAppReceivedUpdate/` + email
+    return this.http.get<number>(URL)
+      .pipe(
+        map(resp =>{
+          return resp
+        })
+      )
+  } 
+  
 }

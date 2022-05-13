@@ -27,7 +27,7 @@ export class SuperuserLoadFileComponent implements OnInit, OnDestroy {
 
   //Sharing data between views
   message?: Team360;
-  subscription?: Subscription;
+  //subscription?: Subscription;
 
   //Loading Progress
 
@@ -46,11 +46,11 @@ export class SuperuserLoadFileComponent implements OnInit, OnDestroy {
 
   //Helps subscribing to the data
   ngOnInit(): void {
-    this.subscription = this.data.currentTeams.subscribe(message => this.message = message)
+    //this.subscription = this.data.currentTeams.subscribe(message => this.message = message)
   }
 
   ngOnDestroy(): void {
-    this.subscription?.unsubscribe()
+    //this.subscription?.unsubscribe()
   }
 
   constructor(

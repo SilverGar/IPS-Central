@@ -13,7 +13,7 @@ import { SidebarComponent } from './components/shared/sidebar/sidebar.component'
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 
-import { MsalModule, MsalRedirectComponent, MsalGuard, MsalInterceptor } from '@azure/msal-angular'; // Import MsalInterceptor
+import { MsalModule, MsalGuard, MsalInterceptor } from '@azure/msal-angular'; // Import MsalInterceptor
 import { InteractionType, PublicClientApplication } from '@azure/msal-browser';
 import { EmployeeDetailsComponent } from './components/employee/employee-details/employee-details.component';
 import { EmployeeHomeComponent } from './components/employee/employee-home/employee-home.component';
@@ -37,6 +37,7 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { PopUpLoadInfoComponent } from './components/superuser/pop-up-load-info/pop-up-load-info.component';
 import { PopUpAddUserComponent } from './components/superuser/pop-up-add-user/pop-up-add-user.component';
 import { SuperuserVisualizeTeamsComponent } from './components/superuser/superuser-visualize-teams/superuser-visualize-teams.component';
+import { PopUpConfirmTeamComponent } from './components/employee/pop-up-confirm-team/pop-up-confirm-team.component';
 
 const isIE = window.navigator.userAgent.indexOf('MSIE ') > -1 || window.navigator.userAgent.indexOf('Trident/') > -1;
 
@@ -64,7 +65,8 @@ const isIE = window.navigator.userAgent.indexOf('MSIE ') > -1 || window.navigato
     HrApproveteamsComponent,
     PopUpLoadInfoComponent,
     PopUpAddUserComponent,
-    SuperuserVisualizeTeamsComponent
+    SuperuserVisualizeTeamsComponent,
+    PopUpConfirmTeamComponent
   ],
   imports: [
     BrowserModule,
@@ -113,7 +115,8 @@ const isIE = window.navigator.userAgent.indexOf('MSIE ') > -1 || window.navigato
   bootstrap: [AppComponent],
   entryComponents: [
     PopUpLoadInfoComponent,
-    PopUpAddUserComponent
+    PopUpAddUserComponent,
+    PopUpConfirmTeamComponent
   ]
 })
 export class AppModule { }
