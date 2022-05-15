@@ -126,5 +126,14 @@ export class DatabaseService {
         })
       )
   } 
-  
+
+  getReleasedStatus(){
+    var URL = `http://localhost:4000/api/getReleasedStatus`
+    return this.http.get<number>(URL)
+      .pipe(
+        map(resp =>{
+          return resp
+        })
+      )
+  }
 }

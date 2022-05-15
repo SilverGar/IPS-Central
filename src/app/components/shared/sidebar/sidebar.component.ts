@@ -30,6 +30,7 @@ export class SidebarComponent implements OnInit, OnDestroy {
 
   subscription?: Subscription
   currentUpdateStatus: number = 0
+  currentReleasedStatus: number = -1
 
 
 
@@ -40,17 +41,15 @@ export class SidebarComponent implements OnInit, OnDestroy {
   ) { }
 
   ngOnInit(): void {
-    
     this.msSignIn.getProfile().subscribe(resp => {
       this.profile = resp
       if(this.profile != null){
         this.subscription = this.dataSharingService.currentUpdate.subscribe(resp => {
           this.currentUpdateStatus = resp
-          
         })
       }
     })
-    this.fetchUpdate()
+    this.getReleasedStatus()
     this.msSignIn.verifyPage(0);
   }
   
@@ -73,6 +72,15 @@ export class SidebarComponent implements OnInit, OnDestroy {
     })
     
     this.fetchUpdate()
+  }
+
+  getReleasedStatus(){
+    this.db.getReleasedStatus().subscribe(resp =>{
+      this.currentReleasedStatus = resp
+      if(resp == 1){
+        this.fetchUpdate()
+      }
+    })
   }
 
   delay(ms: number){

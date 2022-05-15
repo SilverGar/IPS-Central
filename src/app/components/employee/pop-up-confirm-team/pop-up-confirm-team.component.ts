@@ -18,8 +18,8 @@ export class PopUpConfirmTeamComponent implements OnInit {
 
   constructor(
     private dialogRef: MatDialogRef<PopUpConfirmTeamComponent>,
-    //Se supone que la variable 'data' no tiene que tener ningun tipo de variable, segun Angular es de tipo Any.
-    //Pero el codigo no funciona si no se agrega el dato despues del data:
+    //Se supone que la variable 'data' no tiene que tener ningun tipo de variable, segun la pagina de Angular es de tipo Any.
+    //Pero el codigo no funciona si no se agrega el tipo de dato despues del 'data:'
     //WTF Angular
     @Inject(MAT_DIALOG_DATA) data: boolean
     ) 
