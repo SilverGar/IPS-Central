@@ -33,11 +33,34 @@
                 <tr *ngFor="let user of userTeam">
                     <th>{{user.PartnerID}}</th> 
                     <th>{{user.Partner}}</th>  
-                    <th>{{user.EvalType}}</th>   
+                    <th *ngIf="user.EvalType == 0">Peer</th>
+                    <th *ngIf="user.EvalType == 1">Team</th>
+                    <th *ngIf="user.EvalType == 2">Leader</th>
                     <th>{{user.Hours}}</th>  
-                    <th>{{user.Check1}} | {{user.Check2}}</th>  
+                    <th>{{user.OwnerCheck}} | {{user.PartnerCheck}}</th>  
                     <th>Hue</th>  
-                    
+                </tr>
+            </table>
+            <button class="add-user-button">Cancelar</button>
+            <button class="add-user-button">Aprobar</button>
+            <table>
+                <tr>
+                    <th>#</th>
+                    <th>Nombre</th>
+                    <th>Evaluación</th>
+                    <th>Horas</th>
+                    <th>Status</th>
+                    <th>Acción</th>
+                </tr>
+                <tr *ngFor="let user of userTeamNotApproved">
+                    <th>{{user.PartnerID}}</th> 
+                    <th>{{user.Partner}}</th>  
+                    <th *ngIf="user.EvalType == 0">Peer</th>
+                    <th *ngIf="user.EvalType == 1">Team</th>
+                    <th *ngIf="user.EvalType == 2">Leader</th>
+                    <th>{{user.Hours}}</th>  
+                    <th>{{user.OwnerCheck}} | {{user.PartnerCheck}}</th>  
+                    <th>Hue</th>  
                 </tr>
             </table>
         </div>

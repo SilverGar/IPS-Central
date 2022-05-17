@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { HttpParams, HttpRequest, HttpEvent } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { DbUserTeam360, UserType, User, ManageUsers } from 'src/app/models/db-user';
+import { DbUserTeam360, UserType, User, ManageUsers, Complete_Team360 } from 'src/app/models/db-user';
 import { map } from 'rxjs';
 import { response } from 'express';
 
@@ -79,6 +79,7 @@ export class DatabaseService {
     var URL = `http://localhost:4000/api/postEmployeeTeam360/` + publish
     return this.http.post<any>(URL, input).pipe(
       map(resp => {
+        console.log("Respuesta de cambios")
         console.log(resp)
         return resp
       })
@@ -101,6 +102,16 @@ export class DatabaseService {
     return this.http.get<Array<User>>(URL)
       .pipe(
         map(resp => {
+          return resp
+        })
+      )
+  }
+
+  getCompleteTeam360(email: string){
+    var URL = `http://localhost:4000/api/hr/getCompleteTeam/` + email
+    return this.http.get<Array<Complete_Team360>>(URL)
+      .pipe(
+        map(resp =>{
           return resp
         })
       )

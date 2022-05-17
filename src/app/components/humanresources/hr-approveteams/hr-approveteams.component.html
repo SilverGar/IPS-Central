@@ -1,4 +1,113 @@
-<div class="row">
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div class="main">
+        <p id="title">Verificadores de equipos 360 By Giorgio Armani</p>
+        <div class="container">
+            <div class="finder">
+                <div class="searchbar">
+                    <fieldset>
+                        <form class="searchform" method="post">
+                            <input (keydown)="sortUserList(1,searchQuery)" class="searcharea" type="text" placeholder="Buscar Usuario" [(ngModel)]="searchQuery" [ngModelOptions]="{standalone: true}">
+                            <input type="submit" value="Reset" class="submitbutton" (click)="sortUserList(1,''); searchQuery=''"/>
+
+                            <ul class="filters">
+                                <li class="letter-up-filter" title="Alfabeto Ascendente" data-searchType="web" (click)="sortUserList(2, '')">A</li>
+                                <li class="letter-down-filter" title="Alfabeto Descendete" data-searchType="web" (click)="sortUserList(3, '')">Z</li>
+                                <li class="approved" title="Aprobados" data-searchType="web" (click)="sortUserList(4, '')">Ap</li>
+                                <li class="not-approved" title="No Aprobados" data-searchType="web" (click)="sortUserList(5, '')">NAp</li>
+                                <li class="orphans" title="Huerfanos" data-searchType="web">H</li>
+                            </ul>
+                        </form>
+                    </fieldset>
+                </div>
+
+                <!-- <img src="/assets/uploadAssets/browse-icon.svg" title="Filtros" width="25px"> -->
+                <div class="searchresults">
+                    <div *ngIf="userList != null">
+
+                        <table class="styled-table" id="employees" style="box-shadow: none; border-spacing: 0px;">
+                            <tbody>
+                                <tr *ngFor="let user of displayUserList">
+                                    <td (click)="getTeam(user.email ?? ''); currentUser = user.name ?? ''" style="cursor:pointer ;">{{user.name}}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div *ngIf="userTeam?.length == 0">
+                        <p>Es huerfano</p>
+                    </div>
+                </div>
+            </div>
+
+            
+    
+            <div class="display" *ngIf="userList != null" >
+                <table class="styled-table">
+                    <caption>Equipo 360 de {{currentUser}}</caption>
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Nombre</th>
+                            <th>Evaluación</th>
+                            <th>Horas</th>
+                            <th>Status</th>
+                            <th>Acción</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let user of userTeam">
+                            <th>{{user.PartnerID}}</th> 
+                            <th>{{user.Partner}}</th>  
+                            <th *ngIf="user.EvalType == 0">Peer</th>
+                            <th *ngIf="user.EvalType == 1">Team</th>
+                            <th *ngIf="user.EvalType == 2">Leader</th>
+                            <th>{{user.Hours}}</th>  
+                            <th>{{user.OwnerCheck}} | {{user.PartnerCheck}}</th>  
+                            <th>Hue</th>  
+                        </tr>
+                    </tbody>
+                </table>
+
+                <table class="styled-table">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Nombre</th>
+                            <th>Evaluación</th>
+                            <th>Horas</th>
+                            <th>Status</th>
+                            <th>Acción</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let user of userTeamNotApproved">
+                            <th>{{user.PartnerID}}</th> 
+                            <th>{{user.Partner}}</th>  
+                            <th *ngIf="user.EvalType == 0">Peer</th>
+                            <th *ngIf="user.EvalType == 1">Team</th>
+                            <th *ngIf="user.EvalType == 2">Leader</th>
+                            <th>{{user.Hours}}</th>  
+                            <th>{{user.OwnerCheck}} | {{user.PartnerCheck}}</th>  
+                            <th>Hue</th>  
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+
+
+
+<!-- <div class="row">
     <div class="column-left">
         <h1>Usuarios</h1>
         <table>
@@ -22,15 +131,40 @@
             <tr *ngFor="let user of userTeam">
                 <th>{{user.PartnerID}}</th> 
                 <th>{{user.Partner}}</th>  
-                <th>{{user.EvalType}}</th>   
+                <th *ngIf="user.EvalType == 0">Peer</th>
+                <th *ngIf="user.EvalType == 1">Team</th>
+                <th *ngIf="user.EvalType == 2">Leader</th>
                 <th>{{user.Hours}}</th>  
-                <th>{{user.Check1}} | {{user.Check2}}</th>  
+                <th>{{user.OwnerCheck}} | {{user.PartnerCheck}}</th>  
                 <th>Hue</th>  
-                
             </tr>
         </table>
         <button class="add-user-button">Cancelar</button>
         <button class="add-user-button">Aprobar</button>
+        <table>
+            <tr>
+                <th>#</th>
+                <th>Nombre</th>
+                <th>Evaluación</th>
+                <th>Horas</th>
+                <th>Status</th>
+                <th>Acción</th>
+            </tr>
+            <tr *ngFor="let user of userTeamNotApproved">
+                <th>{{user.PartnerID}}</th> 
+                <th>{{user.Partner}}</th>  
+                <th *ngIf="user.EvalType == 0">Peer</th>
+                <th *ngIf="user.EvalType == 1">Team</th>
+                <th *ngIf="user.EvalType == 2">Leader</th>
+                <th>{{user.Hours}}</th>  
+                <th>{{user.OwnerCheck}} | {{user.PartnerCheck}}</th>  
+                <th>Hue</th>  
+            </tr>
+        </table>
+        
+
+
+       
     </div>
 
-</div>
+</div> -->

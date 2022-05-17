@@ -2,17 +2,13 @@
 //REGULAR USERS
 export interface DbUserTeam360 {
     TeamOwnerID?: number,
-    TeamOwner?: string,
     PartnerID?: number,
     Partner?: string,
     Check1?: boolean,
-    Check2?: boolean,
     Hours?: number,
     EvalType?: number,
     Approved?: boolean,
     Reason?: string,
-    ProjectID?: number,
-    Project?: string,
 }
 
 export interface UserType {
@@ -22,7 +18,8 @@ export interface UserType {
 export interface User {
     id?: number,
     name?: string,
-    email?: string
+    email?: string,
+    AllowEditing?: boolean
 }
 
 export interface ManageUsers {
@@ -32,3 +29,14 @@ export interface ManageUsers {
     userType: boolean
 }
 //HUMAN RESOURCES
+
+export interface Complete_Team360 {
+    TeamOwnerID?: number,
+    PartnerID?: string,
+    Partner?: string,
+    OwnerCheck?: boolean,
+    PartnerCheck?: boolean,
+    EvalType?: number,
+    Approved?: boolean,
+    Hours?: number
+}

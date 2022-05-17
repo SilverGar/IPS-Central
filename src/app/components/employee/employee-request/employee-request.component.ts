@@ -18,7 +18,7 @@ type ProfileType = {
 type messages = {
   message: string,
   partner: number,
-  project: number
+  evalType: number
 }
 
 @Component({
@@ -90,7 +90,7 @@ export class EmployeeRequestComponent implements OnInit, OnDestroy {
             var newMessage: messages = {
               message: currentTeam[i].Reason ?? '',
               partner: currentTeam[i].PartnerID ?? 0,
-              project: currentTeam[i].ProjectID ?? 0
+              evalType: currentTeam[i].EvalType ?? 0
             }
             localMessages.push(newMessage)
           }
@@ -99,7 +99,7 @@ export class EmployeeRequestComponent implements OnInit, OnDestroy {
         for(var i in newTeam){
           if(localMessages.length > 0){
             for(var j in localMessages){
-              if(newTeam[i].PartnerID == localMessages[j].partner && newTeam[i].ProjectID == localMessages[j].project){
+              if(newTeam[i].PartnerID == localMessages[j].partner && newTeam[i].EvalType == localMessages[j].evalType){
                 newTeam[i].Reason = localMessages[i].message
                 newTeam[i].Check1 = false
                 delete localMessages[j]
