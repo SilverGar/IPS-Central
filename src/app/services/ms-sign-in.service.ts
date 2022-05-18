@@ -70,7 +70,9 @@ export class MsSignInService {
               })
             })
           },
-          error: (error) => console.log(error)
+          error: (error) => {
+              console.log(error)
+            }
         });
     }
   }

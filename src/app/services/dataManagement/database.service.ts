@@ -158,5 +158,10 @@ export class DatabaseService {
       )
   }
 
+  //Errores
+  apiNotEnabled(){
+      console.log("Error")
+  }
+
 
 }
