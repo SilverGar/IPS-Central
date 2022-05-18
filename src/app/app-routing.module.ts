@@ -24,6 +24,10 @@ import { SuperuserHomeComponent } from './components/superuser/superuser-home/su
 import { HrDashboardComponent } from './components/humanresources/hr-dashboard/hr-dashboard.component';
 import { HrNotificationsComponent } from './components/humanresources/hr-notifications/hr-notifications.component';
 import { SignInComponent } from './components/shared/sign-in/sign-in.component';
+import { LoadInfoComponent } from './components/superuser/load-info/load-info.component';
+import { InvalidUserComponent } from './components/shared/invalid-user/invalid-user.component';
+import { HrApproveteamsComponent } from './components/humanresources/hr-approveteams/hr-approveteams.component';
+import { SuperuserVisualizeTeamsComponent } from './components/superuser/superuser-visualize-teams/superuser-visualize-teams.component';
 
 const routes: Routes = [
   {
@@ -41,12 +45,16 @@ const routes: Routes = [
     canActivate: [MsalGuard]
   },
   {
+    path: 'userNotFound',
+    component: InvalidUserComponent,
+  },
+  {
     path: 'home',
     component: SidebarComponent,
     canActivate: [MsalGuard],
-    children:[
+    children: [
       {
-        path: 'employee_home', 
+        path: 'employee_home',
         component: EmployeeHomeComponent,
         canActivate: [MsalGuard]
       },
@@ -71,7 +79,7 @@ const routes: Routes = [
     path: 'superuser',
     component: SidebarSuperuserComponent,
     canActivate: [MsalGuard],
-    children:[
+    children: [
       {
         path: 'load-file',
         component: SuperuserLoadFileComponent,
@@ -86,6 +94,16 @@ const routes: Routes = [
         path: 'dashboard',
         component: SuperuserHomeComponent,
         canActivate: [MsalGuard]
+      },
+      {
+        path: 'confirm-load',
+        component: LoadInfoComponent,
+        canActivate: [MsalGuard]
+      },
+      {
+        path: 'visualize-teams',
+        component: SuperuserVisualizeTeamsComponent,
+        canActivate: [MsalGuard]
       }
     ]
   },
@@ -93,7 +111,7 @@ const routes: Routes = [
     path: 'hr',
     component: SidebarHumanresourcesComponent,
     canActivate: [MsalGuard],
-    children:[
+    children: [
       {
         path: 'dashboard',
         component: HrDashboardComponent,
@@ -102,6 +120,11 @@ const routes: Routes = [
       {
         path: 'notifications',
         component: HrNotificationsComponent,
+        canActivate: [MsalGuard]
+      },
+      {
+        path: 'team-management',
+        component: HrApproveteamsComponent,
         canActivate: [MsalGuard]
       }
     ]

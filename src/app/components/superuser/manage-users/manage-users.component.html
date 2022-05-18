@@ -1,5 +1,3 @@
-<!-- <button (click)="newMessage()">Hola</button> -->
-
 <section class="main-section">
     <div class="title-section">
         <h1>Administrar usuarios</h1>
@@ -9,11 +7,14 @@
             <div>
                 <h2 class="subtitle">Recursos humanos</h2>
             </div>
-            <div class="add-user-button">
+            <div class="add-user-button" (click)="openDialog()">
                 <figure class=".add-icon">
                     <img src="https://cdn.onlinewebfonts.com/svg/img_529925.png" alt="icono agregar usuario">
                 </figure>
-                <a class="add-user" href="">Nuevo usuario</a>
+                <a class="add-user">Nuevo usuario</a>
+            </div>
+            <div class="save-button">
+                <a href="">Guardar</a>
             </div>
         </div>
         <table class="rh-table">
@@ -23,46 +24,14 @@
                 <th>Correo</th>
                 <th>Especialista RH</th>
             </tr>
-            <tr>
-                <td>1</td>
-                <td>Christian</td>
-                <td>christian@tec.mx</td>
-                <td>
+            <tr *ngFor="let user of users">
+                <td *ngIf="user.userType">{{user.id}}</td>
+                <td *ngIf="user.userType">{{user.name}}</td>
+                <td *ngIf="user.userType">{{user.email}}</td>
+                <td *ngIf="user.userType">
                     <label class="switch">
-                        <input type="checkbox" checked>
-                        <span class="slider"></span>
-                    </label>
-                </td>
-            </tr>
-            <tr>
-                <td>2</td>
-                <td>Pedro</td>
-                <td>pedro@tec.mx</td>
-                <td>
-                    <label class="switch">
-                        <input type="checkbox" checked>
-                        <span class="slider"></span>
-                    </label>
-                </td>
-            </tr>
-            <tr>
-                <td>3</td>
-                <td>Jorge</td>
-                <td>jorge@tec.mx</td>
-                <td>
-                    <label class="switch">
-                        <input type="checkbox" checked>
-                        <span class="slider"></span>
-                    </label>
-                </td>
-            </tr>
-            <tr>
-                <td>4</td>
-                <td>Chavacano</td>
-                <td>chava@tec.mx</td>
-                <td>
-                    <label class="switch">
-                        <input type="checkbox" checked>
+                        <input type="checkbox" value="{{user.userType}}" [checked]="user.userType"
+                            (change)="user.userType = !user.userType">
                         <span class="slider"></span>
                     </label>
                 </td>
@@ -79,46 +48,14 @@
                 <th>Correo</th>
                 <th>Especialista RH</th>
             </tr>
-            <tr>
-                <td>1</td>
-                <td>Christian</td>
-                <td>christian@tec.mx</td>
-                <td>
+            <tr *ngFor="let user of users">
+                <td *ngIf="!user.userType">{{user.id}}</td>
+                <td *ngIf="!user.userType">{{user.name}}</td>
+                <td *ngIf="!user.userType">{{user.email}}</td>
+                <td *ngIf="!user.userType">
                     <label class="switch">
-                        <input type="checkbox">
-                        <span class="slider"></span>
-                    </label>
-                </td>
-            </tr>
-            <tr>
-                <td>2</td>
-                <td>Pedro</td>
-                <td>pedro@tec.mx</td>
-                <td>
-                    <label class="switch">
-                        <input type="checkbox">
-                        <span class="slider"></span>
-                    </label>
-                </td>
-            </tr>
-            <tr>
-                <td>3</td>
-                <td>Jorge</td>
-                <td>jorge@tec.mx</td>
-                <td>
-                    <label class="switch">
-                        <input type="checkbox">
-                        <span class="slider"></span>
-                    </label>
-                </td>
-            </tr>
-            <tr>
-                <td>4</td>
-                <td>Chavacano</td>
-                <td>chava@tec.mx</td>
-                <td>
-                    <label class="switch">
-                        <input type="checkbox">
+                        <input type="checkbox" value="{{user.userType}}" [checked]="user.userType"
+                            (change)="user.userType = !user.userType">
                         <span class="slider"></span>
                     </label>
                 </td>
@@ -126,4 +63,3 @@
         </table>
     </section>
 </section>
-

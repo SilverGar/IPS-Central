@@ -13,7 +13,7 @@ import { SidebarComponent } from './components/shared/sidebar/sidebar.component'
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 
-import { MsalModule, MsalRedirectComponent, MsalGuard, MsalInterceptor } from '@azure/msal-angular'; // Import MsalInterceptor
+import { MsalModule, MsalGuard, MsalInterceptor } from '@azure/msal-angular'; // Import MsalInterceptor
 import { InteractionType, PublicClientApplication } from '@azure/msal-browser';
 import { EmployeeDetailsComponent } from './components/employee/employee-details/employee-details.component';
 import { EmployeeHomeComponent } from './components/employee/employee-home/employee-home.component';
@@ -30,7 +30,16 @@ import { SidebarHumanresourcesComponent } from './components/shared/sidebar-huma
 import { SidebarSuperuserComponent } from './components/shared/sidebar-superuser/sidebar-superuser.component';
 import { ConfirmationDialogLogoutComponent } from './components/shared/ui/confirmation-dialog-logout/confirmation-dialog-logout.component';
 import { HrApproveComponent } from './components/humanresources/hr-approve/hr-approve.component';
+import { LoadInfoComponent } from './components/superuser/load-info/load-info.component';
+import { InvalidUserComponent } from './components/shared/invalid-user/invalid-user.component';
+import { HrApproveteamsComponent } from './components/humanresources/hr-approveteams/hr-approveteams.component';
 
+import { MatDialogModule } from '@angular/material/dialog';
+import { PopUpLoadInfoComponent } from './components/superuser/pop-up-load-info/pop-up-load-info.component';
+import { PopUpAddUserComponent } from './components/superuser/pop-up-add-user/pop-up-add-user.component';
+import { SuperuserVisualizeTeamsComponent } from './components/superuser/superuser-visualize-teams/superuser-visualize-teams.component';
+import { PopUpConfirmTeamComponent } from './components/employee/pop-up-confirm-team/pop-up-confirm-team.component';
+import { HrPopUpConflictComponent } from './components/humanresources/hr-pop-up-conflict/hr-pop-up-conflict.component';
 
 const isIE = window.navigator.userAgent.indexOf('MSIE ') > -1 || window.navigator.userAgent.indexOf('Trident/') > -1;
 
@@ -53,7 +62,15 @@ const isIE = window.navigator.userAgent.indexOf('MSIE ') > -1 || window.navigato
     SidebarHumanresourcesComponent,
     SidebarSuperuserComponent,
     ConfirmationDialogLogoutComponent,
-    HrApproveComponent
+    HrApproveComponent,
+    InvalidUserComponent,
+    LoadInfoComponent,
+    HrApproveteamsComponent,
+    PopUpLoadInfoComponent,
+    PopUpAddUserComponent,
+    SuperuserVisualizeTeamsComponent,
+    PopUpConfirmTeamComponent,
+    HrPopUpConflictComponent
   ],
   imports: [
     BrowserModule,
@@ -67,6 +84,7 @@ const isIE = window.navigator.userAgent.indexOf('MSIE ') > -1 || window.navigato
     AppRoutingModule,
     FormsModule,
     ReactiveFormsModule,
+    MatDialogModule,
     MsalModule.forRoot(new PublicClientApplication({
       auth: {
         //clientId: '01f29e73-b3dc-4096-9f42-51fed93bedc5',
@@ -98,6 +116,11 @@ const isIE = window.navigator.userAgent.indexOf('MSIE ') > -1 || window.navigato
     },
     MsalGuard
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  entryComponents: [
+    PopUpLoadInfoComponent,
+    PopUpAddUserComponent,
+    PopUpConfirmTeamComponent
+  ]
 })
 export class AppModule { }

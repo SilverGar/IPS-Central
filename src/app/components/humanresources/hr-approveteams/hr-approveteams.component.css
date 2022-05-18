@@ -1,0 +1,418 @@
+@import url(https://fonts.googleapis.com/css?family=Montserrat);
+/**========================================================================
+ *                           Elementos principales
+ *========================================================================**/
+.container{
+    /* Borde */
+
+    /* Fuente */
+
+    /* Tamanio */
+
+    /* Formato */
+    grid-template-columns: 30% 70%;
+    display: grid;
+    
+}
+
+#title, .styled-table caption{
+    /* Borde */
+    padding: 1.5rem;
+    margin: 0;
+
+    /* Fuente */
+    font-family: 'Montserrat', sans-serif;
+    font-weight: bolder;
+    text-align: center;
+    font-size:250%;
+
+    /* Tamanio */
+
+    /* Formato */
+}
+
+.display{
+    /* Borde */
+
+    /* Fuente */
+
+    /* Tamanio */
+
+    /* Formato */
+
+    padding-left: 5%;
+    padding-right: 5%;
+}
+
+/**========================================================================
+ *                           Buscador
+ *========================================================================**/
+.finder{
+    /* Borde */
+    margin-left: 5%;
+    margin-top: 5%;
+    position: static;
+
+    /* Fuente */
+
+    /* Tamanio */
+    height: 75vh;
+
+    /* Formato */
+    box-shadow: 0 0 5px rgb(108, 108, 108);
+    background: rgb(254, 254, 247);
+}
+
+.searchform{
+    /* The search form. */
+    background-color: #e65624;
+    margin-top: 5px;
+    padding:10px 10px 30px 10px;
+    position:relative;
+    box-shadow: 0 0 5px rgb(108, 108, 108);
+
+    /* -moz-border-radius:10px;
+    -webkit-border-radius:10px; */
+    border-radius:8px;
+}
+
+.searchbar fieldset{
+    border: none;
+}
+
+.searcharea{
+    border:none;
+
+    float:left;
+    line-height:22px;
+    margin-right:12px;
+    outline:medium none;
+    text-shadow:1px 1px 0 white;
+    border-radius: 10px;
+    color: black;
+    width: 65%;
+    height: 34px;
+}
+
+.submitbutton{
+    width:75px;
+    height:34px;
+    overflow:hidden;
+    border-style:double;
+    cursor:pointer;
+    border-radius: 10px;
+}
+
+.submitbutton:hover{
+    background-position:left bottom;
+
+}
+
+.employee-btn{
+    /* Borde */
+    box-shadow: 0 0 5px rgb(108, 108, 108);
+    border-radius: 10px;
+    padding-top: 1%;
+    margin-left: 3%;
+    margin-top: 3%;
+    border: none;
+    
+    /* Fuente */
+    text-align: left;
+
+    /* Tamanio */
+    height: 35px;
+    max-width: 70%;
+    width: 70%;
+
+    /* Formato */
+    background-color: #e2e0e0;
+    word-wrap: break-word;
+    cursor: pointer;
+}
+
+.employee-btn:hover{
+    /* Borde */
+
+    /* Fuente */
+
+    /* Tamanio */
+
+    /* Formato */
+    background-color: #f3f3f3;
+    transition: all 0.5s;
+}
+
+/**========================================================================
+ *                           Equipo 360
+ *========================================================================**/
+
+ /* En edicion */
+.styled-table {
+    /* Borde */
+    box-shadow: 0 0 10px rgb(89, 71, 71);
+    border-collapse: collapse;
+    border-collapse:separate;
+    border-spacing: 3px;
+    border-radius:6px;
+    margin: 25px 0;
+
+    /* Fuente */
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1rem;
+    
+    /* Tamanio */
+    min-width: 60%;
+    max-width: 100%;
+    width:100%;
+    
+    /* Formato */
+    table-layout: fixed;
+    display: table;
+}
+
+.styled-table caption{
+    /* Borde */
+    border-style: outset inset inset outset;
+    border-radius: 10px;
+    margin-bottom: 25px;
+
+    /* Fuente */
+
+    /* Tamanio */
+
+    /* Formato */
+    background-color: rgb(254, 254, 247);
+}
+
+/* En edicion */
+.styled-table tbody{ 
+    /* Borde */
+
+    /* Fuente */
+
+    /* Tamanio */
+
+    /* Formato */
+    display: block;
+    max-height: 52vh;
+    overflow-y: scroll;
+} 
+
+.styled-table tbody tr {
+    /* Borde */
+    border-bottom: 3px solid #dddddd;
+
+    /* Fuente */
+
+    /* Tamanio */
+    width: 100%;
+
+    /* Formato */
+    
+}
+
+.styled-table tbody tr:last-of-type {
+    /* Borde */
+    border-bottom: 2px solid #009879;
+
+    /* Fuente */
+
+    /* Tamanio */
+
+    /* Formato */
+    
+}
+
+.styled-table tbody tr:nth-of-type(odd){
+    /* Borde */
+
+    /* Fuente */
+
+    /* Tamanio */
+
+    /* Formato */
+    background-color: #ece7e7;
+}
+
+.styled-table tbody tr:nth-of-type(even) {
+    /* Borde */
+
+    /* Fuente */
+
+    /* Tamanio */
+
+    /* Formato */
+    background-color: #f3f3f3;
+}
+
+.styled-table tbody tr:nth-of-type(odd):hover, .styled-table tbody tr:nth-of-type(even):hover{
+    /* Borde */
+
+    /* Fuente */
+
+    /* Tamanio */
+
+    /* Formato */
+    background-color: #c8c8c8;
+}
+
+/* en edicion */
+.styled-table thead, .styled-table tbody tr{ 
+    display: table;
+    width: 100%;
+    table-layout: fixed;
+}
+
+.styled-table thead tr {
+    /* Borde */
+    border-radius: 10px;
+
+    /* Fuente */
+
+    /* Tamanio */
+
+    /* Formato */
+    background-color: #e65624;
+    color: #ffffff;
+}
+
+.styled-table th, .styled-table td {
+    /* Borde */
+    padding: 12px 15px;
+
+    /* Fuente */
+    text-align: justify;
+
+    /* Tamanio */
+    max-width: 150px;
+
+    /* Formato */
+    word-wrap: break-word;
+}
+
+#employees tbody{
+    max-height: 60.4vh;
+}
+
+#employees{
+    margin: 0;
+}
+
+/**========================================================================
+ *                           Iconos de Filtros
+ *========================================================================**/
+ .filters{
+    list-style:none;
+    margin:10px 0 0 100px;
+    /* height:19px; */
+    position:relative;
+}
+
+.filters li{
+    float:left;
+    /* height:19px; */
+    text-indent:-999px;
+    cursor:pointer;
+    margin-right:10px;
+}
+
+/* Alfabeto superior */
+li.letter-up-filter{
+    background:url("/assets/icons/searchIcons/letterFilter-icon.png") no-repeat;
+    background-size: contain;
+    width:15px;
+}
+
+li.letter-up-filter.active, li.letter-up-filter:hover{ 
+    background-position:right bottom;
+}
+
+/* Alfabeto inferior */
+li.letter-down-filter{ 
+    background:url("/assets/icons/searchIcons/letterFilterBack-icon.png") no-repeat;
+    background-size: contain;
+    width:15px; 
+    /* background-position:-18px 0; */
+}
+li.letter-down-filter.active, li.letter-down-filter:hover{ 
+    background-position:right bottom;
+}
+
+/* Aprobados */
+li.approved{ 
+    background:url("/assets/icons/searchIcons/completeFilter-icon.png") no-repeat;
+    background-size: contain;
+    width:15px; 
+    /* background-position:-44px 0; */
+}
+
+li.approved.active, li.approved:hover{ 
+    background-position:right bottom;
+}
+
+/* No aprobados */
+li.not-approved{ 
+    background:url("/assets/icons/searchIcons/notCompleteFilter-icon.png") no-repeat;
+    background-size: contain;
+    width:15px; 
+    /* background-position:right 0; */
+}
+
+li.not-approved.active, li.not-approved:hover{ 
+    background-position:right bottom;
+}
+
+/* Huerfanos */
+li.orphans{ 
+    background:url("/assets/icons/searchIcons/orphan-icon.png") no-repeat;
+    background-size: contain;
+    width:15px; 
+    /* background-position:right 0; */
+}
+
+li.orphans.active, li.orphans:hover{ 
+    background-position:right bottom;
+}
+
+span.arrow{
+    width:11px;
+    height:6px;
+    margin:21px 0 0 5px;
+    position:absolute;
+    background:url('/assets/icons/searchIcons/arrow.png') no-repeat;
+    left:0;
+}
+
+
+/* --Botones de aprobar y cancelar. */
+
+.buttons {
+    width: 50%;
+    display: flex;
+    justify-content: space-around;
+    margin-top: 24px;
+}
+
+.buttons button {
+    width: 40%;
+    height: 40px;
+    
+    
+    font-weight: bold;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: all 0.2s ease-in-out;
+    
+}
+
+.button-deny{
+    background-color: #e62424;
+    color: #d7d7d7;
+}
+
+.button-confirm{
+    background-color: #1a9f1f;
+    color: #d7d7d7;
+}

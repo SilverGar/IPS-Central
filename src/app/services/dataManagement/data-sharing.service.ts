@@ -1,8 +1,7 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
-import { DbUserTeam360 } from 'src/app/models/db-user';
-import { Team360 } from 'src/app/models/userModels';
-import { DatabaseService } from './database.service';
+import { Subscription } from 'rxjs';
+import { Complete_Team360 } from 'src/app/models/db-user';
 
 
 @Injectable({
@@ -10,22 +9,34 @@ import { DatabaseService } from './database.service';
 })
 export class DataSharingService {
 
-  initTeams: Team360 = {} as Team360;
-  private generatedTeams = new BehaviorSubject<Team360>(this.initTeams)
-  currentTeams = this.generatedTeams.asObservable();
+  // initTeams: Team360 = {} as Team360;
+  // private generatedTeams = new BehaviorSubject<Team360>(this.initTeams)
+  // currentTeams = this.generatedTeams.asObservable();
 
   // initDataTeams: Array<DbUserTeam360> = []
   // private databaseUserTeams = new BehaviorSubject<Array<DbUserTeam360>>(this.initDataTeams)
   // currentUserTeams = this.databaseUserTeams.asObservable()
 
+  private currentUpdateStatus = new BehaviorSubject<number>(0)
+  currentUpdate = this.currentUpdateStatus.asObservable()
 
-  constructor(
-    private db: DatabaseService
-  ) { }
+  private hr_currentSelectedTeam = new BehaviorSubject<Array<Complete_Team360>>([])
+  currentTeam = this.hr_currentSelectedTeam.asObservable()
 
-  changeLocalTeam(message: Team360){
-    this.generatedTeams.next(message)
+  constructor() { }
+
+  changeUpdateStatus(message: number){
+    this.currentUpdateStatus.next(message)
   }
+
+  changeCurrentTeam(message: Array<Complete_Team360>){
+      this.hr_currentSelectedTeam.next(message)
+  }
+
+
+  // changeLocalTeam(message: Team360){
+  //   this.generatedTeams.next(message)
+  // }
 
   // changeUserTeam(message: Array<DbUserTeam360>){
   //   this.databaseUserTeams.next(message)

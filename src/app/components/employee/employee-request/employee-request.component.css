@@ -115,7 +115,7 @@ html {
 }
 
 .hr-users {
-    width: 70%;
+    width: 98%;
 }
 
 .rh-table {
@@ -171,7 +171,7 @@ html {
     bottom: 0;
     left: 0;
     right: 0;
-    background-color: #ccc;
+    background-color: red;
     -webkit-transition: .4s;
     transition: .4s;
 }
@@ -189,7 +189,7 @@ html {
 }
 
 input:checked + .slider {
-    background-color: #46647c;
+    background-color: green;
 }
 
 input:focus + .slider {
@@ -277,3 +277,39 @@ h1{
     box-sizing: border-box;
     width: 100%;
 }
+
+/* Loading animation */
+
+.loader {
+    border: 16px solid #f3f3f3;
+    border-radius: 50%;
+    border-top: 16px solid #3498db;
+    width: 120px;
+    height: 120px;
+    -webkit-animation: spin 2s linear infinite; /* Safari */
+    animation: spin 2s linear infinite;
+  }
+
+  .container { 
+    height: 100%;
+    position: relative;
+
+  }
+  
+  .center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+  }
+  
+  /* Safari */
+  @-webkit-keyframes spin {
+    0% { -webkit-transform: rotate(0deg); }
+    100% { -webkit-transform: rotate(360deg); }
+  }
+  
+  @keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }

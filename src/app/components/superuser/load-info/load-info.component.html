@@ -1,0 +1,23 @@
+<link rel="stylesheet" href="./load-info.component.css">
+<main>
+    <section class="title-section">
+        <h1>Cargar información</h1>
+    </section>
+    <section class="content-section">
+        <div class="message">
+            <div class="message-content">
+                <p>Una vez que se carge la información a la base de datos, no será posible cargar otro archivo para este
+                    periodo.
+                </p>
+                <p>La información será liberada para todos los empleados de recursos humanos y lo empleados para empezar
+                    la evaluación 360.</p>
+                <p>
+                    ¿Estas seguro que quieres encargar la información?
+                </p>
+            </div>
+            <div class="button-content">
+                <button mat-button (click)="openDialog()">Cargar información</button>
+            </div>
+        </div>
+    </section>
+</main>

@@ -1,7 +1,23 @@
-<!-- <div *ngIf="loginDisplay">
-    <p>Login successful!</p>
-</div> -->
-<body>
+<body *ngIf="statusDisplay == 0"> 
+    <div class="container">
+        <div class="center">
+            <div class="loader"></div>
+        </div>
+        
+    </div>
+</body>
+
+<body *ngIf="statusDisplay == 1"> 
+    <div class="container">
+        <div class="center">
+            <h1>No tienes integrantes en tu equipo.</h1>
+        </div>
+        
+    </div>
+</body>
+
+
+<body *ngIf="statusDisplay == 2">
     <section class="paddingSidebar">
         <div class="title-selection">
             <h1>Bienvenido {{profile?.givenName}} {{profile?.surname}}</h1>
@@ -13,19 +29,24 @@
                 <div>
                     <h2 class="subtitle">Mi Evaluación360</h2>
                 </div>
-                <div class="button-section">
-                    <div class="add-user-button-center">
+                
+                <div *ngIf="allowEditing" class="button-section">
+                    <div class="add-user-button-center" (click)="displayRequest()">
                         <figure class=".add-icon">
-                            <img src="https://cdn.onlinewebfonts.com/svg/img_529925.png" alt="icono agregar usuario">
+                            <img src="http://localhost:4200/assets/icons/editIcon.png" alt="icono agregar usuario">
                         </figure>
-                        <a class="add-user" (click)="displayRequest()">Nueva peticion</a>
+                        <a class="add-user">Modificar equipo</a>
                     </div>
         
-                    <div class="add-user-button-right">
+                    <div class="add-user-button-center" (click)="confirmTeam()">
+                        <figure class=".add-icon">
+                            <img src="http://localhost:4200/assets/icons/confirmButton.png" alt="icono agregar usuario">
+                        </figure>
                         <a class="add-user">Confirmar equipo</a> 
                     </div>
                 </div>
             </div>
+
     
                 
             <table class="rh-table">
@@ -34,36 +55,51 @@
                     <th>Usuario</th>
                     <th>Como evaluo</th>
                     <th>Horas Totales</th>
+                    <th *ngIf="allowEditing">Mi Decisión</th>
                 </tr>
 
                 <!-- DATABASE -->
                 <tr *ngFor="let team of displayTeam">
-                    <th>1</th>
+                    <th>{{team.PartnerID}}</th>
                     <th>{{team.Partner}}</th>
-                    <th *ngIf="team.TipoEval == 0">Peer</th>
-                    <th *ngIf="team.TipoEval == 1">Team</th>
-                    <th *ngIf="team.TipoEval == 2">Leader</th>
-                    <th>{{team.Horas}}</th>
+                    <th *ngIf="team.EvalType == 0">Peer</th>
+                    <th *ngIf="team.EvalType == 1">Team</th>
+                    <th *ngIf="team.EvalType == 2">Leader</th>
+                    <th>{{team.Hours}}</th>
+                    <th *ngIf="allowEditing">
+                        <div *ngIf="!team.Approved">
+                            <div *ngIf="team.Check1 != null">
+                                <div *ngIf="!team.Check1" class="tooltip">
+                                    <figure>
+                                        <img src="http://localhost:4200/assets/icons/removeIcon.png" alt="icono agregar usuario" style="width: auto; height: 25px; margin: -10px;">
+                                    </figure>
+                                    <span class="tooltiptext">{{team?.Reason}}</span>
+                                </div>
+                               
+                                <figure *ngIf="team.Check1">
+                                    <img src="http://localhost:4200/assets/icons/addIcon.png" alt="icono agregar usuario" style="width: auto; height: 25px; margin: -10px;">
+                                </figure>
+                            </div>
+                            <div *ngIf="team.Check1 == null">
+                                <figure *ngIf="!team.Check1">
+                                    <img src="http://localhost:4200/assets/icons/addIcon.png" alt="icono agregar usuario" style="width: auto; height: 25px; margin: -10px;">
+                                </figure>
+                            </div>
+                        </div>
+                        
+                        
+                    </th>
                 </tr>
-
-                <!-- <tr *ngFor="let team of displayTeam?.relationships">
-                    <th>{{team.ID}}</th>
-                    <th>{{team.userName}}</th>
-                    <th>{{team.clientname}}</th>
-                    <th>{{team.hours}}</th>
-                </tr> -->
                 
             </table>
+            
+            <div id="container">
+                <figure id="iconStatus">
+                    <img src="http://localhost:4200/assets/icons/{{imagePath}}" alt="icono agregar usuario" style="width: auto; height: 35px; margin: -10px;">
+                </figure>
+                <h2 id="textStatus">{{textStatus}}</h2>
+            </div>
+
         </section>
     </section>
 </body>
-
-
-
-<!-- <div>
-    <p><strong>First Name: </strong> {{profile?.givenName}}</p>
-    <p><strong>Last Name: </strong> {{profile?.surname}}</p>
-    <p><strong>Email: </strong> {{profile?.userPrincipalName}}</p>
-    <p><strong>Id: </strong> {{profile?.id}}</p>
-    <button (click)="logout()">Log out</button>
-</div> -->

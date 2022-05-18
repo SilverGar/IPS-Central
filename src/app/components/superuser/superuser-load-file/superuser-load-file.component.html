@@ -5,7 +5,30 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
-  <body>
+  <body *ngIf="fileProcessProgress > 0 && fileProcessProgress < 6">
+    <div class="container">
+      <div class="center">
+          <div class="loader"></div>
+        </div>
+        <h1>{{displayText[fileProcessProgress]}}</h1>
+    </div>
+  </body>
+
+  <body *ngIf="fileProcessProgress == 6">
+    <div class="container">
+      <div class="center">
+      </div>
+      <section>
+        <h1>Archivo cargado exitosamente</h1>
+        <button (click)="visualizeTeams()">Aceptar</button>
+      </section>
+    </div>
+  </body>
+    
+
+
+
+  <body *ngIf="fileProcessProgress == 0">
     <main class="container">
         <!-- Seccion del titulo -->
         <section id="title">
@@ -49,7 +72,8 @@
 
         <!-- Seccion de botones -->
         <section class="actions" *ngIf="csvRecords && csvRecords.progress === 100">
-            <button id="go" (click)="createData()">Aceptar</button>
+            <button id="go" (click)="uploadData()">Aceptar</button>
+            
             <!-- <button id="go">Aceptar</button> -->
         </section>
 
@@ -57,4 +81,6 @@
         <!-- <div id="dropzone" appDnd (fileDropped)="onFileDropped($event)"> -->
           <!-- <input type="file" #fileDropRef id="fileDropRef" accept=".xlsx" (change)="fileBrowserHandler($event.target)"> -->
   </body>
+
+  
 </html>
