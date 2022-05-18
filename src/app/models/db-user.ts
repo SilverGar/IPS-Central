@@ -32,11 +32,27 @@ export interface ManageUsers {
 
 export interface Complete_Team360 {
     TeamOwnerID?: number,
-    PartnerID?: string,
+    TeamOwner: string,
+    PartnerID?: number,
     Partner?: string,
     OwnerCheck?: boolean,
     PartnerCheck?: boolean,
     EvalType?: number,
     Approved?: boolean,
-    Hours?: number
+    Hours?: number,
+    warning?: boolean,
+    Reason?: string
+}
+
+export interface getConflictData{
+    owner: number,
+    partner: number,
+    evalTypeOwner: number,
+    evalTypePartner: number
+}
+
+export interface dbConflictData{
+    Partner: number,
+    Reason: string,
+    DateCreated: string
 }

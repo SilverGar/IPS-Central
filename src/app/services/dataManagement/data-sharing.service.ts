@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { Subscription } from 'rxjs';
+import { Complete_Team360 } from 'src/app/models/db-user';
 
 
 @Injectable({
@@ -19,10 +20,17 @@ export class DataSharingService {
   private currentUpdateStatus = new BehaviorSubject<number>(0)
   currentUpdate = this.currentUpdateStatus.asObservable()
 
+  private hr_currentSelectedTeam = new BehaviorSubject<Array<Complete_Team360>>([])
+  currentTeam = this.hr_currentSelectedTeam.asObservable()
+
   constructor() { }
 
   changeUpdateStatus(message: number){
     this.currentUpdateStatus.next(message)
+  }
+
+  changeCurrentTeam(message: Array<Complete_Team360>){
+      this.hr_currentSelectedTeam.next(message)
   }
 
 

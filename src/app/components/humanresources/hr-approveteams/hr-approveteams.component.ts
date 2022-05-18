@@ -1,7 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { filter } from 'rxjs';
-import { Complete_Team360, DbUserTeam360, User } from 'src/app/models/db-user';
+import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
+import { filter, Subscription } from 'rxjs';
+import { Complete_Team360, DbUserTeam360, getConflictData, User } from 'src/app/models/db-user';
+import { DataSharingService } from 'src/app/services/dataManagement/data-sharing.service';
 import { DatabaseService } from 'src/app/services/dataManagement/database.service';
+import { HrPopUpConflictComponent } from '../hr-pop-up-conflict/hr-pop-up-conflict.component';
 
 @Component({
   selector: 'app-hr-approveteams',
@@ -19,7 +22,8 @@ export class HrApproveteamsComponent implements OnInit {
   searchQuery: string = ''
 
   constructor(
-    private db: DatabaseService
+    private db: DatabaseService,
+		private dialog: MatDialog
   ) { }
 
   ngOnInit(): void {
@@ -27,6 +31,34 @@ export class HrApproveteamsComponent implements OnInit {
       this.userList = resp
       this.displayUserList = resp
     })
+
+    // var testing: getConflictData = {
+    //     owner: 2,
+    //     partner: 7,
+    //     evalTypeOwner: 0,
+    //     evalTypePartner: 0
+    // }
+    // this.db.getConflictData(testing).subscribe(resp => {
+    //     console.log("Conflictos.")
+    //     console.log(resp)
+    // })
+  }
+
+  checkConflict(input: Complete_Team360){
+      const dialogConfig = new MatDialogConfig()
+      dialogConfig.disableClose = true
+      dialogConfig.autoFocus = true
+
+			dialogConfig.data = {
+				newUser: input
+			}
+
+			const dialogRef = this.dialog.open(HrPopUpConflictComponent, dialogConfig)
+			dialogRef.afterClosed().subscribe(data => {
+				console.log("Dialog Output: ")
+				console.log(data)
+			})
+
   }
 
   sortUserList(input: number, query: string){
@@ -49,7 +81,6 @@ export class HrApproveteamsComponent implements OnInit {
           this.displayUserList = this.filterApproved(true)
           break
       }
-      
     }
   }
 
@@ -72,30 +103,40 @@ export class HrApproveteamsComponent implements OnInit {
   }
 
   getTeam(input: string){
-      
+    
     this.db.getCompleteTeam360(input).subscribe(resp => {
 
-    var newUserList: Array<Complete_Team360> = []
-    var newUserListNotApproved: Array<Complete_Team360> = []
-    for(var i in resp){
-      if(resp[i].OwnerCheck == null){
-      resp[i].OwnerCheck = true
-      }
-      if(resp[i].PartnerCheck == null){
-      resp[i].PartnerCheck = true
-      }
+      this.sortTeam(resp)
+      
+    })
+  }
 
-      if(resp[i].Approved == false){
-      newUserListNotApproved.push(resp[i])
+  sortTeam(input: Array<Complete_Team360>){
+    var newUserList: Array<Complete_Team360> = []
+      var newUserListNotApproved: Array<Complete_Team360> = []
+      for(var i in input){
+        if(input[i].OwnerCheck == null){
+          input[i].OwnerCheck = true
+          if(input[i].Hours ?? 0 < 40){
+            input[i].warning = true
+          }
+          else{
+            input[i].warning = false
+          }
+        }
+        if(input[i].PartnerCheck == null){
+          input[i].PartnerCheck = true
+        }
+        if(input[i].Approved == false){
+        newUserListNotApproved.push(input[i])
+        }
+        else{
+        newUserList.push(input[i])
+        }
       }
-      else{
-      newUserList.push(resp[i])
-      }
-    }
 
     this.userTeam = newUserList
     this.userTeamNotApproved = newUserListNotApproved
-    })
   }
 
   debugging(input: string){

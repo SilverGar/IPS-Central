@@ -38,6 +38,7 @@ import { PopUpLoadInfoComponent } from './components/superuser/pop-up-load-info/
 import { PopUpAddUserComponent } from './components/superuser/pop-up-add-user/pop-up-add-user.component';
 import { SuperuserVisualizeTeamsComponent } from './components/superuser/superuser-visualize-teams/superuser-visualize-teams.component';
 import { PopUpConfirmTeamComponent } from './components/employee/pop-up-confirm-team/pop-up-confirm-team.component';
+import { HrPopUpConflictComponent } from './components/humanresources/hr-pop-up-conflict/hr-pop-up-conflict.component';
 
 const isIE = window.navigator.userAgent.indexOf('MSIE ') > -1 || window.navigator.userAgent.indexOf('Trident/') > -1;
 
@@ -66,7 +67,8 @@ const isIE = window.navigator.userAgent.indexOf('MSIE ') > -1 || window.navigato
     PopUpLoadInfoComponent,
     PopUpAddUserComponent,
     SuperuserVisualizeTeamsComponent,
-    PopUpConfirmTeamComponent
+    PopUpConfirmTeamComponent,
+    HrPopUpConflictComponent
   ],
   imports: [
     BrowserModule,

@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { HttpParams, HttpRequest, HttpEvent } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { DbUserTeam360, UserType, User, ManageUsers, Complete_Team360 } from 'src/app/models/db-user';
+import { DbUserTeam360, UserType, User, ManageUsers, Complete_Team360, getConflictData, dbConflictData } from 'src/app/models/db-user';
 import { map } from 'rxjs';
 import { response } from 'express';
 
@@ -117,6 +117,16 @@ export class DatabaseService {
       )
   }
 
+  getConflictData(input: getConflictData){
+      var URL = `http://localhost:4000/api/hr/getConflictData`
+      return this.http.post<dbConflictData>(URL, input)
+			.pipe(
+				map(resp =>{
+						return resp
+				})
+			)
+  }
+
   //GENERAL
   getEmployeeUpdate(email: string){
     var URL  = `http://localhost:4000/api/getAppUpdate/` + email
@@ -147,4 +157,6 @@ export class DatabaseService {
         })
       )
   }
+
+
 }

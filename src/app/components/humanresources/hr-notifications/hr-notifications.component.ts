@@ -12,4 +12,15 @@ export class HrNotificationsComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  title = 'Menu';
+
+  isMenuOpened: boolean = false;
+  
+  toggleMenu(): void{
+    this.isMenuOpened = !this.isMenuOpened;
+  }
+
+  clickedOutside(): void{
+    this.isMenuOpened = false;
+  }
 }
