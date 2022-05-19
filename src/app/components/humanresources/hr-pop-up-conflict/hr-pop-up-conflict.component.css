@@ -45,7 +45,7 @@ main {
 }
 
 .pop-up .message .buttons button {
-    width: 30%;
+    width: 60%;
     height: 40px;
     
     font-weight: bold;
@@ -53,16 +53,6 @@ main {
     cursor: pointer;
     border-radius: 5px;
     transition: all 0.2s ease-in-out;
-}
-
-.button-deny{
-    background-color: #e62424;
-    color: #d7d7d7;
-}
-
-.button-confirm{
-    background-color: #1a9f1f;
-    color: #d7d7d7;
 }
 
 .button-return{
@@ -114,7 +104,6 @@ main {
 }
 
 .tableRequest{
-    height: 300px;
     overflow-y: scroll;
 }
 

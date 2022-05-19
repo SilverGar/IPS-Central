@@ -119,7 +119,7 @@ export class DatabaseService {
 
   getConflictData(input: getConflictData){
       var URL = `http://localhost:4000/api/hr/getConflictData`
-      return this.http.post<dbConflictData>(URL, input)
+      return this.http.post<Array<dbConflictData>>(URL, input)
 			.pipe(
 				map(resp =>{
 						return resp

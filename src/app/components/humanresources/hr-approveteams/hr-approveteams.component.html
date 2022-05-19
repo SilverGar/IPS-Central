@@ -44,18 +44,20 @@
                 </div>
             </div>
 
-            <div style="text-align: center;" *ngIf="userTeam?.length == 0 && userTeamNotApproved?.length == 0">
-                <h1>El equipo de {{currentUser}} no tiene usuarios.</h1>
+            <div class="messageTeam" *ngIf="userTeam?.length == 0">
+                <h1 class="boldTextMessageTeam">El equipo de {{currentUser}} no tiene usuarios.</h1>
             </div>
-            <div style="text-align: center;" *ngIf="userTeam == null && userTeamNotApproved == null">
-                <h1>Seleccione un equipo para empezar</h1>
+            
+            <div class="messageTeam" *ngIf="userTeam == null && userTeamNotApproved == null">
+                <h1 class="boldTextMessageTeam">Seleccione un equipo para empezar</h1>
             </div>
-            <div class="display" *ngIf="userTeam?.length ?? 0 > 0 || userTeamNotApproved?.length ?? 0 > 0" >
+
+            <div class="display" *ngIf="userTeam?.length ?? 0 > 0">
                 <table class="styled-table">
                     <caption>Equipo 360 de {{currentUser}}</caption>
                     <thead>
                         <tr>
-                            <th>#</th>
+                            <th>ID</th>
                             <th>Nombre</th>
                             <th>Evaluación</th>
                             <th>Horas</th>
@@ -64,35 +66,100 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr *ngFor="let user of userTeam">
-                            <th>{{user.PartnerID}}</th> 
-                            <th>{{user.Partner}}</th>  
-                            <th *ngIf="user.EvalType == 0">Peer</th>
-                            <th *ngIf="user.EvalType == 1">Team</th>
-                            <th *ngIf="user.EvalType == 2">Leader</th>
-                            <th>{{user.Hours}}</th>  
-                            <th *ngIf="user.OwnerCheck && user.PartnerCheck">
-                                <figure>
-                                    <img src="http://localhost:4200/assets/icons/confirmButton.png" alt="icono agregar usuario" style="width: auto; height: 25px; margin: -10px;">
-                                </figure>
-                            </th>  
-                            <th *ngIf="!user.OwnerCheck || !user.PartnerCheck">
-                                <figure style="cursor: pointer;" (click)="checkConflict(user)">
-                                    <img src="http://localhost:4200/assets/icons/conflictIcon.png" alt="icono agregar usuario" style="width: auto; height: 25px; margin: -10px;">
-                                </figure>
-                            </th>
-                            <th>Hue</th>  
+                      <ng-container *ngFor="let user of userTeam">
+                        <tr *ngIf="(user.Approved == null || user.Approved == true) && user.warning == 2">
+                          <th>{{user.PartnerID}}</th> 
+                          <th>{{user.Partner}}</th>  
+                          <th *ngIf="user.EvalType == 0">Peer</th>
+                          <th *ngIf="user.EvalType == 1">Team</th>
+                          <th *ngIf="user.EvalType == 2">Leader</th>
+                          <th>{{user.Hours}}</th>  
+                          <th>
+                            <div class="tooltip" *ngIf="user.Hours < 40">
+                              <figure>
+                                <img src="http://localhost:4200/assets/icons/warningIconHours.png" alt="icono agregar usuario" class="warningIcon">
+                              </figure>
+                              <span class="tooltiptext">No cumple con las 40 horas.</span>
+                            </div>
+                            
+                            <div class="tooltip" *ngIf="user.Hours >= 40">
+                              <figure>
+                                <img src="http://localhost:4200/assets/icons/warningIconHours.png" alt="icono agregar usuario" class="warningIcon">
+                              </figure>
+                              <span class="tooltiptext">Participo en varios proyectos que no cumplen 40 horas con {{user.TeamOwner}} y llega a acumular mas de 40 horas.</span>
+                            </div>
+                        </th>
+                          <th style="text-align: center; margin-top: auto;">
+                            <label class="switch">
+                              <input type="checkbox" value="{{user.HrDecision}}" [checked]="user.HrDecision" (change)="user.HrDecision = !user.HrDecision">
+                              <span class="slider"></span>
+                            </label>
+                              <h3 *ngIf="user.HrDecision == true">Conservar</h3>
+                              <h3 *ngIf="user.HrDecision == false">Remover</h3>
+                          </th>  
                         </tr>
+                      </ng-container>
+
+
+                      <ng-container *ngFor="let user of userTeam">
+                        <tr *ngIf="(user.Approved == null || user.Approved == true) && user.warning == 1">
+                          <th>{{user.PartnerID}}</th> 
+                          <th>{{user.Partner}}</th>  
+                          <th *ngIf="user.EvalType == 0">Peer</th>
+                          <th *ngIf="user.EvalType == 1">Team</th>
+                          <th *ngIf="user.EvalType == 2">Leader</th>
+                          <th>{{user.Hours}}</th>  
+                          <th>
+                              <figure style="cursor: pointer;" (click)="checkConflict(user)">
+                                  <img src="http://localhost:4200/assets/icons/conflictIcon.png" alt="icono agregar usuario" style="width: auto; height: 25px; margin: -10px;">
+                              </figure>
+                          </th>
+
+                          <th style="text-align: center; margin-top: auto;">
+                            <label class="switch">
+                              <input type="checkbox" value="{{user.HrDecision}}" [checked]="user.HrDecision" (change)="user.HrDecision = !user.HrDecision">
+                              <span class="slider"></span>
+                            </label>
+
+                              <h3 *ngIf="user.HrDecision == true">Conservar</h3>
+                              <h3 *ngIf="user.HrDecision == false">Remover</h3>
+                          </th>  
+                        </tr>
+                      </ng-container>
+
+                      <ng-container *ngFor="let user of userTeam">
+                        <tr *ngIf="(user.Approved == null || user.Approved == true) && user.warning == 0">
+                          <th>{{user.PartnerID}}</th> 
+                          <th>{{user.Partner}}</th>  
+                          <th *ngIf="user.EvalType == 0">Peer</th>
+                          <th *ngIf="user.EvalType == 1">Team</th>
+                          <th *ngIf="user.EvalType == 2">Leader</th>
+                          <th>{{user.Hours}}</th>  
+                          <th>
+                              <figure>
+                                  <img src="http://localhost:4200/assets/icons/confirmButton.png" alt="icono agregar usuario" style="width: auto; height: 25px; margin: -10px;">
+                              </figure>
+                          </th>  
+                          <th style="text-align: center; margin-top: auto;">
+                            <label class="switch">
+                              <input type="checkbox" value="{{user.HrDecision}}" [checked]="user.HrDecision" (change)="user.HrDecision = !user.HrDecision">
+                              <span class="slider"></span>
+                            </label>
+
+                              <h3 *ngIf="user.HrDecision == true">Conservar</h3>
+                              <h3 *ngIf="user.HrDecision == false">Remover</h3>
+                          </th>  
+                        </tr>
+                      </ng-container>
                     </tbody>
                 </table>
                 <div class="buttons">
-                    <button class="button-deny">Reestablecer</button>
                     <button class="button-confirm">Confirmar</button>
                 </div>
                 <table class="styled-table">
                     <thead>
                         <tr>
-                            <th>#</th>
+                            <th>ID</th>
                             <th>Nombre</th>
                             <th>Evaluación</th>
                             <th>Horas</th>
@@ -100,15 +167,21 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr *ngFor="let user of userTeamNotApproved">
-                            <th>{{user.PartnerID}}</th> 
-                            <th>{{user.Partner}}</th>  
-                            <th *ngIf="user.EvalType == 0">Peer</th>
-                            <th *ngIf="user.EvalType == 1">Team</th>
-                            <th *ngIf="user.EvalType == 2">Leader</th>
-                            <th>{{user.Hours}}</th>   
-                            <th>Hue</th>  
+                      <ng-container *ngFor="let user of userTeam">
+                        <tr *ngIf="user.Approved == false">
+                          <th>{{user.PartnerID}}</th> 
+                          <th>{{user.Partner}}</th>  
+                          <th *ngIf="user.EvalType == 0">Peer</th>
+                          <th *ngIf="user.EvalType == 1">Team</th>
+                          <th *ngIf="user.EvalType == 2">Leader</th>
+                          <th>{{user.Hours}}</th>  
+                          <th style="text-align: center;">
+                            <figure class="addIconFigure" (click)="user.Approved = true; user.OwnerCheck = true; user.PartnerCheck = true; user.HrDecision = true" >
+                              <img src="http://localhost:4200/assets/icons/addUserIcon.png" alt="icono agregar usuario" class="addIcon">
+                          </figure>
+                          </th>  
                         </tr>
+                      </ng-container>
                     </tbody>
                 </table>
             </div>

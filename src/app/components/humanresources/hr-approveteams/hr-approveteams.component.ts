@@ -31,17 +31,6 @@ export class HrApproveteamsComponent implements OnInit {
       this.userList = resp
       this.displayUserList = resp
     })
-
-    // var testing: getConflictData = {
-    //     owner: 2,
-    //     partner: 7,
-    //     evalTypeOwner: 0,
-    //     evalTypePartner: 0
-    // }
-    // this.db.getConflictData(testing).subscribe(resp => {
-    //     console.log("Conflictos.")
-    //     console.log(resp)
-    // })
   }
 
   checkConflict(input: Complete_Team360){
@@ -106,38 +95,73 @@ export class HrApproveteamsComponent implements OnInit {
     
     this.db.getCompleteTeam360(input).subscribe(resp => {
 
-      this.sortTeam(resp)
+      this.processTeam(resp)
       
     })
   }
 
-  sortTeam(input: Array<Complete_Team360>){
-    var newUserList: Array<Complete_Team360> = []
-      var newUserListNotApproved: Array<Complete_Team360> = []
-      for(var i in input){
-        if(input[i].OwnerCheck == null){
-          input[i].OwnerCheck = true
-          if(input[i].Hours ?? 0 < 40){
-            input[i].warning = true
-          }
-          else{
-            input[i].warning = false
-          }
-        }
-        if(input[i].PartnerCheck == null){
-          input[i].PartnerCheck = true
-        }
-        if(input[i].Approved == false){
-        newUserListNotApproved.push(input[i])
-        }
-        else{
-        newUserList.push(input[i])
-        }
+  processTeam(input: Array<Complete_Team360>){
+    for(var i in input){
+      //Warning Levels:
+      //0 -> Not important
+      //1 -> Conflict
+      //2 -> Doesn't have the requirement
+      input[i].warning = 0
+
+
+      //Checamos si ya estan aprobados.
+      if(input[i].Approved == null || input[i].Approved == true){
+        input[i].Approved = true
+      }
+      else{
+        input[i].Approved = false
       }
 
-    this.userTeam = newUserList
-    this.userTeamNotApproved = newUserListNotApproved
+      //Los null del Owner y Partner se vuelven true para poder desplegar en la pagina web.
+      if(input[i].OwnerCheck == null){
+        input[i].OwnerCheck = true
+      }
+
+      if(input[i].PartnerCheck == null){
+        input[i].PartnerCheck = true
+      }
+
+      //En base a lo anterior, se "precalifica" los resultados.
+      input[i].HrDecision = input[i].Approved
+
+      //Asignamos prioridades y warnings.
+      if(input[i].Approved == false){
+        input[i].warning = 2
+      }
+
+      if(input[i].OwnerCheck == false || input[i].PartnerCheck == false){
+        input[i].warning = 1
+      }
+
+      // if(input[i].Hours ?? 0 < 40){
+      //   input[i].warning = 2
+      // }
+      // else{
+      //   input[i].warning = 0
+      // }
+
+      
+      
+
+      // if(input[i].Approved == false){
+      //   input[i].priority = true
+      //   input[i].warning = 2
+      // }
+    
+
+
+      
+
+    }
+
+    this.userTeam = input
   }
+
 
   debugging(input: string){
     console.log("Hola" + input)

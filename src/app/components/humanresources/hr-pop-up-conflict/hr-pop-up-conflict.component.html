@@ -4,34 +4,28 @@
             
             
             <div>
-                <p>Conflicto</p>
+                <p>Detalles del conflicto</p>
                 <div class="tableRequest">
                     <table class="rh-table">
                         <tr>
-                            <th>#</th>
+                            <th>ID</th>
                             <th>Nombre</th>
-                            <th>Como Evaluo</th>
+                            <th>Evaluación</th>
                             <th>Motivo</th>
                         </tr>
-                        <tr>
-                            <th>1</th>
-                            <th>Christian</th>
-                            <th>Texto</th>
-                            <th>:c</th>
-                        </tr>
-                        <tr>
-                            <th>1</th>
-                            <th>Christian</th>
-                            <th>Texto</th>
-                            <th>:c</th>
+                        <tr *ngFor="let individualConflict of conflict">
+                            <th>{{individualConflict.OwnerID}}</th>
+                            <th>{{individualConflict.OwnerName}}</th>
+                            <th *ngIf="individualConflict.EvalType == 0">Peer</th>
+                            <th *ngIf="individualConflict.EvalType == 1">Team</th>
+                            <th *ngIf="individualConflict.EvalType == 2">Leader</th>
+                            <th>{{individualConflict.Reason}}</th>
                         </tr>
                     </table>
                 </div>
             </div>
             <mat-dialog-actions class="buttons">
-                <button class="button-return">Regresar</button>
-                <button class="button-deny">Eliminar relacion</button>
-                <button class="button-confirm">Conservar relacion</button>
+                <button class="button-return" (click)="cancel()">Regresar</button>
             </mat-dialog-actions>
             
         </div>

@@ -39,8 +39,9 @@ export interface Complete_Team360 {
     PartnerCheck?: boolean,
     EvalType?: number,
     Approved?: boolean,
-    Hours?: number,
-    warning?: boolean,
+    Hours: number,
+    warning?: number,
+    HrDecision?: boolean,
     Reason?: string
 }
 
@@ -52,7 +53,9 @@ export interface getConflictData{
 }
 
 export interface dbConflictData{
-    Partner: number,
-    Reason: string,
-    DateCreated: string
+  OwnerName: string, 
+  OwnerID: number,
+  EvalType: number,
+  Reason: string,
+  DateCreated: string
 }
