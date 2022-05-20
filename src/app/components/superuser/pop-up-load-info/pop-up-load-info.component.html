@@ -3,8 +3,9 @@
         <div class="message">
             <p>¿Estás seguro que deseas cargar la información?</p>
             <div class="buttons">
-                <button>SI</button>
-                <button>NO</button>
+              <button (click)="close()">NO</button>
+                <button (click)="publish()" >SI</button>
+                
             </div>
         </div>
     </div>

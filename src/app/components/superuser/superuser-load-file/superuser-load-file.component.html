@@ -5,7 +5,15 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
-  <body *ngIf="fileProcessProgress > 0 && fileProcessProgress < 6">
+  <body *ngIf="!displayPage">
+    <div class="container">
+      <div class="center">
+          <div class="loader"></div>
+        </div>
+    </div>
+  </body>
+
+  <body *ngIf="(fileProcessProgress > 0 && fileProcessProgress < 6) && displayPage">
     <div class="container">
       <div class="center">
           <div class="loader"></div>
@@ -14,21 +22,19 @@
     </div>
   </body>
 
-  <body *ngIf="fileProcessProgress == 6">
+  <body *ngIf="fileProcessProgress == 6 && displayPage">
     <div class="container">
       <div class="center">
       </div>
       <section>
-        <h1>Archivo cargado exitosamente</h1>
-        <button (click)="visualizeTeams()">Aceptar</button>
+        <h1 style="text-align: center;">Archivo cargado exitosamente</h1>
+        <button (click)="visualizeTeams()">Visualizar equipos</button>
+        <button (click)="deleteDatabase()">Eliminar información</button>
       </section>
     </div>
   </body>
-    
 
-
-
-  <body *ngIf="fileProcessProgress == 0">
+  <body *ngIf="fileProcessProgress == 0 && displayPage">
     <main class="container">
         <!-- Seccion del titulo -->
         <section id="title">

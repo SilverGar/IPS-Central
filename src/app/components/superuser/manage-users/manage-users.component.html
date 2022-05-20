@@ -19,19 +19,18 @@
         </div>
         <table class="rh-table">
             <tr>
-                <th>Id</th>
-                <th>Nombre</th>
-                <th>Correo</th>
+                <th>ID</th>
+                <th style="text-align: left;">Nombre</th>
+                <th style="text-align: left;">Correo</th>
                 <th>Especialista RH</th>
             </tr>
             <tr *ngFor="let user of users">
                 <td *ngIf="user.userType">{{user.id}}</td>
-                <td *ngIf="user.userType">{{user.name}}</td>
-                <td *ngIf="user.userType">{{user.email}}</td>
+                <td *ngIf="user.userType" style="text-align: left;">{{user.name}}</td>
+                <td *ngIf="user.userType" style="text-align: left;">{{user.email}}</td>
                 <td *ngIf="user.userType">
                     <label class="switch">
-                        <input type="checkbox" value="{{user.userType}}" [checked]="user.userType"
-                            (change)="user.userType = !user.userType">
+                        <input type="checkbox" value="{{user.SU_decision}}" [checked]="user.SU_decision" (change)="user.SU_decision = !user.SU_decision">
                         <span class="slider"></span>
                     </label>
                 </td>
@@ -43,19 +42,19 @@
         <h2 class="subtitle">Empleados</h2>
         <table class="employee-table">
             <tr>
-                <th>Id</th>
-                <th>Nombre</th>
-                <th>Correo</th>
+                <th>ID</th>
+                <th style="text-align: left;">Nombre</th>
+                <th style="text-align: left;">Correo</th>
                 <th>Especialista RH</th>
             </tr>
             <tr *ngFor="let user of users">
                 <td *ngIf="!user.userType">{{user.id}}</td>
-                <td *ngIf="!user.userType">{{user.name}}</td>
-                <td *ngIf="!user.userType">{{user.email}}</td>
+                <td *ngIf="!user.userType" style="text-align: left;">{{user.name}}</td>
+                <td *ngIf="!user.userType" style="text-align: left;">{{user.email}}</td>
                 <td *ngIf="!user.userType">
                     <label class="switch">
-                        <input type="checkbox" value="{{user.userType}}" [checked]="user.userType"
-                            (change)="user.userType = !user.userType">
+                        <input type="checkbox" value="{{user.SU_decision}}" [checked]="user.SU_decision"
+                            (change)="user.SU_decision = !user.SU_decision">
                         <span class="slider"></span>
                     </label>
                 </td>

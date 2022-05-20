@@ -52,6 +52,11 @@ export class DatabaseService {
       )
   }
 
+  deleteData(){
+    var URL = `http://localhost:4000/api/su/deleteDatabase`
+    return this.http.delete(URL)
+  }
+
 
   //EMPLEADOS
 
@@ -67,9 +72,47 @@ export class DatabaseService {
 
   getEmployeeTeam(email: string) {
     var URL = `http://localhost:4000/api/user_getTeam/` + email
+    // this.http.get(URL).subscribe(resp =>{
+    //   console.log("RAW DATA")
+    //   console.log(resp)
+    // })
+
+    //Por algun motivo, ni dios sabe como, pero al hacer el fetch de la base de datos
+    //se hace el pipe a un array de DbUserTeam360
+    //Algunos valores que vienen de la base de datos son nulos tales como
+    //'Approved', 'Check1' y 'Reason'
+    //Al hacer el pipe(map()) y si los tres son nulos de la base de datos, Angular deberia hacer esto:
+    //Resultado esperado:
+    //  Approved = null
+    //  Check1 = null
+    //  Reason = null
+    //Pero Angular hace esto:
+    //  Approved = null
+    //  Check1 = true
+    //  Reason = null 
+    //PERO algo pasa cuando la variable de 'currentUpdate' ubicada en data-sharing-service es 1 (Cuando la webapp hace un update) y
+    //en el componente de employee-request, que hace que todos los valores destinados a Check1 sean FALSE
+    //Aunque la base de datos envie un array para check1 como -> [TRUE, NULL, FALSE, TRUE]
+    //Angular al hacer el pipe(map) hace esto -> [FALSE, FALSE, FALSE, FALSE]
+    
+    //Escribe aqui la cantidad de horas dedicadas a solucionar esto: 3 Horas
+
+
+    //Update: Al hacer una mexicanada para solucionar el request, de la nada angular hace "medio bien"
+    //Es decir, si recibe para Check1 -> [TRUE, NULL, FALSE]
+    //Angular pone en el Check1 -> [TRUE, TRUE, FALSE]
+    //Deje la mexicanda comentada por ahora
+
+    this.http.get(URL).subscribe(resp =>{
+      console.log("RAW DATA")
+      console.log(resp)
+    })
+
     return this.http.get<Array<DbUserTeam360>>(URL)
       .pipe(
         map(resp => {
+          console.log("Respuesta del server")
+          console.log(resp)
           return resp
         })
       )

@@ -111,7 +111,7 @@ button::after, button::before {
     opacity: 0;
     padding: 5rem;
     width: 57%;
-    height: 41%;
+    height: 350px;
     position: absolute;
 }
 

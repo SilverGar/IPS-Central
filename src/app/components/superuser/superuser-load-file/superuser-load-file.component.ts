@@ -1,10 +1,12 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnDestroy, OnInit, ViewChild, ElementRef } from '@angular/core';
+import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { User, Regular_Team, Team360 } from 'src/app/models/userModels';
 import { DataSharingService } from 'src/app/services/dataManagement/data-sharing.service';
 import { DatabaseService } from 'src/app/services/dataManagement/database.service';
+import { PopUpResetDatabaseComponent } from '../pop-up-reset-database/pop-up-reset-database.component';
 
 @Component({
   selector: 'app-superuser-load-file',
@@ -42,11 +44,14 @@ export class SuperuserLoadFileComponent implements OnInit, OnDestroy {
 
   fileProcessProgress: number = 0
   displayText: Array<string> = ['', 'Procesando archivo', 'Cargando Usuarios', 'Cargando Proyectos', 'Cargando Horas', 'Cargando Evaluaciones 360', '']
-
+  displayPage: boolean = false
 
   //Helps subscribing to the data
   ngOnInit(): void {
-    //this.subscription = this.data.currentTeams.subscribe(message => this.message = message)
+    this.db.getProccessProgress().subscribe(resp =>{
+      this.fileProcessProgress = resp
+      this.displayPage = true
+    })
   }
 
   ngOnDestroy(): void {
@@ -56,7 +61,8 @@ export class SuperuserLoadFileComponent implements OnInit, OnDestroy {
   constructor(
     private data: DataSharingService, 
     private db: DatabaseService,
-    private router: Router
+    private router: Router,
+    private dialog: MatDialog
   ) { }
 
   // @ViewChild('fileImportInput') fileImportInput: any;
@@ -102,8 +108,6 @@ export class SuperuserLoadFileComponent implements OnInit, OnDestroy {
     this.file = files[0];
     this.fileBrowserHandler(this.file);
     this.header = (this.header as unknown as string) === 'true' || this.header === true;
-
-
   }
 
   uploadData() {
@@ -138,5 +142,31 @@ export class SuperuserLoadFileComponent implements OnInit, OnDestroy {
 
   visualizeTeams(){
     this.router.navigateByUrl('/superuser/visualize-teams')
+  }
+
+  deleteDatabase(){
+    const dialogConfig = new MatDialogConfig()
+    dialogConfig.disableClose = true
+    dialogConfig.autoFocus =  true
+
+    dialogConfig.data = {
+      selection: false
+    }
+
+    const dialogRef = this.dialog.open(PopUpResetDatabaseComponent, dialogConfig);
+    dialogRef.afterClosed().subscribe(data => {
+      if(data){
+        console.log("Borrar")
+        this.db.deleteData().subscribe(resp => {
+          console.log(resp)
+
+          window.location.reload()
+        })
+        
+      }
+      else{
+        console.log("No borrar")
+      }
+    })
   }
 }

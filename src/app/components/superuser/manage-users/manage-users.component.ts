@@ -27,6 +27,9 @@ export class MANAGEUSERSComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.db.getUsersSu().subscribe(resp => {
+      for(var i in resp){
+        resp[i].SU_decision = resp[i].userType
+      }
       this.users = resp;
     })
   }

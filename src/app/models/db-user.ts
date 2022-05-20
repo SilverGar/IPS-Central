@@ -5,10 +5,10 @@ export interface DbUserTeam360 {
     PartnerID?: number,
     Partner?: string,
     Check1?: boolean,
-    Hours?: number,
     EvalType?: number,
     Approved?: boolean,
-    Reason?: string,
+    Hours?: number,
+    Reason?: string
 }
 
 export interface UserType {
@@ -26,7 +26,8 @@ export interface ManageUsers {
     id: number,
     name: string,
     email: string,
-    userType: boolean
+    userType: boolean,
+    SU_decision: boolean
 }
 //HUMAN RESOURCES
 

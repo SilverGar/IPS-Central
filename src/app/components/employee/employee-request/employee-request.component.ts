@@ -50,6 +50,7 @@ export class EmployeeRequestComponent implements OnInit, OnDestroy {
     this.loadData(false)
     this.subscription = this.dataSharingService.currentUpdate.subscribe(resp => {
       if(resp != 0){
+        console.log("Huehue")
         this.loadData(true)
       }
     })
@@ -67,13 +68,7 @@ export class EmployeeRequestComponent implements OnInit, OnDestroy {
         }
         else{
           this.db.getEmployeeTeam(this.profile.mail ?? '').subscribe(resp => {
-            console.log(resp)
             this.displayTeam = this.mergeTeams(resp, this.displayTeam ?? [], merge)
-            for(let i in this.displayTeam){
-              if(this.displayTeam[i].Check1 == null){
-                this.displayTeam[i].Check1 = true
-              }
-            }
             this.loadingScreen = false
           })
         }
@@ -82,35 +77,71 @@ export class EmployeeRequestComponent implements OnInit, OnDestroy {
   }
 
   mergeTeams(newTeam: Array<DbUserTeam360>, currentTeam: Array<DbUserTeam360>, merge: boolean): Array<DbUserTeam360>{
-    if(merge){
-      if(currentTeam.length > 0){
-        var localMessages: Array<messages> = []
-        for(var i in currentTeam){
-          if(currentTeam[i].Reason != ''){
-            var newMessage: messages = {
-              message: currentTeam[i].Reason ?? '',
-              partner: currentTeam[i].PartnerID ?? 0,
-              evalType: currentTeam[i].EvalType ?? 0
-            }
-            localMessages.push(newMessage)
-          }
+    console.log("NewTeam")
+    console.log(newTeam)
+    console.log("CurrentTeam")
+    console.log(currentTeam)
+    if(newTeam != null){
+      for(var i in newTeam){
+        if(newTeam[i].Check1 == null){
+          newTeam[i].Check1 = true
         }
+      }
 
-        for(var i in newTeam){
-          if(localMessages.length > 0){
-            for(var j in localMessages){
-              if(newTeam[i].PartnerID == localMessages[j].partner && newTeam[i].EvalType == localMessages[j].evalType){
-                newTeam[i].Reason = localMessages[i].message
-                newTeam[i].Check1 = false
-                delete localMessages[j]
+
+      if(merge){
+        // for(var i in newTeam){
+        //   newTeam[i].Check1 = true
+        // }
+        if(currentTeam != null){
+          for(var i in currentTeam){
+            if(currentTeam[i].Check1 == null){
+              currentTeam[i].Check1 = true
+            }
+          }
+          var localMessages: Array<messages> = []
+          for(var i in currentTeam){
+            if(currentTeam[i].Check1 == false){
+              var newMessage: messages = {
+                message: currentTeam[i].Reason ?? '',
+                partner: currentTeam[i].PartnerID ?? 0,
+                evalType: currentTeam[i].EvalType ?? 0
+              }
+              localMessages.push(newMessage)
+            }
+          }
+
+          for(var i in newTeam){
+            // if(currentTeam[i].Check1 == false){
+            //   newTeam[i].Check1 = false
+            // }
+            if(localMessages != null){
+              for(var j in localMessages){
+                if(newTeam[i].PartnerID == localMessages[j].partner && newTeam[i].EvalType == localMessages[j].evalType){
+                  newTeam[i].Reason = localMessages[j].message
+                  newTeam[i].Check1 = false
+                  delete localMessages[j]
+                }
               }
             }
           }
+          console.log("Hola")
+          return newTeam
+        }
+        else{
+          this.router.navigateByUrl('/home/employee_home')
         }
       }
+      console.log("Hola2")
+      return newTeam
+    }
+    else{
+      this.router.navigateByUrl('/home/employee_home')
     }
 
-    return newTeam
+
+    console.log("Hola3")
+    return []
   }
 
   ngOnDestroy(): void {

@@ -126,8 +126,6 @@ export class EmployeeHomeComponent implements OnInit {
   }
    
   confirmTeam(){
-
-
     const dialogConfig = new MatDialogConfig()
     dialogConfig.disableClose = true
     dialogConfig.autoFocus = true

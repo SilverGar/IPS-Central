@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { MatDialog } from '@angular/material/dialog';
+import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { PopUpLoadInfoComponent } from '../pop-up-load-info/pop-up-load-info.component';
 
 @Component({
@@ -12,10 +12,21 @@ export class LoadInfoComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  constructor(public dialog: MatDialog) { }
+  constructor(
+    public dialog: MatDialog
+    ) { }
   openDialog(): void {
-    this.dialog.open(PopUpLoadInfoComponent, {
-      width: '300px'
-    });
+    const dialogConfig = new MatDialogConfig()
+    dialogConfig.disableClose = true
+    dialogConfig.autoFocus = true
+
+    dialogConfig.data = {
+      selection: false
+    }
+
+    const dialogRef = this.dialog.open(PopUpLoadInfoComponent, dialogConfig);
+    dialogRef.afterClosed().subscribe(data => {
+      console.log(data)
+    })
   }
 }
