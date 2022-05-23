@@ -4,6 +4,7 @@ import { Injectable } from '@angular/core';
 import { DbUserTeam360, UserType, User, ManageUsers, Complete_Team360, getConflictData, dbConflictData } from 'src/app/models/db-user';
 import { map } from 'rxjs';
 import { response } from 'express';
+import { url } from 'inspector';
 
 
 @Injectable({
@@ -152,9 +153,23 @@ export class DatabaseService {
 
   getCompleteTeam360(email: string){
     var URL = `http://localhost:4000/api/hr/getCompleteTeam/` + email
-    return this.http.get<Array<Complete_Team360>>(URL)
+
+    // this.http.get<Array<Complete_Team360>>(URL).subscribe(resp => {
+    //   console.log("RAW")
+    //   console.log(resp)
+    // })
+
+    //return this.http.get<Array<Complete_Team360>>(URL)
+    // this.http.get(URL).subscribe(resp =>{
+    //   console.log("RAW DATA")
+    //   console.log(resp)
+    // })
+
+    return this.http.get<Array<Complete_Team360>>(URL, {responseType: 'json'})
       .pipe(
         map(resp =>{
+          console.log("Server processed")
+          console.log(resp)
           return resp
         })
       )

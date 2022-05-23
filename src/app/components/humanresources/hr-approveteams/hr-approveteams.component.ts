@@ -1,8 +1,7 @@
+import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
-import { filter, Subscription } from 'rxjs';
-import { Complete_Team360, DbUserTeam360, getConflictData, User } from 'src/app/models/db-user';
-import { DataSharingService } from 'src/app/services/dataManagement/data-sharing.service';
+import { Complete_Team360, User } from 'src/app/models/db-user';
 import { DatabaseService } from 'src/app/services/dataManagement/database.service';
 import { HrPopUpConflictComponent } from '../hr-pop-up-conflict/hr-pop-up-conflict.component';
 
@@ -19,11 +18,15 @@ export class HrApproveteamsComponent implements OnInit {
   userTeamNotApproved?: Array<Complete_Team360>
   currentUser: string = ""
 
+
+  dbResponseTeams: Array<Complete_Team360> = []
+
   searchQuery: string = ''
 
   constructor(
     private db: DatabaseService,
-		private dialog: MatDialog
+		private dialog: MatDialog,
+    private http: HttpClient
   ) { }
 
   ngOnInit(): void {
@@ -92,74 +95,75 @@ export class HrApproveteamsComponent implements OnInit {
   }
 
   getTeam(input: string){
-    
-    this.db.getCompleteTeam360(input).subscribe(resp => {
 
-      this.processTeam(resp)
-      
+    this.db.getCompleteTeam360(input).subscribe(resp => {
+      console.log("RAW DATA COMPONENT")
+      console.log(resp)
+      if(resp != null){
+        this.processTeam(resp)
+        //this.testingNull(resp)
+      }
     })
   }
 
-  processTeam(input: Array<Complete_Team360>){
-    for(var i in input){
-      //Warning Levels:
-      //0 -> Not important
-      //1 -> Conflict
-      //2 -> Doesn't have the requirement
-      input[i].warning = 0
+  testingNull(input?: Array<Complete_Team360>){
+    console.log("Debug")
+    console.log(input)
+  }
 
-
-      //Checamos si ya estan aprobados.
-      if(input[i].Approved == null || input[i].Approved == true){
-        input[i].Approved = true
+  processTeam(input?: Array<Complete_Team360>){
+    if(input != null){
+      for(var i in input){
+        //Warning Levels:
+        //0 -> Not important
+        //1 -> Conflict
+        //2 -> Doesn't have the requirement
+        
+        input[i].warning = 0
+  
+  
+        // Checamos si ya estan aprobados.
+        if(input[i].Approved == null){
+          input[i].warning = 1
+        }
+  
+        if(input[i].Approved == null || input[i].Approved == true){
+          input[i].Approved = true
+        }
+        else{
+          input[i].Approved = false
+        }
+  
+        //Los null del Owner y Partner se vuelven true para poder desplegar en la pagina web.
+        if(input[i].OwnerCheck == null){
+          input[i].OwnerCheck = true
+        }
+  
+        if(input[i].PartnerCheck == null){
+          input[i].PartnerCheck = true
+        }
+  
+        //En base a lo anterior, se "precalifica" los resultados.
+        input[i].HrDecision = input[i].Approved
+  
+        //Asignamos prioridades y warnings.
+        if(input[i].PartnerCheck && input[i].OwnerCheck){
+          input[i].warning = 1
+        }
+  
+        if(input[i].OwnerCheck == false || input[i].PartnerCheck == false){
+          input[i].warning = 2
+        }
+  
+        if(input[i].Approved == false){
+          input[i].warning = 3
+        }
       }
-      else{
-        input[i].Approved = false
-      }
-
-      //Los null del Owner y Partner se vuelven true para poder desplegar en la pagina web.
-      if(input[i].OwnerCheck == null){
-        input[i].OwnerCheck = true
-      }
-
-      if(input[i].PartnerCheck == null){
-        input[i].PartnerCheck = true
-      }
-
-      //En base a lo anterior, se "precalifica" los resultados.
-      input[i].HrDecision = input[i].Approved
-
-      //Asignamos prioridades y warnings.
-      if(input[i].Approved == false){
-        input[i].warning = 2
-      }
-
-      if(input[i].OwnerCheck == false || input[i].PartnerCheck == false){
-        input[i].warning = 1
-      }
-
-      // if(input[i].Hours ?? 0 < 40){
-      //   input[i].warning = 2
-      // }
-      // else{
-      //   input[i].warning = 0
-      // }
-
-      
-      
-
-      // if(input[i].Approved == false){
-      //   input[i].priority = true
-      //   input[i].warning = 2
-      // }
-    
-
-
-      
-
+      console.log("Sort result")
+      console.log(input)
+      this.userTeam = input
     }
-
-    this.userTeam = input
+    
   }
 
 
