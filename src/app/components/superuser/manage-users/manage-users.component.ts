@@ -43,6 +43,15 @@ export class MANAGEUSERSComponent implements OnInit, OnDestroy {
       width: '30%'
     });
   }
+
+  updateData() {
+    if (this.users != null) {
+      console.log(this.users)
+      this.db.updateUserType(this.users).subscribe(resp => {
+        window.location.reload();
+      })
+    }
+  }
 }
 
 // @Component({

@@ -64,6 +64,13 @@ export class DatabaseService {
     }))
   }
 
+  updateUserType(users: Array<ManageUsers>) {
+    var URL = `http://localhost:4000/api/su/updateUser`;
+    return this.http.post<any>(URL, users).pipe(map(resp => {
+      console.log(resp);
+    }))
+  }
+
   //EMPLEADOS
 
   getEmployeeEditing(email: string) {

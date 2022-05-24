@@ -14,7 +14,7 @@
                 <a class="add-user">Nuevo usuario</a>
             </div>
             <div class="save-button">
-                <a href="">Guardar</a>
+                <a (click)="updateData()">Guardar</a>
             </div>
         </div>
         <table class="rh-table">
@@ -30,7 +30,8 @@
                 <td *ngIf="user.userType" style="text-align: left;">{{user.email}}</td>
                 <td *ngIf="user.userType">
                     <label class="switch">
-                        <input type="checkbox" value="{{user.SU_decision}}" [checked]="user.SU_decision" (change)="user.SU_decision = !user.SU_decision">
+                        <input type="checkbox" value="{{user.SU_decision}}" [checked]="user.SU_decision"
+                            (change)="user.SU_decision = !user.SU_decision">
                         <span class="slider"></span>
                     </label>
                 </td>

@@ -29,6 +29,7 @@ export class PopUpAddUserComponent implements OnInit {
     this.db.addUser(user).subscribe(resp => {
       console.log(resp);
       this.dialogRef.close();
+      window.location.reload();
     })
   }
 
