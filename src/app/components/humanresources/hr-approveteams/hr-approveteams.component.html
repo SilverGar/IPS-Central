@@ -14,7 +14,7 @@
                 <div class="searchbar">
                     <fieldset>
                         <form class="searchform" method="post">
-                            <input (keydown)="sortUserList(1,searchQuery)" class="searcharea" type="text" placeholder="Buscar Usuario" [(ngModel)]="searchQuery" [ngModelOptions]="{standalone: true}">
+                            <input (keyup)="sortUserList(1,searchQuery)" class="searcharea" type="text" placeholder="Buscar Usuario" [(ngModel)]="searchQuery" [ngModelOptions]="{standalone: true}">
                             <input type="submit" value="Reset" class="submitbutton" (click)="sortUserList(1,''); searchQuery=''"/>
 
                             <ul class="filters">
@@ -110,9 +110,15 @@
                           <th *ngIf="user.EvalType == 2">Leader</th>
                           <th>{{user.Hours}}</th>  
                           <th>
-                              <figure style="cursor: pointer;" (click)="checkConflict(user)">
-                                  <img src="http://localhost:4200/assets/icons/conflictIcon.png" alt="icono agregar usuario" style="width: auto; height: 25px; margin: -10px;">
-                              </figure>
+
+
+
+                            <figure style="cursor: pointer; display:flex; flex-direction: row; justify-content: center; align-items: center" (click)="checkConflict(user)">
+                              <img src="http://localhost:4200/assets/icons/conflictIcon.png" alt="icono agregar usuario" style="width: auto; height: 25px; margin: 5px;">
+                              <img *ngIf="checkMessage(user.Notification ?? [])" src="http://localhost:4200/assets/icons/messageIcon.png" alt="icono agregar usuario" style="width: auto; height: 25px; margin: 5px;">
+                            </figure>
+
+                              
                           </th>
 
                           <th style="text-align: center; margin-top: auto;">
@@ -137,7 +143,7 @@
                           <th>{{user.Hours}}</th>  
                           <th>
                               <figure>
-                                  <img src="http://localhost:4200/assets/icons/confirmButton.png" alt="icono agregar usuario" style="width: auto; height: 25px; margin: -10px;">
+                                  <img src="http://localhost:4200/assets/icons/pendingIcon.png" alt="icono agregar usuario" style="width: auto; height: 25px; margin: -10px;">
                               </figure>
                           </th>  
                           <th style="text-align: center; margin-top: auto;">
@@ -180,7 +186,7 @@
                     </tbody>
                 </table>
                 <div class="buttons">
-                    <button class="button-confirm">Confirmar</button>
+                    <button class="button-confirm" (click)="confirmTeam()">Confirmar</button>
                 </div>
                 <table class="styled-table">
                     <thead>

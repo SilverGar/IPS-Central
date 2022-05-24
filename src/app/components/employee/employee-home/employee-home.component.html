@@ -55,7 +55,8 @@
                     <th>Usuario</th>
                     <th>Como evaluo</th>
                     <th>Horas Totales</th>
-                    <th *ngIf="allowEditing">Mi Decisión</th>
+                    <th>Mi decisión</th>
+
                 </tr>
 
                 <!-- DATABASE -->
@@ -66,7 +67,7 @@
                     <th *ngIf="team.EvalType == 1">Team</th>
                     <th *ngIf="team.EvalType == 2">Leader</th>
                     <th>{{team.Hours}}</th>
-                    <th *ngIf="allowEditing">
+                    <th>
                         <div *ngIf="!team.Approved">
                             <div *ngIf="team.Check1 != null">
                                 <div *ngIf="!team.Check1" class="tooltip">
@@ -86,9 +87,10 @@
                                 </figure>
                             </div>
                         </div>
+                      </th>
                         
                         
-                    </th>
+
                 </tr>
                 
             </table>

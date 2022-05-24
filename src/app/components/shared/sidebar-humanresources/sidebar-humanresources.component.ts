@@ -64,12 +64,8 @@ export class SidebarHumanresourcesComponent implements OnInit {
       if(resp != 0){
         this.dataSharingService.changeUpdateStatus(resp)
         this.db.getReceivedUpdate(this.profile.mail ?? '').subscribe(resp =>{
-          console.log("Actualizacion recibida.")
           this.dataSharingService.changeUpdateStatus(resp)
         })
-      }
-      else{
-        console.log("Sin actualizacion")
       }
     })
     

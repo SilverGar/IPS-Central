@@ -60,6 +60,12 @@ main {
     color: #d7d7d7;
 }
 
+.button-confirm{
+  background-color: #00bc13;
+  color: #d7d7d7;
+}
+
+
 .pop-up .message .buttons button:hover {
     transform: translateY(-3px);
     box-shadow: 0 4px 17px rgba(0, 0, 0, 0.35);
@@ -111,4 +117,16 @@ main {
     color: black;
     font-weight: bolder;
     font-family: Helvetica;
+}
+
+.enabledTextbox{
+  border: 2px solid lightsalmon;
+  border-radius: 4px;
+  height: 50px;
+  resize: none;
+  box-sizing: border-box;
+  width: 100%;
+  font-size: 12px;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: bolder;
 }

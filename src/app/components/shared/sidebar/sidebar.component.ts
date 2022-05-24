@@ -62,12 +62,8 @@ export class SidebarComponent implements OnInit, OnDestroy {
       if(resp != 0){
         this.dataSharingService.changeUpdateStatus(resp)
         this.db.getReceivedUpdate(this.profile.mail ?? '').subscribe(resp =>{
-          console.log("Actualizacion recibida.")
           this.dataSharingService.changeUpdateStatus(0)
         })
-      }
-      else{
-        console.log("Sin actualizacion")
       }
     })
     

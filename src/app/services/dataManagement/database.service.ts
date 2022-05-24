@@ -29,7 +29,6 @@ export class DatabaseService {
   }
 
   processFile(file: File) {
-    console.log(file)
 
     let formData = new FormData()
     formData.append('file', file)
@@ -96,7 +95,7 @@ export class DatabaseService {
     //Aunque la base de datos envie un array para check1 como -> [TRUE, NULL, FALSE, TRUE]
     //Angular al hacer el pipe(map) hace esto -> [FALSE, FALSE, FALSE, FALSE]
     
-    //Escribe aqui la cantidad de horas dedicadas a solucionar esto: 3 Horas
+    //Escribe aqui la cantidad de horas dedicadas a solucionar esto: 6 Horas
 
 
     //Update: Al hacer una mexicanada para solucionar el request, de la nada angular hace "medio bien"
@@ -104,16 +103,11 @@ export class DatabaseService {
     //Angular pone en el Check1 -> [TRUE, TRUE, FALSE]
     //Deje la mexicanda comentada por ahora
 
-    this.http.get(URL).subscribe(resp =>{
-      console.log("RAW DATA")
-      console.log(resp)
-    })
+    //RESUELTO! YAY!
 
     return this.http.get<Array<DbUserTeam360>>(URL)
       .pipe(
         map(resp => {
-          console.log("Respuesta del server")
-          console.log(resp)
           return resp
         })
       )
@@ -123,8 +117,6 @@ export class DatabaseService {
     var URL = `http://localhost:4000/api/postEmployeeTeam360/` + publish
     return this.http.post<any>(URL, input).pipe(
       map(resp => {
-        console.log("Respuesta de cambios")
-        console.log(resp)
         return resp
       })
     )
@@ -154,22 +146,9 @@ export class DatabaseService {
   getCompleteTeam360(email: string){
     var URL = `http://localhost:4000/api/hr/getCompleteTeam/` + email
 
-    // this.http.get<Array<Complete_Team360>>(URL).subscribe(resp => {
-    //   console.log("RAW")
-    //   console.log(resp)
-    // })
-
-    //return this.http.get<Array<Complete_Team360>>(URL)
-    // this.http.get(URL).subscribe(resp =>{
-    //   console.log("RAW DATA")
-    //   console.log(resp)
-    // })
-
     return this.http.get<Array<Complete_Team360>>(URL, {responseType: 'json'})
       .pipe(
         map(resp =>{
-          console.log("Server processed")
-          console.log(resp)
           return resp
         })
       )
@@ -184,6 +163,17 @@ export class DatabaseService {
 				})
 			)
   }
+
+  hr_ConfirmTeam(input: Array<Complete_Team360>){
+    var URL = `http://localhost:4000/api/hr/confirmTeam`
+    return this.http.post<any>(URL, input).pipe(
+      map(resp => {
+        return resp
+      })
+    )
+  }
+    
+  
 
   //GENERAL
   getEmployeeUpdate(email: string){

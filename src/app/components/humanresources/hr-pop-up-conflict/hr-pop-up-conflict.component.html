@@ -23,10 +23,31 @@
                         </tr>
                     </table>
                 </div>
+                <div class="tableRequest">
+                  <table class="rh-table">
+                    <tr>
+                      <th>Para</th>
+                      <th>Motivo de decision</th>
+                    </tr>
+                    <tr *ngFor="let individualConflict of conflict">
+                      <th>{{individualConflict.OwnerName}}</th>
+                      <th>
+                        <textarea style="padding: 2%;" class="enabledTextbox" placeholder="Motivo" (keyup)="checkMessage()" [(ngModel)]="individualConflict.HrResponse"></textarea>
+                      </th>
+                    </tr>
+                  </table>
+                </div>
             </div>
-            <mat-dialog-actions class="buttons">
-                <button class="button-return" (click)="cancel()">Regresar</button>
+            <div>
+
+            </div>
+            <mat-dialog-actions *ngIf="!saveResponse" class="buttons">
+                <button class="button-return" (click)="save()">Regresar</button>
             </mat-dialog-actions>
+
+            <mat-dialog-actions *ngIf="saveResponse" class="buttons">
+              <button class="button-confirm" (click)="save()">Guardar</button>
+          </mat-dialog-actions>
             
         </div>
     </div>
