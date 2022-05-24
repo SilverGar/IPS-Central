@@ -1,25 +1,65 @@
-<h1>Notificaciones</h1>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Notifications</title>
+</head>
+
+<!-- 
+Una notificacion debe tener:
+    Sender: string, 
+    Addressee: string, 
+    EvalType: number, 
+    RequestType: number, 
+    Status: number,
+    userComplaint?: string,
+    HRresponse?: string, 
+    DataCreated: Date, 
+    DataSolved?: Date
+-->
+
+
 <body>
-  <div class="menu-container" clickOutside (clickOutside)="clickedOutside()">
-    <div class="menu-toggler" (click)="toggleMenu()">Jorge Maa</div>
-    <div class="menu" *ngIf="isMenuOpened">
-      <table>
-        <tr class="menu-title">
-          <th>Integrante</th>
-          <th>Tipo de Solicitud</th>
-          <th>Horas</th>
-        </tr>
-        <tr class="menu-item">
-          <td>Christina Terrón</td>
-          <td>Eliminar de Equipo</td>
-          <td>50</td>
-        </tr>
-      </table>
-      <div>
-        <button class="button">Ver equipo de Jorge Armando</button>
-      </div>
-      <!-- <div class="menu-title">Integrante | Tipo de Solicitud | Horas</div>
-      <div class="menu-item">Christian Terrón</div> -->
+    <div class="container">
+        <div class="days" *ngFor="let day of Notificationdata">
+            
+            <details class="day" open>
+                <summary class="summary-date">{{ dp.transform(day.date, 'yyyy-MM-dd') }}</summary>
+
+                <div class="info" *ngFor="let not of day.Notifications">
+
+                    <div class="info-left">
+                        <p class="eval{{not.EvalType}}"></p>
+                        <p style="text-align: center;">{{ dp.transform(not.DataCreated, 'hh:mm a') }}</p>
+                    </div>
+
+                    <div class="info-right">
+                        <div class="info-right-upper">
+                            <p>{{ not.Sender }} comentó sobre {{not.Addressee}}</p>
+                            <p>{{ not.EvalType }}</p>
+                        </div>
+
+                        <div class="info-right-lower">
+                            <p>{{ not.userComplaint }}</p>
+                            <p>{{ not.HRresponse }}</p>
+                        </div>
+                        
+
+                        <!-- <p class="info_apply">
+                            <a class="info_link">{{not.Addressee}} <i class="fas fa-arrow-right"></i></a>
+                            </p> -->
+                    </div>
+
+                </div>
+
+                
+            </details>
+
+
+        </div>
     </div>
-  </div>
+    
 </body>
+</html>

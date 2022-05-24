@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { HttpParams, HttpRequest, HttpEvent } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { DbUserTeam360, UserType, User, ManageUsers, Complete_Team360, getConflictData, dbConflictData } from 'src/app/models/db-user';
+import { DbUserTeam360, UserType, User, ManageUsers, Complete_Team360, getConflictData, dbConflictData, Day, Notification } from 'src/app/models/db-user';
 import { map } from 'rxjs';
 import { response } from 'express';
 
@@ -125,6 +125,26 @@ export class DatabaseService {
 						return resp
 				})
 			)
+  }
+
+  getNotificationsDays(user: number){
+    var URL = `http://localhost:4000/api/hr/getNotificationsDays/` + user;
+    return this.http.get<Array<Day>>(URL)
+    .pipe(
+      map(resp =>{
+        return resp;
+      })
+    )
+  }
+
+  getNotifications(day:Date, user: number){
+    var URL = `http://localhost:4000/api/hr/getNotifications/`+ day + `/` + user;
+    return this.http.get<Array<Notification>>(URL)
+    .pipe(
+      map(resp =>{
+        return resp;
+      })
+    )
   }
 
   //GENERAL

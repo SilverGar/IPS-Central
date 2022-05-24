@@ -35,7 +35,7 @@
                         <table class="styled-table" id="employees" style="box-shadow: none; border-spacing: 0px;">
                             <tbody>
                                 <tr *ngFor="let user of displayUserList">
-                                    <td (click)="getTeam(user.email ?? ''); currentUser = user.name ?? ''" style="cursor:pointer ;">{{user.name}}</td>
+                                    <td (click)="getTeam(user.email ?? ''); currentUser = user.name ?? ''" style="cursor:pointer ;text-align: start; width: 85%;" title="{{user.name}}">{{user.name}}</td><span [class.circle] = "user.AllowEditing"></span>
                                 </tr>
                             </tbody>
                         </table>
@@ -52,7 +52,7 @@
             </div>
             <div class="display" *ngIf="userTeam?.length ?? 0 > 0 || userTeamNotApproved?.length ?? 0 > 0" >
                 <table class="styled-table">
-                    <caption>Equipo 360 de {{currentUser}}</caption>
+                    <caption title="{{currentUser}}">Equipo 360 de {{currentUser}}</caption>
                     <thead>
                         <tr>
                             <th>#</th>
@@ -66,7 +66,7 @@
                     <tbody>
                         <tr *ngFor="let user of userTeam">
                             <th>{{user.PartnerID}}</th> 
-                            <th>{{user.Partner}}</th>  
+                            <th title="{{user.Partner}}">{{user.Partner}}</th>  
                             <th *ngIf="user.EvalType == 0">Peer</th>
                             <th *ngIf="user.EvalType == 1">Team</th>
                             <th *ngIf="user.EvalType == 2">Leader</th>
@@ -102,7 +102,7 @@
                     <tbody>
                         <tr *ngFor="let user of userTeamNotApproved">
                             <th>{{user.PartnerID}}</th> 
-                            <th>{{user.Partner}}</th>  
+                            <th title="{{user.Partner}}">{{user.Partner}}</th>  
                             <th *ngIf="user.EvalType == 0">Peer</th>
                             <th *ngIf="user.EvalType == 1">Team</th>
                             <th *ngIf="user.EvalType == 2">Leader</th>

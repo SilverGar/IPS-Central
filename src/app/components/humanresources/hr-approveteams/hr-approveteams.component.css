@@ -10,14 +10,14 @@
     /* Tamanio */
 
     /* Formato */
-    grid-template-columns: 30% 70%;
+    grid-template-columns: 330px 680px;
     display: grid;
     
 }
 
 #title, .styled-table caption{
     /* Borde */
-    padding: 1.5rem;
+    padding: 1rem;
     margin: 0;
 
     /* Fuente */
@@ -31,6 +31,10 @@
     /* Formato */
 }
 
+#title{
+    width: 1024px;
+}
+
 .display{
     /* Borde */
 
@@ -39,9 +43,8 @@
     /* Tamanio */
 
     /* Formato */
-
-    padding-left: 5%;
-    padding-right: 5%;
+    margin-left: 15px;
+    padding-left: 20px;
 }
 
 /**========================================================================
@@ -49,14 +52,15 @@
  *========================================================================**/
 .finder{
     /* Borde */
-    margin-left: 5%;
-    margin-top: 5%;
+    margin-left: 10px;
+    margin-top: 30px;
     position: static;
 
     /* Fuente */
 
     /* Tamanio */
-    height: 75vh;
+    height: 82vh;
+    width: 330px;
 
     /* Formato */
     box-shadow: 0 0 5px rgb(108, 108, 108);
@@ -70,9 +74,6 @@
     padding:10px 10px 30px 10px;
     position:relative;
     box-shadow: 0 0 5px rgb(108, 108, 108);
-
-    /* -moz-border-radius:10px;
-    -webkit-border-radius:10px; */
     border-radius:8px;
 }
 
@@ -82,15 +83,14 @@
 
 .searcharea{
     border:none;
-
     float:left;
     line-height:22px;
-    margin-right:12px;
+    margin-right:5px;
     outline:medium none;
     text-shadow:1px 1px 0 white;
     border-radius: 10px;
     color: black;
-    width: 65%;
+    width: 68%;
     height: 34px;
 }
 
@@ -162,9 +162,7 @@
     font-size: 1rem;
     
     /* Tamanio */
-    min-width: 60%;
-    max-width: 100%;
-    width:100%;
+    max-width: 680px;
     
     /* Formato */
     table-layout: fixed;
@@ -180,9 +178,16 @@
     /* Fuente */
 
     /* Tamanio */
+    
 
     /* Formato */
     background-color: rgb(254, 254, 247);
+
+    white-space: nowrap; 
+    width: 680px; 
+    overflow: hidden;
+    text-overflow: ellipsis; 
+    border: 1px solid #000000;
 }
 
 /* En edicion */
@@ -195,7 +200,7 @@
 
     /* Formato */
     display: block;
-    max-height: 52vh;
+    max-height: 60vh;
     overflow-y: scroll;
 } 
 
@@ -282,22 +287,37 @@
     padding: 12px 15px;
 
     /* Fuente */
-    text-align: justify;
+    text-align: center;
 
     /* Tamanio */
     max-width: 150px;
 
     /* Formato */
-    word-wrap: break-word;
+    /* word-wrap: break-word; */
+    white-space: nowrap; 
+    overflow: hidden;
+    text-overflow: ellipsis; 
 }
 
 #employees tbody{
-    max-height: 60.4vh;
+    max-height: 67.3vh;
 }
 
 #employees{
     margin: 0;
 }
+
+.circle{
+    margin-top: 5px;
+    text-align: end;
+    float: left;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    color: #fff;
+    background: #12ba0f;
+}
+
 
 /**========================================================================
  *                           Iconos de Filtros
@@ -318,71 +338,56 @@
 }
 
 /* Alfabeto superior */
-li.letter-up-filter{
+.letter-up-filter{
     background:url("/assets/icons/searchIcons/letterFilter-icon.png") no-repeat;
     background-size: contain;
     width:15px;
-}
-
-li.letter-up-filter.active, li.letter-up-filter:hover{ 
-    background-position:right bottom;
+    opacity: 0.5;
 }
 
 /* Alfabeto inferior */
-li.letter-down-filter{ 
+.letter-down-filter{
     background:url("/assets/icons/searchIcons/letterFilterBack-icon.png") no-repeat;
     background-size: contain;
-    width:15px; 
-    /* background-position:-18px 0; */
-}
-li.letter-down-filter.active, li.letter-down-filter:hover{ 
-    background-position:right bottom;
+    width:15px;
+    opacity: 0.5;
 }
 
 /* Aprobados */
-li.approved{ 
+.approved{ 
     background:url("/assets/icons/searchIcons/completeFilter-icon.png") no-repeat;
     background-size: contain;
     width:15px; 
+    opacity: 0.5;
     /* background-position:-44px 0; */
 }
 
-li.approved.active, li.approved:hover{ 
-    background-position:right bottom;
-}
-
 /* No aprobados */
-li.not-approved{ 
+.not-approved{
     background:url("/assets/icons/searchIcons/notCompleteFilter-icon.png") no-repeat;
     background-size: contain;
-    width:15px; 
-    /* background-position:right 0; */
-}
-
-li.not-approved.active, li.not-approved:hover{ 
-    background-position:right bottom;
+    width:15px;
+    opacity: 0.5;
 }
 
 /* Huerfanos */
-li.orphans{ 
+.orphans{ 
     background:url("/assets/icons/searchIcons/orphan-icon.png") no-repeat;
     background-size: contain;
     width:15px; 
+    opacity: 0.5;
     /* background-position:right 0; */
 }
 
-li.orphans.active, li.orphans:hover{ 
+.active, .orphans:hover, .not-approved:hover, .approved:hover, .letter-down-filter:hover, .letter-up-filter:hover{ 
     background-position:right bottom;
+    opacity: 1;
 }
 
-span.arrow{
-    width:11px;
-    height:6px;
-    margin:21px 0 0 5px;
-    position:absolute;
-    background:url('/assets/icons/searchIcons/arrow.png') no-repeat;
-    left:0;
+.active{
+    filter:drop-shadow(0px 0px 5px #fff);
 }
+
 
 
 /* --Botones de aprobar y cancelar. */
