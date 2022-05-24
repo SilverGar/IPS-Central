@@ -46,17 +46,23 @@ export interface Complete_Team360 {
     Reason?: string
 }
 
-export interface getConflictData{
+export interface getConflictData {
     owner: number,
     partner: number,
     evalTypeOwner: number,
     evalTypePartner: number
 }
 
-export interface dbConflictData{
-  OwnerName: string, 
-  OwnerID: number,
-  EvalType: number,
-  Reason: string,
-  DateCreated: string
+export interface dbConflictData {
+    OwnerName: string,
+    OwnerID: number,
+    EvalType: number,
+    Reason: string,
+    DateCreated: string
+}
+
+export interface addNewUser {
+    Name: string,
+    Email: string,
+    IsHR: boolean
 }
