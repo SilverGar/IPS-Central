@@ -1,9 +1,10 @@
 import { HttpClient } from '@angular/common/http';
+import { IfStmt } from '@angular/compiler';
 import { Component, OnInit } from '@angular/core';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { info } from 'console';
 import { identity } from 'rxjs';
-import { Complete_Team360, dbConflictData, User } from 'src/app/models/db-user';
+import { Complete_Team360, dbConflictData, getConflictData, User } from 'src/app/models/db-user';
 import { DatabaseService } from 'src/app/services/dataManagement/database.service';
 import { HrPopUpConflictComponent } from '../hr-pop-up-conflict/hr-pop-up-conflict.component';
 
@@ -118,6 +119,19 @@ export class HrApproveteamsComponent implements OnInit {
     //3 -> Exceptions
 
     for(var i in input){
+      input[i].Notification = []
+      switch (input[i].EvalType){
+        case 2:
+          input[i].EvalTypePartner = 1
+          break
+        case 1:
+          input[i].EvalTypePartner = 2
+          break
+        default:
+          input[i].EvalTypePartner = 0
+          break
+      }
+
       input[i].HrDecision = true
       if(allowEditing){
         input[i].warning = 0
@@ -127,7 +141,7 @@ export class HrApproveteamsComponent implements OnInit {
 
         if(input[i].PartnerCheck == false){
           input[i].warning = 2
-          input[i].Notification = []
+          this.getNotification(input[i])
         }
 
         if(input[i].Approved == false){
@@ -150,7 +164,7 @@ export class HrApproveteamsComponent implements OnInit {
 
         if(input[i].PartnerCheck == false || input[i].OwnerCheck == false){
           input[i].warning = 2
-          input[i].Notification = []
+          this.getNotification(input[i])
         }
 
         if(input[i].Approved == false){
@@ -159,16 +173,7 @@ export class HrApproveteamsComponent implements OnInit {
         }
       }
 
-      switch (input[i].EvalType){
-        case 2:
-          input[i].EvalTypePartner = 1
-          break
-        case 1:
-          input[i].EvalTypePartner = 2
-          break
-        default:
-          input[i].EvalTypePartner = 0
-      }
+      
 
     }
     this.userTeam = input
@@ -194,4 +199,110 @@ export class HrApproveteamsComponent implements OnInit {
       this.getTeam(this.currentUserMail)
     })
   }
+
+  getNotification(input: Complete_Team360){
+
+
+    var conflictData: getConflictData ={
+      owner: input.TeamOwnerID ?? 0,
+      partner: input.PartnerID ?? 0,
+      evalTypeOwner: input.EvalType ?? 0,
+      evalTypePartner: input.EvalTypePartner ??0
+    }
+
+
+
+    input.Notification = []
+    console.log("Query Notificacion")
+    console.log(conflictData)
+    this.db.getConflictData(conflictData).subscribe(resp => {
+      console.log("Conflicto")
+      console.log(resp)
+      input.Notification = resp
+    })
+  }
+
+
+  conflictDecision(input: Complete_Team360){
+    input.HrDecision = !input.HrDecision
+    
+    var conflictData: getConflictData ={
+      owner: input.TeamOwnerID ?? 0,
+      partner: input.PartnerID ?? 0,
+      evalTypeOwner: input.EvalType ?? 0,
+      evalTypePartner: input.EvalTypePartner ??0
+    }
+    input.Notification = []
+    // console.log("Query Notificacion")
+    // console.log(conflictData)
+    this.db.getConflictData(conflictData).subscribe(resp => {
+      input.Notification = resp
+      if(resp.length < 2 && input.HrDecision == false){
+        if(input.OwnerCheck == false){
+          var notificationPartner: dbConflictData = {
+            OwnerName: input.Partner ?? '',
+            OwnerID: input.PartnerID ?? 0,
+            PartnerID: input.TeamOwnerID ?? 0,
+            EvalType: input.EvalTypePartner ?? 0,
+            Reason: '',
+            HrResponse: '',
+            requestType: 0
+          }
+          input.Notification.push(notificationPartner)
+        }
+        else{
+          var notificationOwner: dbConflictData = {
+            OwnerName: input.TeamOwner ?? '',
+            OwnerID: input.TeamOwnerID ?? 0,
+            PartnerID: input.PartnerID ?? 0,
+            EvalType: input.EvalType ?? 0,
+            Reason: '',
+            HrResponse: '',
+            requestType: 0
+          }
+          input.Notification.push(notificationOwner)
+        }
+      }
+      console.log("Resultado")
+      console.log(input.Notification)
+    })
+  }
+
+  addNewUser(input: Complete_Team360){
+    input.Approved = !input.Approved
+    input.HrDecision = !input.HrDecision
+
+    
+
+    if(input.HrDecision == true){
+      var notificationOwner: dbConflictData = {
+        OwnerName: input.TeamOwner ?? '',
+        OwnerID: input.TeamOwnerID ?? 0,
+        PartnerID: input.PartnerID ?? 0,
+        EvalType: input.EvalType ?? 0,
+        Reason: '',
+        HrResponse: '',
+        requestType: 1
+        }
+    
+      var notificationPartner: dbConflictData = {
+        OwnerName: input.Partner ?? '',
+        OwnerID: input.PartnerID ?? 0,
+        PartnerID: input.TeamOwnerID ?? 0,
+        EvalType: input.EvalTypePartner ?? 0,
+        Reason: '',
+        HrResponse: '',
+        requestType: 1
+      }
+  
+      input.Notification = []
+      input.Notification?.push(notificationOwner)
+      input.Notification?.push(notificationPartner)
+    }
+    else{
+      input.Notification = []
+    }
+    
+  }
+    
 }

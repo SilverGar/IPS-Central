@@ -91,7 +91,7 @@
                         </th>
                           <th style="text-align: center; margin-top: auto;">
                             <label class="switch">
-                              <input type="checkbox" value="{{user.HrDecision}}" [checked]="user.HrDecision" (change)="user.HrDecision = !user.HrDecision">
+                              <input type="checkbox" value="{{user.HrDecision}}" [checked]="user.HrDecision" (change)="addNewUser(user)">
                               <span class="slider"></span>
                             </label>
                               <h3 *ngIf="user.HrDecision == true">Conservar</h3>
@@ -123,7 +123,7 @@
 
                           <th style="text-align: center; margin-top: auto;">
                             <label class="switch">
-                              <input type="checkbox" value="{{user.HrDecision}}" [checked]="user.HrDecision" (change)="user.HrDecision = !user.HrDecision">
+                              <input type="checkbox" value="{{user.HrDecision}}" [checked]="user.HrDecision" (change)="conflictDecision(user)">
                               <span class="slider"></span>
                             </label>
 
@@ -208,9 +208,12 @@
                           <th *ngIf="user.EvalType == 2">Leader</th>
                           <th>{{user.Hours}}</th>  
                           <th style="text-align: center;">
-                            <figure class="addIconFigure" (click)="user.Approved = true; user.OwnerCheck = true; user.PartnerCheck = true; user.HrDecision = true" >
+                            <figure class="addIconFigure" (click)="addNewUser(user)" >
                               <img src="http://localhost:4200/assets/icons/addUserIcon.png" alt="icono agregar usuario" class="addIcon">
                           </figure>
+                            <!-- <figure class="addIconFigure" (click)="user.Approved = true; user.OwnerCheck = true; user.PartnerCheck = true; user.HrDecision = true" >
+                              <img src="http://localhost:4200/assets/icons/addUserIcon.png" alt="icono agregar usuario" class="addIcon">
+                          </figure> -->
                           </th>  
                         </tr>
                       </ng-container>

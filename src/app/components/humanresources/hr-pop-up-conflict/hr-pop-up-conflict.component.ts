@@ -28,24 +28,7 @@ export class HrPopUpConflictComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    var conflictData: getConflictData ={
-      owner: this.data.newUser.TeamOwnerID,
-      partner: this.data.newUser.PartnerID,
-      evalTypeOwner: 0,
-      evalTypePartner: 0
-    }
-    
-
-    if(this.data.newUser.Notification.length > 0){
-      this.conflict = this.data.newUser.Notification
-    }
-    else{
-      this.db.getConflictData(conflictData).subscribe(resp => {
-        this.conflict = resp
-      })
-    }
-
-    
+    this.conflict = this.data.newUser.Notification 
   }
 
   checkMessage(){

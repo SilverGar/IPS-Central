@@ -61,6 +61,7 @@ export interface dbConflictData{
   PartnerID: number,
   EvalType: number,
   Reason: string,
-  DateCreated: string,
-  HrResponse: string
+  DateCreated?: string,
+  HrResponse: string,
+  requestType: number
 }
