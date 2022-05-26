@@ -26,13 +26,13 @@ Una notificacion debe tener:
         <div class="days" *ngFor="let day of Notificationdata">
             
             <details class="day" open>
-                <summary class="summary-date">{{ dp.transform(day.date, 'yyyy-MM-dd') }}</summary>
+                <summary class="summary-date">{{ day.date.toString().split("T")[0] | date: 'MMM d, y' }}</summary>
                 
                 <div class="info" *ngFor="let not of day.Notifications">
 
                     <div class="info-left">
                         <p class="eval{{not.EvalType}}"></p>
-                        <p style="text-align: center; margin: 0;">{{ dp.transform(not.DataCreated, 'hh:mm a') }}</p>
+                        <p style="text-align: center; margin: 0;">{{ not.DataCreated.toString() | date: 'shortTime' : '+0' }}</p>
                     </div>
 
                     <div class="info-middle">
@@ -43,11 +43,11 @@ Una notificacion debe tener:
                         <div class="info-middle-lower">
 
                             <div class="info-middle-lower-user">
-                                <p style="margin: 0;">{{ not.userComplaint }}</p>
+                                <p class="textbox">{{ not.userComplaint }}</p>
                             </div>
 
                             <div class="info-middle-lower-hr">
-                                <p style="margin: 0;">{{ not.HRresponse }}</p>
+                                <p class="textbox">{{ not.HRresponse }}</p>
                             </div>         
                         </div>
                         <!-- <p class="info_apply">

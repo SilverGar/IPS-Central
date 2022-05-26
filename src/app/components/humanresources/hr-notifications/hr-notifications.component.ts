@@ -11,7 +11,6 @@ import { DatePipe } from '@angular/common';
   styleUrls: ['./hr-notifications.component.css']
 })
 export class HrNotificationsComponent implements OnInit {
-  
   today:Date = new Date();
   Notificationdata?: Array<Day>
   constructor(

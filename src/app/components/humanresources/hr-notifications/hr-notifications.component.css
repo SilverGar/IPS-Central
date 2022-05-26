@@ -1,7 +1,12 @@
+@import url(https://fonts.googleapis.com/css?family=Montserrat);
 
 /**========================================================================
  *                           MAIN CONTAINER
  *========================================================================**/
+body{
+  font-family: 'Montserrat', sans-serif;
+}
+
  .container{
   box-shadow: 0px 6px 10px rgba(0, 0, 0, 0.4);
   margin: 10px;
@@ -195,6 +200,8 @@
   border-radius: 5px;
   margin: 5px;
   border-style: inset;
+  overflow-y: auto;
+  max-height: 77.51px;
 }
 
 .info-middle-lower-hr{
@@ -202,6 +209,12 @@
   border-radius: 5px;
   margin: 5px;
   border-style: inset;
+}
+
+.textbox{
+  margin: 0;
+  padding: 5px;
+  word-wrap: break-word;
 }
 
 /**========================================================================
@@ -222,6 +235,7 @@
 .request0:hover{
   filter: drop-shadow(3px 3px 2px #ff0000);
   transform: scale(1.05);
+  transition: .5s;
 }
 
 .request1{
@@ -234,6 +248,7 @@
 .request1:hover{
   filter: drop-shadow(3px 3px 2px #17b81f);
   transform: scale(1.05);
+  transition: .25s;
 }
 
 
