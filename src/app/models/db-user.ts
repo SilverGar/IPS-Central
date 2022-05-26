@@ -45,17 +45,19 @@ export interface Complete_Team360 {
     warning?: number,
     HrDecision?: boolean,
     Reason?: string,
-    Notification?: Array<dbConflictData>
+    Notification?: Array<NotificationData>,
+    conflictStatus: boolean
 }
 
 export interface getConflictData{
     owner: number,
     partner: number,
     evalTypeOwner: number,
-    evalTypePartner: number
+    evalTypePartner: number,
+    RequestType: number
 }
 
-export interface dbConflictData{
+export interface NotificationData{
   OwnerName: string, 
   OwnerID: number,
   PartnerID: number,
@@ -63,5 +65,6 @@ export interface dbConflictData{
   Reason: string,
   DateCreated?: string,
   HrResponse: string,
-  requestType: number
+  RequestType: number,
+  Status: boolean
 }

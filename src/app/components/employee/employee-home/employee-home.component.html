@@ -55,7 +55,7 @@
                     <th>Usuario</th>
                     <th>Como evaluo</th>
                     <th>Horas Totales</th>
-                    <th>Mi decisión</th>
+                    <th *ngIf="textStatus!=  'Ya puedes empezar tu Evaluación360.'">Mi decisión</th>
 
                 </tr>
 
@@ -67,7 +67,7 @@
                     <th *ngIf="team.EvalType == 1">Team</th>
                     <th *ngIf="team.EvalType == 2">Leader</th>
                     <th>{{team.Hours}}</th>
-                    <th>
+                    <th  *ngIf="textStatus!=  'Ya puedes empezar tu Evaluación360.'">
                         <div *ngIf="!team.Approved">
                             <div *ngIf="team.Check1 != null">
                                 <div *ngIf="!team.Check1" class="tooltip">

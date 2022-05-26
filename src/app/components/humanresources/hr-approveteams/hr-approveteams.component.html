@@ -76,14 +76,14 @@
                           <th>{{user.Hours}}</th>  
                           <th>
                             <div class="tooltip" *ngIf="user.Hours < 40">
-                              <figure>
+                              <figure (click)="checkConflict(user)">
                                 <img src="http://localhost:4200/assets/icons/warningIconHours.png" alt="icono agregar usuario" class="warningIcon">
                               </figure>
                               <span class="tooltiptext">No cumple con las 40 horas.</span>
                             </div>
                             
-                            <div class="tooltip" *ngIf="user.Hours >= 40">
-                              <figure>
+                            <div class="tooltip" *ngIf="user.Hours >= 40" >
+                              <figure (click)="checkConflict(user)">
                                 <img src="http://localhost:4200/assets/icons/warningIconHours.png" alt="icono agregar usuario" class="warningIcon">
                               </figure>
                               <span class="tooltiptext">Participo en varios proyectos que no cumplen 40 horas con {{user.TeamOwner}} y llega a acumular mas de 40 horas.</span>
@@ -91,7 +91,7 @@
                         </th>
                           <th style="text-align: center; margin-top: auto;">
                             <label class="switch">
-                              <input type="checkbox" value="{{user.HrDecision}}" [checked]="user.HrDecision" (change)="addNewUser(user)">
+                              <input type="checkbox" value="{{user.HrDecision}}" [checked]="user.HrDecision" (change)="notificationModule(user, 1, true)">
                               <span class="slider"></span>
                             </label>
                               <h3 *ngIf="user.HrDecision == true">Conservar</h3>
@@ -114,7 +114,8 @@
 
 
                             <figure style="cursor: pointer; display:flex; flex-direction: row; justify-content: center; align-items: center" (click)="checkConflict(user)">
-                              <img src="http://localhost:4200/assets/icons/conflictIcon.png" alt="icono agregar usuario" style="width: auto; height: 25px; margin: 5px;">
+                              <img *ngIf="!user.conflictStatus" src="http://localhost:4200/assets/icons/conflictIcon.png" alt="icono agregar usuario" style="width: auto; height: 25px; margin: 5px;">
+                              <img *ngIf="user.conflictStatus" src="http://localhost:4200/assets/icons/conflictSolvedIcon.png" alt="icono agregar usuario" style="width: auto; height: 25px; margin: 5px;">
                               <img *ngIf="checkMessage(user.Notification ?? [])" src="http://localhost:4200/assets/icons/messageIcon.png" alt="icono agregar usuario" style="width: auto; height: 25px; margin: 5px;">
                             </figure>
 
@@ -123,7 +124,7 @@
 
                           <th style="text-align: center; margin-top: auto;">
                             <label class="switch">
-                              <input type="checkbox" value="{{user.HrDecision}}" [checked]="user.HrDecision" (change)="conflictDecision(user)">
+                              <input type="checkbox" value="{{user.HrDecision}}" [checked]="user.HrDecision" (change)="notificationModule(user, 1, true)">
                               <span class="slider"></span>
                             </label>
 
@@ -208,7 +209,7 @@
                           <th *ngIf="user.EvalType == 2">Leader</th>
                           <th>{{user.Hours}}</th>  
                           <th style="text-align: center;">
-                            <figure class="addIconFigure" (click)="addNewUser(user)" >
+                            <figure class="addIconFigure" (click)="notificationModule(user, 2, true)" >
                               <img src="http://localhost:4200/assets/icons/addUserIcon.png" alt="icono agregar usuario" class="addIcon">
                           </figure>
                             <!-- <figure class="addIconFigure" (click)="user.Approved = true; user.OwnerCheck = true; user.PartnerCheck = true; user.HrDecision = true" >
