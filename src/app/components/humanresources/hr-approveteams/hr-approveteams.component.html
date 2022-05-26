@@ -55,33 +55,34 @@
                     <caption title="{{currentUser}}">Equipo 360 de {{currentUser}}</caption>
                     <thead>
                         <tr>
-                            <th>#</th>
+                            <th style="width: 20px;">#</th>
                             <th>Nombre</th>
-                            <th>Evaluación</th>
-                            <th>Horas</th>
-                            <th>Status</th>
-                            <th>Acción</th>
+                            <th style="width: 100px;">Evaluación</th>
+                            <th style="width: 50px;">Horas</th>
+                            <th style="width: 75px;">Status</th>
+                            <th style="width: 60px;">Acción</th>
                         </tr>
                     </thead>
+                    <!-- 550 -->
                     <tbody>
                         <tr *ngFor="let user of userTeam">
-                            <th>{{user.PartnerID}}</th> 
+                            <th style="width: 20px;">{{user.PartnerID}}</th> 
                             <th title="{{user.Partner}}">{{user.Partner}}</th>  
-                            <th *ngIf="user.EvalType == 0">Peer</th>
-                            <th *ngIf="user.EvalType == 1">Team</th>
-                            <th *ngIf="user.EvalType == 2">Leader</th>
-                            <th>{{user.Hours}}</th>  
-                            <th *ngIf="user.OwnerCheck && user.PartnerCheck">
+                            <th style="width: 100px;" *ngIf="user.EvalType == 0">Peer</th>
+                            <th style="width: 100px;" *ngIf="user.EvalType == 1">Team</th>
+                            <th style="width: 100px;" *ngIf="user.EvalType == 2">Leader</th>
+                            <th style="width: 50px;">{{user.Hours}}</th>  
+                            <th style="width: 75px;" *ngIf="user.OwnerCheck && user.PartnerCheck">
                                 <figure>
                                     <img src="http://localhost:4200/assets/icons/confirmButton.png" alt="icono agregar usuario" style="width: auto; height: 25px; margin: -10px;">
                                 </figure>
                             </th>  
-                            <th *ngIf="!user.OwnerCheck || !user.PartnerCheck">
+                            <th style="width: 75px;" *ngIf="!user.OwnerCheck || !user.PartnerCheck">
                                 <figure style="cursor: pointer;" (click)="checkConflict(user)">
                                     <img src="http://localhost:4200/assets/icons/conflictIcon.png" alt="icono agregar usuario" style="width: auto; height: 25px; margin: -10px;">
                                 </figure>
                             </th>
-                            <th>Hue</th>  
+                            <th style="width: 60px;">Hue</th>  
                         </tr>
                     </tbody>
                 </table>
