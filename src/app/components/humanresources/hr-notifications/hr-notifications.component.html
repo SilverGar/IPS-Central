@@ -27,29 +27,36 @@ Una notificacion debe tener:
             
             <details class="day" open>
                 <summary class="summary-date">{{ dp.transform(day.date, 'yyyy-MM-dd') }}</summary>
-
+                
                 <div class="info" *ngFor="let not of day.Notifications">
 
                     <div class="info-left">
                         <p class="eval{{not.EvalType}}"></p>
-                        <p style="text-align: center;">{{ dp.transform(not.DataCreated, 'hh:mm a') }}</p>
+                        <p style="text-align: center; margin: 0;">{{ dp.transform(not.DataCreated, 'hh:mm a') }}</p>
                     </div>
 
-                    <div class="info-right">
-                        <div class="info-right-upper">
-                            <p>{{ not.Sender }} comentó sobre {{not.Addressee}}</p>
-                            <p>{{ not.EvalType }}</p>
+                    <div class="info-middle">
+                        <div class="info-middle-upper">
+                            <p style="margin: 0;">{{ not.Sender }} comentó sobre {{not.Addressee}}</p>
                         </div>
 
-                        <div class="info-right-lower">
-                            <p>{{ not.userComplaint }}</p>
-                            <p>{{ not.HRresponse }}</p>
-                        </div>
-                        
+                        <div class="info-middle-lower">
 
+                            <div class="info-middle-lower-user">
+                                <p style="margin: 0;">{{ not.userComplaint }}</p>
+                            </div>
+
+                            <div class="info-middle-lower-hr">
+                                <p style="margin: 0;">{{ not.HRresponse }}</p>
+                            </div>         
+                        </div>
                         <!-- <p class="info_apply">
                             <a class="info_link">{{not.Addressee}} <i class="fas fa-arrow-right"></i></a>
                             </p> -->
+                    </div>
+
+                    <div class="info-right">
+                        <p class="request{{ not.RequestType }}" style="margin: 0;"></p>
                     </div>
 
                 </div>
