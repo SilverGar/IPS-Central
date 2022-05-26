@@ -201,7 +201,7 @@
     /* Formato */
     display: block;
     max-height: 60vh;
-    overflow-y: scroll;
+    overflow-y: auto;
 } 
 
 .styled-table tbody tr {
