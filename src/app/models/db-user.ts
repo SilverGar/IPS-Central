@@ -49,7 +49,7 @@ export interface Complete_Team360 {
     conflictStatus: boolean
 }
 
-export interface getConflictData{
+export interface getConflictData {
     owner: number,
     partner: number,
     evalTypeOwner: number,
@@ -67,4 +67,10 @@ export interface NotificationData{
   HrResponse: string,
   RequestType: number,
   Status: boolean
+}
+
+export interface addNewUser{
+  Name: string,
+  Email: string,
+  IsHR: boolean
 }

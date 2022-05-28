@@ -48,7 +48,7 @@ export class SuperuserLoadFileComponent implements OnInit, OnDestroy {
 
   //Helps subscribing to the data
   ngOnInit(): void {
-    this.db.getProccessProgress().subscribe(resp =>{
+    this.db.getProccessProgress().subscribe(resp => {
       this.fileProcessProgress = resp
       this.displayPage = true
     })
@@ -59,7 +59,7 @@ export class SuperuserLoadFileComponent implements OnInit, OnDestroy {
   }
 
   constructor(
-    private data: DataSharingService, 
+    private data: DataSharingService,
     private db: DatabaseService,
     private router: Router,
     private dialog: MatDialog
@@ -68,8 +68,8 @@ export class SuperuserLoadFileComponent implements OnInit, OnDestroy {
   // @ViewChild('fileImportInput') fileImportInput: any;
   @ViewChild("fileDropRef", { static: false }) fileDropEl!: ElementRef;
 
-  formatSize(size: number, decimal = 2){
-    if(size === 0){
+  formatSize(size: number, decimal = 2) {
+    if (size === 0) {
       return "0 bytes";
     }
     const k = 1024;
@@ -79,31 +79,31 @@ export class SuperuserLoadFileComponent implements OnInit, OnDestroy {
     return parseFloat((size / Math.pow(k, i)).toFixed(dm)) + " " + sizes[i];
   }
 
-  fileBrowserHandler(file: any){
+  fileBrowserHandler(file: any) {
     this.progressDisplay(file);
   }
-  
-  progressBarSim(){
-    setTimeout(() =>{
-      const progressInterval = setInterval(() =>{
-        if(this.csvRecords.progress === 100){
+
+  progressBarSim() {
+    setTimeout(() => {
+      const progressInterval = setInterval(() => {
+        if (this.csvRecords.progress === 100) {
           clearInterval(progressInterval);
         }
-        else{
+        else {
           this.csvRecords.progress += 1;
         }
       }, 5);
     }, 1000);
   }
 
-  progressDisplay(file: any){
+  progressDisplay(file: any) {
     file.progress = 0;
     this.csvRecords = file;
     this.fileDropEl.nativeElement.value = "";
     this.progressBarSim();
   }
 
-  fileChangeListener($event: any): void{
+  fileChangeListener($event: any): void {
     const files = $event.srcElement.files;
     this.file = files[0];
     this.fileBrowserHandler(this.file);
@@ -112,7 +112,7 @@ export class SuperuserLoadFileComponent implements OnInit, OnDestroy {
 
   uploadData() {
     this.getProgressFile()
-    this.db.processFile(this.file).subscribe(resp =>{
+    this.db.processFile(this.file).subscribe(resp => {
       console.log(resp)
     })
   }
@@ -125,8 +125,8 @@ export class SuperuserLoadFileComponent implements OnInit, OnDestroy {
   // 5 -> Uploaded hours
   // 6 -> Uploaded 360teams
 
-  async getProgressFile(){
-    if(this.fileProcessProgress < 6){
+  async getProgressFile() {
+    if (this.fileProcessProgress < 6) {
       this.db.getProccessProgress().subscribe(resp => {
         this.fileProcessProgress = resp
         console.log("Consulta")
@@ -136,18 +136,18 @@ export class SuperuserLoadFileComponent implements OnInit, OnDestroy {
     }
   }
 
-  delay(ms: number){
+  delay(ms: number) {
     return new Promise(resolve => setTimeout(resolve, ms));
   }
 
-  visualizeTeams(){
+  visualizeTeams() {
     this.router.navigateByUrl('/superuser/visualize-teams')
   }
 
-  deleteDatabase(){
+  deleteDatabase() {
     const dialogConfig = new MatDialogConfig()
     dialogConfig.disableClose = true
-    dialogConfig.autoFocus =  true
+    dialogConfig.autoFocus = true
 
     dialogConfig.data = {
       selection: false
@@ -155,16 +155,16 @@ export class SuperuserLoadFileComponent implements OnInit, OnDestroy {
 
     const dialogRef = this.dialog.open(PopUpResetDatabaseComponent, dialogConfig);
     dialogRef.afterClosed().subscribe(data => {
-      if(data){
+      if (data) {
         console.log("Borrar")
         this.db.deleteData().subscribe(resp => {
           console.log(resp)
 
           window.location.reload()
         })
-        
+
       }
-      else{
+      else {
         console.log("No borrar")
       }
     })

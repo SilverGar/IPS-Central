@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { HttpParams, HttpRequest, HttpEvent } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { DbUserTeam360, UserType, User, ManageUsers, Complete_Team360, getConflictData, NotificationData } from 'src/app/models/db-user';
+import { DbUserTeam360, UserType, User, ManageUsers, Complete_Team360, getConflictData, NotificationData, addNewUser } from 'src/app/models/db-user';
 import { map } from 'rxjs';
 import { response } from 'express';
 import { url } from 'inspector';
@@ -42,7 +42,7 @@ export class DatabaseService {
     return this.http.request(req)
   }
 
-  getProccessProgress(){
+  getProccessProgress() {
     var URL = `http://localhost:4000/api/getUploadProgress`
     return this.http.get<number>(URL)
       .pipe(
@@ -52,11 +52,24 @@ export class DatabaseService {
       )
   }
 
-  deleteData(){
+  deleteData() {
     var URL = `http://localhost:4000/api/su/deleteDatabase`
     return this.http.delete(URL)
   }
 
+  addUser(input: addNewUser) {
+    var URL = `http://localhost:4000/api/su/addUser`
+    return this.http.post<any>(URL, input).pipe(map(resp => {
+      console.log(resp);
+    }))
+  }
+
+  updateUserType(users: Array<ManageUsers>) {
+    var URL = `http://localhost:4000/api/su/updateUser`;
+    return this.http.post<any>(URL, users).pipe(map(resp => {
+      console.log(resp);
+    }))
+  }
 
   //EMPLEADOS
 
@@ -94,8 +107,8 @@ export class DatabaseService {
     //en el componente de employee-request, que hace que todos los valores destinados a Check1 sean FALSE
     //Aunque la base de datos envie un array para check1 como -> [TRUE, NULL, FALSE, TRUE]
     //Angular al hacer el pipe(map) hace esto -> [FALSE, FALSE, FALSE, FALSE]
-    
-    //Escribe aqui la cantidad de horas dedicadas a solucionar esto: 6 Horas
+
+    //Escribe aqui la cantidad de horas dedicadas a solucionar esto: 3 Horas
 
 
     //Update: Al hacer una mexicanada para solucionar el request, de la nada angular hace "medio bien"
@@ -104,6 +117,10 @@ export class DatabaseService {
     //Deje la mexicanda comentada por ahora
 
     //RESUELTO! YAY!
+    this.http.get(URL).subscribe(resp => {
+      console.log("RAW DATA")
+      console.log(resp)
+    })
 
     return this.http.get<Array<DbUserTeam360>>(URL)
       .pipe(
@@ -143,12 +160,12 @@ export class DatabaseService {
       )
   }
 
-  getCompleteTeam360(email: string){
+  getCompleteTeam360(email: string) {
     var URL = `http://localhost:4000/api/hr/getCompleteTeam/` + email
 
     return this.http.get<Array<Complete_Team360>>(URL, {responseType: 'json'})
       .pipe(
-        map(resp =>{
+        map(resp => {
           return resp
         })
       )
@@ -176,39 +193,39 @@ export class DatabaseService {
   
 
   //GENERAL
-  getEmployeeUpdate(email: string){
-    var URL  = `http://localhost:4000/api/getAppUpdate/` + email
+  getEmployeeUpdate(email: string) {
+    var URL = `http://localhost:4000/api/getAppUpdate/` + email
     return this.http.get<number>(URL)
       .pipe(
-        map(resp =>{
+        map(resp => {
           return resp
         })
       )
-  } 
+  }
 
-  getReceivedUpdate(email: string){
-    var URL  = `http://localhost:4000/api/getAppReceivedUpdate/` + email
+  getReceivedUpdate(email: string) {
+    var URL = `http://localhost:4000/api/getAppReceivedUpdate/` + email
     return this.http.get<number>(URL)
       .pipe(
-        map(resp =>{
+        map(resp => {
           return resp
         })
       )
-  } 
+  }
 
-  getReleasedStatus(){
+  getReleasedStatus() {
     var URL = `http://localhost:4000/api/getReleasedStatus`
     return this.http.get<number>(URL)
       .pipe(
-        map(resp =>{
+        map(resp => {
           return resp
         })
       )
   }
 
   //Errores
-  apiNotEnabled(){
-      console.log("Error")
+  apiNotEnabled() {
+    console.log("Error")
   }
 
 
