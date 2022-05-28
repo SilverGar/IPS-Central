@@ -5,7 +5,7 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Dashboard Apricot</title>
-        <!-- <link rel="stylesheet" href="/Dashboard/styles.css"> -->
+        <link rel="stylesheet" href="/Dashboard/styles.css">
         <!-- BoxIcons CDN Links -->
         <link href='https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css' rel='stylesheet'>
     </head>
@@ -130,7 +130,7 @@
                 </div>
                 <div class="box">
                     <div class="left-side">
-                        <div class="box_topic">Orphans</div>
+                        <div class="box_topic">Unassigned</div>
                         <div class="number">50</div>
                         <div class="indicator">
                             <i class='bx bx-up-arrow-alt' ></i>
@@ -156,96 +156,24 @@
             <div class="sales-boxes">
                 <div class="recent-sale box">
                     <div class="title">Teams</div>
-                    <div class="sales-details">
-                        <ul class="details">
-                            <li class="topic">Date Created</li>
-                            <li><a href="#">02 Jan 2022</a></li>
-                            <li><a href="#">02 Jan 2022</a></li>
-                            <li><a href="#">02 Jan 2022</a></li>
-                            <li><a href="#">02 Jan 2022</a></li>
-                            <li><a href="#">02 Jan 2022</a></li>
-                            <li><a href="#">02 Jan 2022</a></li>
-                        </ul>
-                        <ul class="details">
-                            <li class="topic">User</li>
-                            <li><a href="#">Pedro Treviño</a></li>
-                            <li><a href="#">Jorge Maa</a></li>
-                            <li><a href="#">Christian Terrón</a></li>
-                            <li><a href="#">Silvestre García</a></li>
-                            <li><a href="#">Josue Cano</a></li>
-                            <li><a href="#">David Cantú</a></li>
-                        </ul>
-                        <ul class="details">
-                            <li class="topic">Status</li>
-                            <li><a href="#">Aceptado</a></li>
-                            <li><a href="#">Rechazado</a></li>
-                            <li><a href="#">Aceptado</a></li>
-                            <li><a href="#">Pendiente</a></li>
-                            <li><a href="#">Aceptado</a></li>
-                            <li><a href="#">Aceptado</a></li>
-                        </ul>
-                        <ul class="details">
-                            <li class="topic">Hours</li>
-                            <li><a href="#">100</a></li>
-                            <li><a href="#">200</a></li>
-                            <li><a href="#">170</a></li>
-                            <li><a href="#">110</a></li>
-                            <li><a href="#">220</a></li>
-                            <li><a href="#">150</a></li>
-                        </ul>
-                    </div>
-                    <div class="button">
-                        <a href="#">See More</a>
-                    </div>
+                    <app-hr-pie-chart></app-hr-pie-chart>
                 </div>
 
                 <!-- right side -->
                 <div class="top-sales box">
-                    <div class="title">Workers with More Hours</div>
-                    <ul>
-                        <li>
-                            <a href="#">
-                                <img src="/Dashboard/stock.jpeg" alt="">
-                                <span class="product_name">Silvestre García</span>
-                            </a>
-                            <span class="price">50 horas</span>
-                        </li>
-                        <li>
-                            <a href="#">
-                                <img src="/Dashboard/stock.jpeg" alt="">
-                                <span class="product_name">Pedro Treviño</span>
-                            </a>
-                            <span class="price">45 horas</span>
-                        </li>
-                        <li>
-                            <a href="#">
-                                <img src="/Dashboard/stock.jpeg" alt="">
-                                <span class="product_name">Jorge Maa</span>
-                            </a>
-                            <span class="price">40 horas</span>
-                        </li>
-                        <li>
-                            <a href="#">
-                                <img src="/Dashboard/stock.jpeg" alt="">
-                                <span class="product_name">Josue Cano</span>
-                            </a>
-                            <span class="price">38 horas</span>
-                        </li>
-                        <li>
-                            <a href="#">
-                                <img src="/Dashboard/stock.jpeg" alt="">
-                                <span class="product_name">Christian Terrón</span>
-                            </a>
-                            <span class="price">35 horas</span>
-                        </li>
-                    </ul>
+                    <div class="title">Workers</div>
+                    <app-hr-bar-chart></app-hr-bar-chart>
                 </div>
             </div>
         </div>
 
     </section>
+    
 
     <!-- <script src="/Dashboard/script.js"></script> -->
     
 </body>
+<footer>
+  <app-footer></app-footer>
+</footer>
 </html>

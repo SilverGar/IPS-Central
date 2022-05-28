@@ -41,6 +41,13 @@ import { SuperuserVisualizeTeamsComponent } from './components/superuser/superus
 import { PopUpConfirmTeamComponent } from './components/employee/pop-up-confirm-team/pop-up-confirm-team.component';
 import { HrPopUpConflictComponent } from './components/humanresources/hr-pop-up-conflict/hr-pop-up-conflict.component';
 import { PopUpResetDatabaseComponent } from './components/superuser/pop-up-reset-database/pop-up-reset-database.component';
+import { HrBarChartComponent } from './components/humanresources/hr-bar-chart/hr-bar-chart.component';
+import { HrPieChartComponent } from './components/humanresources/hr-pie-chart/hr-pie-chart.component';
+import { NgChartsModule } from 'ng2-charts';
+import { FooterComponent } from './components/shared/footer/footer.component';
+import { SuPieChartComponent } from './components/superuser/su-pie-chart/su-pie-chart.component';
+import { SuBarChartComponent } from './components/superuser/su-bar-chart/su-bar-chart.component';
+import { BodyComponent } from './components/shared/body/body.component';
 
 const isIE = window.navigator.userAgent.indexOf('MSIE ') > -1 || window.navigator.userAgent.indexOf('Trident/') > -1;
 
@@ -72,7 +79,13 @@ const isIE = window.navigator.userAgent.indexOf('MSIE ') > -1 || window.navigato
     SuperuserVisualizeTeamsComponent,
     PopUpConfirmTeamComponent,
     HrPopUpConflictComponent,
-    PopUpResetDatabaseComponent
+    PopUpResetDatabaseComponent,
+    HrBarChartComponent,
+    HrPieChartComponent,
+    FooterComponent,
+    SuPieChartComponent,
+    SuBarChartComponent,
+    BodyComponent
   ],
   imports: [
     BrowserModule,
@@ -87,6 +100,7 @@ const isIE = window.navigator.userAgent.indexOf('MSIE ') > -1 || window.navigato
     FormsModule,
     ReactiveFormsModule,
     MatDialogModule,
+    NgChartsModule,
     MsalModule.forRoot(new PublicClientApplication({
       auth: {
         //clientId: '01f29e73-b3dc-4096-9f42-51fed93bedc5',

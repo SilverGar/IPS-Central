@@ -17,6 +17,7 @@ body{
     background: #f5f5f5;
     position: relative;
     min-height: 100vh;
+    width: calc(100% - 60px);
 
     transition: all 0.5s ease;
 }
@@ -139,7 +140,7 @@ nav .profile-details i{
     width: calc(100% / 3 - 15px);
     display: flex;
     align-items: center;
-    justify-content: space-evenly;
+    justify-content: center;
     padding: 15px 14px;
     background: #fff;
     border-radius: 12px;
@@ -147,13 +148,12 @@ nav .profile-details i{
 }
 
 .home-content .overview-boxes .box_topic{
-    font-size: 25px;
+    font-size: 20px;
     font-weight: 500;
-    margin-bottom: 10px;
 }
 
 .home-content .overview-boxes .number{
-    font-size: 20px;
+    font-size: 35px;
     font-weight: 500;
     margin-top: -5px;
     display: inline-block;
@@ -218,7 +218,7 @@ nav .profile-details i{
 }
 
 .home-section .sales-boxes .recent-sale{
-    width: 65%;
+    width: 35%;
     background: #fff;
     border-radius: 12px;
     box-shadow: 0 5px 10px rgba(0,0,0,0.1);
@@ -276,7 +276,7 @@ nav .profile-details i{
 
 /* Right Side */
 .home-section .sales-boxes .top-sales{
-    width: 35%;
+    width: 65%;
     margin-left: 20px;
     background: #fff;
     box-shadow: 0 5px 10px rgba(0,0,0,0.1);

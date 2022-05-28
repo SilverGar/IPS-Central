@@ -1,154 +1,38 @@
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <!-- Boxicons CDN Link -->
-    <link href='https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css' rel='stylesheet'>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Apricot Sidebar</title>
-</head>
+<div class="sidenav" [ngClass]="collapsed ? 'sidenav-collapsed': ''">
+  <div class="logo-container">
+      <!-- <button class="logo" (click)="toggleCollapse()">IPS</button> -->
+      <button class="logo-icon" (click)="toggleCollapse()"><i class='bx bx-menu'></i></button>
+      <div class="logo-text" @fadeInOut *ngIf="collapsed">IPS Central</div>
+      <button class="btn-close" @rotate *ngIf="collapsed" (click)="closeSidenav()">
+          <i class='bx bx-x'></i>
+      </button>
+  </div>
+  <div class="image-details" @fadeInOut *ngIf="collapsed">
+      <img src="{{imageSrc}}" alt="{{imageAlt}}" />
+  </div>
+  <ul class="sidenav-nav">
+      <li class="sidenav-nav-item" *ngFor="let data of navData">
+          <a class="sidenav-nav-link" [routerLink]="[data.routeLink]"
+              routerLinkActive="active"
+              [routerLinkActiveOptions]="{exact: true}">
+              <i class="sidenav-link-icon" [class]="data.icon"></i>
+              <span class="sidenav-link-text" @fadeInOut *ngIf="collapsed">
+                  {{data.label}}
+              </span>
+          </a>
+      </li>
+  </ul>
+  <div class="logo-contain">
+      <button class="logo-icon" (click)="toggleCollapse()"><i class='bx bx-user' ></i></button>
+      <div class="logo-text" @fadeInOut *ngIf="collapsed"> {{profile.givenName}}
+          <div class="logo-description">Empleado</div>
+      </div>
+      <button class="btn-close" @fadeInOut *ngIf="collapsed">
+          <i class='bx bx-log-out'></i>
+      </button>
+  </div>
+</div>
 
-<body *ngIf="currentReleasedStatus == -1"> 
-    <div class="container">
-        <div class="center">
-            <div class="loader"></div>
-        </div>
-        
-    </div>
-</body>
-
-<body *ngIf="currentReleasedStatus == 0"> 
-    <div class="container">
-        <div class="center">
-            <h1>Inflection Point no ha publicado la información, intente mas tarde.</h1>
-        </div>
-        
-    </div>
-</body>
-
-<body *ngIf="currentReleasedStatus == 1"> 
-    <div class="sidebar">
-        <!-- <img src="/UI-final-Angular/src/assets/images/InflectionPoint.jpg" alt="profile"> -->
-        <!-- <img [src]="imageSrc" [alt]="imageAlt" /> -->
-        <div class="image-details">
-            <img src="{{imageSrc}}" alt="{{imageAlt}}" />
-        </div>
-        <!-- <div class="logo-details">
-            <i class='bx bxl-windows'></i>
-            <i class='bx bx-menu' ></i>
-            <span class="logo_name">Inflection Point</span>
-        </div> -->
-        <ul class="nav-links">
-            <li>
-                <a routerLink="/home/employee_home">
-                    <i class='bx bx-grid-alt'></i>
-                    <span class="link_name">Inicio</span>
-                </a>
-                <ul class="sub-menu blank">
-                    <li><a class="link_name" routerLink="/home/employee_home">Inicio</a></li>
-                </ul>
-            </li>
-            <li>
-                <a routerLink="/home/notifications">
-                    <i class='bx bx-cog'></i>
-                    <span class="link_name">Notificaciones</span>
-                </a>
-                <ul class="sub-menu blank">
-                    <li><a class="link_name" routerLink="/home/notifications">Notificaciones</a></li>
-                </ul>
-            </li>
-            <li>
-                <div class="profile-details">
-                    <div class="profile-content">
-                        <img src="http://localhost:4200/assets/stock.jpeg" alt="profile">
-                    </div>
-                        <div class="name-job">
-                            <div class="profile_name">{{profile?.givenName}}</div>
-                            <div class="job">Empleado</div>
-                        </div>
-                        <i class='bx bx-log-out' id="log_out" (click)="logout()"></i>
-                </div>
-            </li>
-        </ul>
-    </div>
-    <section class="home-section">
-        <router-outlet></router-outlet>
-    </section>
-</body>
-</html>
-
-
-<!-- <!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <link rel="stylesheet" href="./sidebar.component.css"> -->
-    <!-- Boxicons CDN Link -->
-    <!-- <link href='https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css' rel='stylesheet'>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Apricot Sidebar</title>
-</head> -->
-
-
-<!-- 
-<body>
-    
-    <div class="sidebar">
-        <div class="logo-details">
-            <i class='bx bxl-windows'></i>
-            <span class="logo_name">Inflection Point</span>
-        </div>
-        <ul class="nav-links">
-            <li>
-                <a routerLink="/home/employee_home">
-                    <i class='bx bx-grid-alt'></i>
-                    <span class="link_name">Inicio</span>
-                </a>
-                <ul class="sub-menu blank">
-                    <li><a class="link_name">Inicio</a></li>
-                </ul>
-            </li>
-            <li>
-                <a routerLink="/home/notifications">
-                    <i class='bx bx-pie-chart-alt'></i>
-                    <span class="link_name">Notificaciones</span>
-                </a>
-                <ul class="sub-menu blank">
-                    <li><a class="link_name">Notificaciones</a></li>
-                </ul>
-            </li>
-            <li>
-                <a routerLink="/home/details">
-                    <i class='bx bx-folder'></i>
-                    <span class="link_name">Mi Usuario</span>
-                </a>
-                <ul class="sub-menu blank">
-                    <li><a class="link_name">Mi Usuario</a></li>
-                </ul>
-            </li>
-            <li>
-                <div class="profile-details">
-                    <div class="profile-content">
-                        <img src="http://localhost:4200/assets/stock.jpeg" alt="">
-                    </div>
-                    <div class="name-job">
-                        <div class="profile_name">{{profile?.givenName}}</div>
-                        <div class="job">Recursos Humanos</div>
-                    </div>
-                    <i class='bx bx-log-out' id="log_out" (click)="logout()"></i>
-                </div>
-            </li>
-        </ul>
-    </div>
-
-    <section class="home-section">
-        <router-outlet></router-outlet>
-    </section>
-
-</body>
-
-</html> -->
+<app-body [collapsed]="isSideNavCollapsed"
+[screenWidth]="screenWidth"></app-body>
