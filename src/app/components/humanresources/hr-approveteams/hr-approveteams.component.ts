@@ -250,6 +250,7 @@ export class HrApproveteamsComponent implements OnInit {
               RequestType: 0,
               Status: false
             }
+            console.log("Push Partner")
             input.Notification.push(notificationPartner)
           }
           else{
@@ -263,6 +264,7 @@ export class HrApproveteamsComponent implements OnInit {
               RequestType: 0,
               Status: false
             }
+            console.log("Push Owner")
             input.Notification.push(notificationOwner)
           }
         }
@@ -333,8 +335,9 @@ export class HrApproveteamsComponent implements OnInit {
   }
 
   confirmTeam(){
-    this.db.hr_ConfirmTeam(this.userTeam ?? []).subscribe(resp => {
-      this.getTeam(this.currentUserMail)
-    })
+    console.log(this.userTeam)
+    // this.db.hr_ConfirmTeam(this.userTeam ?? []).subscribe(resp => {
+    //   this.getTeam(this.currentUserMail)
+    // })
   } 
 }

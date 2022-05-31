@@ -80,6 +80,7 @@ export class SidebarComponent implements OnInit, OnDestroy {
   ) { }
 
   ngOnInit(): void {
+    this.screenWidth = window.innerWidth;
     this.msSignIn.getProfile().subscribe(resp => {
       this.profile = resp
       if(this.profile != null){
@@ -108,6 +109,7 @@ export class SidebarComponent implements OnInit, OnDestroy {
   }
 
   closeSidenav(): void {
+    this.isSideNavCollapsed = !this.isSideNavCollapsed
     this.collapsed = false;
     this.onToggleSideNav.emit({collapsed: this.collapsed, screenWidth: this.screenWidth});
 

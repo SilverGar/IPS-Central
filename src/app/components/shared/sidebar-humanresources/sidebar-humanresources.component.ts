@@ -111,6 +111,7 @@ export class SidebarHumanresourcesComponent implements OnInit {
   }
 
   closeSidenav(): void {
+    this.isSideNavCollapsed = !this.isSideNavCollapsed
     this.collapsed = false;
     this.onToggleSideNav.emit({collapsed: this.collapsed, screenWidth: this.screenWidth});
 
