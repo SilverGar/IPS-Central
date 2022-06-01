@@ -32,23 +32,46 @@ Una notificacion debe tener:
 
                     <div class="info-left">
                         <p class="eval{{not.EvalType}}"></p>
-                        <p style="text-align: center; margin: 0;">{{ not.DataCreated.toString() | date: 'shortTime' : '+0' }}</p>
+                        <p class="info_link" style="text-align: center; margin-left: 2px; font-weight: bold;">{{ not.DataCreated.toString() | date: 'shortTime' : '+0' }}</p>
                     </div>
 
                     <div class="info-middle">
                         <div class="info-middle-upper">
-                            <p style="margin: 0;">{{ not.Sender }} comentó sobre {{not.Addressee}}</p>
+
+                            <div *ngIf="not.DataSolved">
+                                <p class="textbox">RH comento sobre la peticion de {{ not.Sender }} hecha el dia {{ not.DataSolved.toString().split("T")[0] | date: 'MMM d, y'}}</p>
+                            </div>
+
+                            <div *ngIf="!not.DataSolved">
+                                
+                                <div *ngIf="not.RequestType">
+                                    <!-- <p class="textbox">{{ not.Sender }} ha hecho una peticion para agregar a {{ not.Addressee }} a su equipo</p> -->
+                                    <p style="margin:0;display:inline;font-weight: bold;">{{ not.Sender }} </p>
+                                    <p style="margin:0;display:inline;">ha hecho una peticion para agregar a </p>
+                                    <p style="margin:0;display:inline;font-weight: bold;">{{ not.Addressee }} </p>
+                                    <p style="margin:0;display:inline;">a su equipo</p>
+                                    <!-- <p style="margin:0;display:inline;float:left">Pedido </p> -->
+                                </div>
+
+                                <div *ngIf="!not.RequestType">
+                                    <p class="textbox">{{ not.Sender }} ha hecho una peticion para eliminar de su equipo a {{ not.Addressee }}</p>
+                                </div>
+
+                            </div>
                         </div>
 
                         <div class="info-middle-lower">
 
-                            <div class="info-middle-lower-user">
+                            <div *ngIf="not.DataSolved">
+                                <p class="textbox">Un administrador de recursos humanos comento '{{ not.HRresponse }}' sobre tu peticion '{{ not.userComplaint }}' con respecto a {{ not.Addressee }}</p>
+                            </div>
+
+                            <div *ngIf="!not.DataSolved">
                                 <p class="textbox">{{ not.userComplaint }}</p>
                             </div>
 
-                            <div class="info-middle-lower-hr">
-                                <p class="textbox">{{ not.HRresponse }}</p>
-                            </div>         
+                            <!-- <p class="textbox">Response</p> -->
+                            
                         </div>
                         <!-- <p class="info_apply">
                             <a class="info_link">{{not.Addressee}} <i class="fas fa-arrow-right"></i></a>

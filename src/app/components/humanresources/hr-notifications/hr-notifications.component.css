@@ -14,6 +14,7 @@ body{
   border-radius: 5px;
   padding-bottom: 5px;
   max-height: 650px;
+  min-height: 650px;
   overflow-y: auto;
 }
 
@@ -185,30 +186,13 @@ body{
  /**============================================
  *               LOWER
  *=============================================**/
- .info-middle-lower{
-  /* Borde */
-
-  /* Tamanio */
-
-  /* Formato */
-  grid-template-columns: 50% 50%;
-  display: grid;
-}
-
-.info-middle-lower-user{
+.info-middle-lower{
   background-color: #7acbfa;
   border-radius: 5px;
   margin: 5px;
   border-style: inset;
   overflow-y: auto;
   max-height: 77.51px;
-}
-
-.info-middle-lower-hr{
-  background-color: #7acbfa;
-  border-radius: 5px;
-  margin: 5px;
-  border-style: inset;
 }
 
 .textbox{
