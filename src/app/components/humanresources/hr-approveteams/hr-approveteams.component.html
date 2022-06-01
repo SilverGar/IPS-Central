@@ -35,7 +35,7 @@
                         <table class="styled-table" id="employees" style="box-shadow: none; border-spacing: 0px;">
                             <tbody>
                                 <tr *ngFor="let user of displayUserList">
-                                    <td (click)="getTeam(user.email ?? ''); currentUser = user.name ?? ''" style="cursor:pointer ;">{{user.name}}</td>
+                                    <td (click)="getTeam(user.email ?? ''); currentUser = user.name ?? ''" style="cursor:pointer ;text-align: start; width: 85%;" title="{{user.name}}">{{user.name}}</td><span [class.circle] = "user.AllowEditing"></span>
                                 </tr>
                             </tbody>
                         </table>
@@ -54,17 +54,18 @@
 
             <div class="display" *ngIf="userTeam?.length ?? 0 > 0">
                 <table class="styled-table">
-                    <caption>Equipo 360 de {{currentUser}}</caption>
+                    <caption title="{{currentUser}}">Equipo 360 de {{currentUser}}</caption>
                     <thead>
                         <tr>
                             <th>ID</th>
                             <th>Nombre</th>
-                            <th>Evaluación</th>
-                            <th>Horas</th>
-                            <th>Status</th>
-                            <th>Acción</th>
+                            <th style="width: 100px;">Evaluación</th>
+                            <th style="width: 50px;">Horas</th>
+                            <th style="width: 75px;">Status</th>
+                            <th style="width: 60px;">Acción</th>
                         </tr>
                     </thead>
+                    <!-- 550 -->
                     <tbody>
                       <ng-container *ngFor="let user of userTeam">
                         <tr *ngIf="(user.Approved == null || user.Approved == true) && user.warning == 3">
