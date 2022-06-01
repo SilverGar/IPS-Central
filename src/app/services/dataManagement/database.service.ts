@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { HttpParams, HttpRequest, HttpEvent } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { DbUserTeam360, UserType, User, ManageUsers, Complete_Team360, getConflictData, NotificationData, addNewUser } from 'src/app/models/db-user';
+import { DbUserTeam360, UserType, User, ManageUsers, Complete_Team360, getConflictData, NotificationData, addNewUser, DashboardData } from 'src/app/models/db-user';
 import { map } from 'rxjs';
 import { response } from 'express';
 import { url } from 'inspector';
@@ -220,6 +220,18 @@ export class DatabaseService {
         map(resp => {
           return resp
         })
+      )
+  }
+
+  getDashboardData(){
+    var URL = `http://localhost:4000/api/general/dashboardStatistic`
+    return this.http.get<Array<DashboardData>>(URL)
+      .pipe(
+        map(
+          resp =>{
+            return resp
+          }
+        )
       )
   }
 

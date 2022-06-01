@@ -117,13 +117,14 @@ export class SuperuserLoadFileComponent implements OnInit, OnDestroy {
     })
   }
 
-  // 0 -> Nothing
-  // 1 -> File Uploaded
-  // 2 -> File processed
-  // 3 -> Uploaded users
-  // 4 -> Uploaded teams
-  // 5 -> Uploaded hours
-  // 6 -> Uploaded 360teams
+  //Variable fileProcessProgress.
+  // 0 -> Display upload screen
+  // 1 -> File Uploaded and display loading
+  // 2 -> File processed and display loading
+  // 3 -> Uploaded users and display loading
+  // 4 -> Uploaded teams and display loading
+  // 5 -> Uploaded hours and display loading
+  // 6 -> Uploaded 360teams and display done
 
   async getProgressFile() {
     if (this.fileProcessProgress < 6) {

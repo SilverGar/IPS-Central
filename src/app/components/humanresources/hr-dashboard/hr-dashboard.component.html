@@ -10,106 +10,15 @@
         <link href='https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css' rel='stylesheet'>
     </head>
 <body>
-    <!-- <div class="sidebar">
-        <div class="logo-details">
-            <i class='bx bxl-windows'></i>
-            <span class="logo_name">Inflection Point</span>
-        </div>
-        <ul class="nav-links">
-            <li>
-                <a href="#">
-                    <i class='bx bx-grid-alt'></i>
-                    <span class="link_name">Dashboard</span>
-                </a>
-            </li>
-            <li>
-                <a href="#">
-                    <i class='bx bx-box'></i>
-                    <span class="link_name">Product</span>
-                </a>
-            </li>
-            <li>
-                <a href="#">
-                    <i class='bx bx-list-ul'></i>
-                    <span class="link_name">Order List</span>
-                </a>
-            </li>
-            <li>
-                <a href="#">
-                    <i class='bx bx-pie-chart-alt-2'></i>
-                    <span class="link_name">Analytics</span>
-                </a>
-            </li>
-            <li>
-                <a href="#">
-                    <i class='bx bx-coin-stack'></i>
-                    <span class="link_name">Stock</span>
-                </a>
-            </li>
-            <li>
-                <a href="#">
-                    <i class='bx bx-book-alt'></i>
-                    <span class="link_name">Order Total</span>
-                </a>
-            </li>
-            <li>
-                <a href="#">
-                    <i class='bx bx-user'></i>
-                    <span class="link_name">Team</span>
-                </a>
-            </li>
-            <li>
-                <a href="#">
-                    <i class='bx bx-message'></i>
-                    <span class="link_name">Messages</span>
-                </a>
-            </li>
-            <li>
-                <a href="#">
-                    <i class='bx bx-heart'></i>
-                    <span class="link_name">Favorites</span>
-                </a>
-            </li>
-            <li>
-                <a href="#">
-                    <i class='bx bx-cog'></i>
-                    <span class="link_name">Settings</span>
-                </a>
-            </li>
-            <li>
-                <a href="#">
-                    <i class='bx bx-log-out'></i>
-                    <span class="link_name">Log Out</span>
-                </a>
-            </li>
-        </ul>
-    </div> -->
-
     <!-- home-content -->
     <section class="home-section">
-        <!-- <nav>
-            <div class="sidebar-button">
-                <i class='bx bx-menu sidebarBtn'></i>
-                <span class="dashboard">Dashboard</span>
-            </div>
-            <div class="search-box">
-                <input type="text" placeholder="Search...">
-                <i class='bx bx-search' ></i>
-            </div>
-            <div class="profile-details">
-                <img src="/Dashboard/stock.jpeg" alt="">
-                <span class="admin_name">Jorge Maa</span>
-                <i class='bx bx-chevron-down' ></i>
-            </div>
-        </nav> -->
-
         <!-- home-content -->
         <div class="home-content">
             <div class="overview-boxes">
                 <div class="box">
                     <div class="left-side">
                         <div class="box_topic">Approved Teams</div>
-                        <div class="number">350</div>
+                        <div class="number">{{ApprovedTeams}}</div>
                         <div class="indicator">
                             <i class='bx bx-up-arrow-alt' ></i>
                             <span class="text">Updated yesterday</span>
@@ -120,7 +29,7 @@
                 <div class="box">
                     <div class="left-side">
                         <div class="box_topic">Pending Teams</div>
-                        <div class="number">150</div>
+                        <div class="number">{{PendingTeams}}</div>
                         <div class="indicator">
                             <i class='bx bx-up-arrow-alt' ></i>
                             <span class="text">Updated yesterday</span>
@@ -131,7 +40,7 @@
                 <div class="box">
                     <div class="left-side">
                         <div class="box_topic">Unassigned</div>
-                        <div class="number">50</div>
+                        <div class="number">{{Orphans}}</div>
                         <div class="indicator">
                             <i class='bx bx-up-arrow-alt' ></i>
                             <span class="text">Updated yesterday</span>

@@ -74,3 +74,9 @@ export interface addNewUser{
   Email: string,
   IsHR: boolean
 }
+
+export interface DashboardData{
+  ApprovedTeams: number,
+  PendingTeams: number,
+  Orphans: number
+}
