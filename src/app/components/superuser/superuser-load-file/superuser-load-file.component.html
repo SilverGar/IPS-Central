@@ -20,11 +20,12 @@
       </div>
       <section>
         <h1>Archivo cargado exitosamente</h1>
-        <button (click)="visualizeTeams()">Aceptar</button>
+        <button (click)="visualizeTeams()" class="action-button red">Eliminar Información</button>
+        <button (click)="visualizeTeams()" class="action-button  green">Visualizar Equipos</button>
       </section>
     </div>
   </body>
-    
+
 
 
 
@@ -45,18 +46,18 @@
 
             <h3>Arrastra el archivo o haz click en el cuadro</h3>
             <!-- <input type="file" class="file" accept=".xlsx, .csv" (change)="getFile($event)" #fileDropRef> -->
-            <input type="file" #fileDropRef class="file" id="csvFileUpload" (change)="fileChangeListener($event)" accept=".csv" /> 
+            <input type="file" #fileDropRef class="file" id="csvFileUpload" (change)="fileChangeListener($event)" accept=".csv" />
         </section>
 
         <!-- Seccion para mostrar informacion del archivo -->
         <section class="file-display">
             <img src="http://localhost:4200/assets/uploadAssets/file-icon.svg" alt="File" width="45px">
-            
+
             <div class="info" *ngIf="!csvRecords">
                 <h4 class="file-name">No se ha subido ningun archivo</h4>
                 <p class="file-size">0 KB</p>
             </div>
-          
+
             <div class="info" *ngIf="csvRecords">
               <h4 class="file-name">{{csvRecords.name}}</h4>
               <p class="file-size">{{formatSize(csvRecords.size)}}</p>
@@ -67,13 +68,13 @@
             <div class="Browse" *ngIf="csvRecords">
               <img src="http://localhost:4200/assets/uploadAssets/delete-icon.svg" alt="Borrar Archivo" width="40px" (click)="csvRecords = undefined" title="Borrar archivo">
             </div>
- 
+
         </section>
 
         <!-- Seccion de botones -->
         <section class="actions" *ngIf="csvRecords && csvRecords.progress === 100">
             <button id="go" (click)="uploadData()">Aceptar</button>
-            
+
             <!-- <button id="go">Aceptar</button> -->
         </section>
 
@@ -82,5 +83,5 @@
           <!-- <input type="file" #fileDropRef id="fileDropRef" accept=".xlsx" (change)="fileBrowserHandler($event.target)"> -->
   </body>
 
-  
+
 </html>
