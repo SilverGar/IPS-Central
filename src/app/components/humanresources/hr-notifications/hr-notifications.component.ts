@@ -34,7 +34,7 @@ export class HrNotificationsComponent implements OnInit {
   getNotifications(){
     if(this.Notificationdata != null){
       for(let i in this.Notificationdata){
-        console.log("Fecha query: " + this.Notificationdata[i].date)
+        // console.log("Fecha query: " + this.Notificationdata[i].date)
         this.db.getNotifications(this.Notificationdata[i].date, 2).subscribe(resp=>{
           if(this.Notificationdata != null){
             this.Notificationdata[i].Notifications = resp;
