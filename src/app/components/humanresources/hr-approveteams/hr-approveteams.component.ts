@@ -327,9 +327,9 @@ export class HrApproveteamsComponent implements OnInit {
 
   confirmTeam(){
     console.log(this.userTeam)
-    // this.db.hr_ConfirmTeam(this.userTeam ?? []).subscribe(resp => {
-    //   this.getTeam(this.currentUserMail)
-    // })
+    this.db.hr_ConfirmTeam(this.userTeam ?? []).subscribe(resp => {
+      this.getTeam(this.currentUserMail)
+    })
   } 
 
   clockIconStatus(input: Array<NotificationData>): boolean{
