@@ -2,6 +2,7 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+  
 }
 
 main {
@@ -12,12 +13,12 @@ main {
 
 .pop-up {
     width: 60%;
-    height: fit-content;
     border: 1px solid #d7d7d7;
     border-radius: 5px;
     background: white;
     padding: 24px;
     position: absolute;
+    overflow-y: scroll; height:90%;
 }
 
 .pop-up .message {
@@ -113,10 +114,11 @@ main {
     overflow-y: scroll;
 }
 
-.h1{
+.title{
     color: black;
     font-weight: bolder;
-    font-family: Helvetica;
+    text-align: center;
+    font-size: 2.5rem;
 }
 
 .enabledTextbox{

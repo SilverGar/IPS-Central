@@ -75,19 +75,25 @@
                           <th *ngIf="user.EvalType == 2">Leader</th>
                           <th>{{user.Hours}}</th>  
                           <th>
-                            <div class="tooltip" *ngIf="user.Hours < 40">
-                              <figure (click)="checkConflict(user)">
-                                <img src="http://localhost:4200/assets/icons/warningIconHours.png" alt="icono agregar usuario" class="warningIcon">
+                            <div (click)="checkConflict(user)" class="tooltip" *ngIf="user.Hours < 40" style="cursor: pointer; display:flex; flex-direction: row; justify-content: center; align-items: center">
+                              <figure style="width: auto; height: 25px; margin: 15px;">
+                                <img *ngIf="!clockIconStatus(user.Notification ?? [])" src="http://localhost:4200/assets/icons/warningIconHours.png" alt="icono agregar usuario" class="warningIcon">
+                                <img *ngIf="clockIconStatus(user.Notification ?? [])" src="http://localhost:4200/assets/icons/warningIconHoursSolved.png" alt="icono agregar usuario" class="warningIcon">
                               </figure>
+                              <img *ngIf="checkMessage(user.Notification ?? [])" src="http://localhost:4200/assets/icons/messageIcon.png" alt="icono agregar usuario" style="width: auto; height: 25px; margin: 5px;">
                               <span class="tooltiptext">No cumple con las 40 horas.</span>
                             </div>
                             
-                            <div class="tooltip" *ngIf="user.Hours >= 40" >
-                              <figure (click)="checkConflict(user)">
-                                <img src="http://localhost:4200/assets/icons/warningIconHours.png" alt="icono agregar usuario" class="warningIcon">
+                            <div (click)="checkConflict(user)" class="tooltip" *ngIf="user.Hours >= 40" style="cursor: pointer; display:flex; flex-direction: row; justify-content: center; align-items: center">
+                              <figure style="width: auto; height: 25px; margin: 15px;">
+                                <img *ngIf="!clockIconStatus(user.Notification ?? [])" src="http://localhost:4200/assets/icons/warningIconHours.png" alt="icono agregar usuario" class="warningIcon">
+                                <img *ngIf="clockIconStatus(user.Notification ?? [])" src="http://localhost:4200/assets/icons/warningIconHours.png" alt="icono agregar usuario" class="warningIcon">
                               </figure>
+                              <img *ngIf="checkMessage(user.Notification ?? [])" src="http://localhost:4200/assets/icons/messageIcon.png" alt="icono agregar usuario" style="width: auto; height: 25px; margin: 5px;">
                               <span class="tooltiptext">Participo en varios proyectos que no cumplen 40 horas con {{user.TeamOwner}} y llega a acumular mas de 40 horas.</span>
                             </div>
+
+                            
                         </th>
                           <th style="text-align: center; margin-top: auto;">
                             <label class="switch">
@@ -143,13 +149,19 @@
                           <th *ngIf="user.EvalType == 2">Leader</th>
                           <th>{{user.Hours}}</th>  
                           <th>
-                              <figure>
-                                  <img src="http://localhost:4200/assets/icons/pendingIcon.png" alt="icono agregar usuario" style="width: auto; height: 25px; margin: -10px;">
+                              <figure style="cursor: pointer; display:flex; flex-direction: row; justify-content: center; align-items: center" *ngIf="user.Notification?.length ?? 0 > 0" (click)="checkConflict(user)">
+                                  <img *ngIf="!user.HrDecision" src="http://localhost:4200/assets/icons/removeIconHr.png" alt="icono agregar usuario" style="width: auto; height: 25px; margin: 5px;">
+                                  <img *ngIf="user.HrDecision"src="http://localhost:4200/assets/icons/confirmButton.png" alt="icono agregar usuario" style="width: auto; height: 25px; margin: 5px;">
+                                  <img *ngIf="checkMessage(user.Notification ?? [])" src="http://localhost:4200/assets/icons/messageIcon.png" alt="icono agregar usuario" style="width: auto; height: 25px; margin: 5px;">
                               </figure>
+
+                              <figure style="display:flex; flex-direction: row; justify-content: center; align-items: center" *ngIf="user.Notification?.length == 0">
+                                <img src="http://localhost:4200/assets/icons/pendingIcon.png" alt="icono agregar usuario" style="width: auto; height: 25px; margin: 5px;">
+                            </figure>
                           </th>  
                           <th style="text-align: center; margin-top: auto;">
                             <label class="switch">
-                              <input type="checkbox" value="{{user.HrDecision}}" [checked]="user.HrDecision" (change)="user.HrDecision = !user.HrDecision">
+                              <input type="checkbox" value="{{user.HrDecision}}" [checked]="user.HrDecision" (change)="notificationModule(user, 2, true)">
                               <span class="slider"></span>
                             </label>
 
@@ -169,13 +181,19 @@
                           <th *ngIf="user.EvalType == 2">Leader</th>
                           <th>{{user.Hours}}</th>  
                           <th>
-                              <figure>
-                                  <img src="http://localhost:4200/assets/icons/confirmButton.png" alt="icono agregar usuario" style="width: auto; height: 25px; margin: -10px;">
+                              <figure *ngIf="user.Notification?.length == 0" style="display:flex; flex-direction: row; justify-content: center; align-items: center">
+                                  <img src="http://localhost:4200/assets/icons/confirmButton.png" alt="icono agregar usuario" style="width: auto; height: 25px; margin: 5px;">
                               </figure>
+
+                              <figure *ngIf="user.Notification?.length != 0" (click)="checkConflict(user)" style="cursor: pointer; display:flex; flex-direction: row; justify-content: center; align-items: center">
+                                <img *ngIf="user.HrDecision" src="http://localhost:4200/assets/icons/confirmButton.png" alt="icono agregar usuario" style="width: auto; height: 25px; margin: 5px;">
+                                <img *ngIf="!user.HrDecision" src="http://localhost:4200/assets/icons/removeIconHr.png" alt="icono agregar usuario" style="width: auto; height: 25px; margin: 5px;">
+                                <img *ngIf="checkMessage(user.Notification ?? [])" src="http://localhost:4200/assets/icons/messageIcon.png" alt="icono agregar usuario" style="width: auto; height: 25px; margin: 5px;">
+                            </figure>
                           </th>  
                           <th style="text-align: center; margin-top: auto;">
                             <label class="switch">
-                              <input type="checkbox" value="{{user.HrDecision}}" [checked]="user.HrDecision" (change)="user.HrDecision = !user.HrDecision">
+                              <input type="checkbox" value="{{user.HrDecision}}" [checked]="user.HrDecision" (change)="notificationModule(user, 1, true)">
                               <span class="slider"></span>
                             </label>
 

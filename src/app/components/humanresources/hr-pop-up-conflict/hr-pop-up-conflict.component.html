@@ -1,9 +1,17 @@
-<main *ngIf="conflictType == 0">
+<main>
     <div class="pop-up">
         <div class="message">
             <div>
-                <p>Detalles del conflicto</p>
-                <div class="tableRequest">
+                <h1 class="title">{{titleDisplay}}</h1>
+                <div style="display:flex; flex-direction: row; justify-content: center; align-items: center;">
+                  <figure>
+                    <img *ngIf="!conflictStatus" src="http://localhost:4200/assets/icons/removeIconHr.png" alt="icono agregar usuario" style="width: auto; height: 30px; margin: 5px;">
+                    <img *ngIf="conflictStatus" src="http://localhost:4200/assets/icons/confirmButton.png" alt="icono agregar usuario" style="width: auto; height: 30px; margin: 5px;">
+                  </figure>
+                  <p>Status: {{statusDisplay}}</p>
+                </div>
+                
+                <div class="tableRequest" *ngIf="displayTable">
                     <table class="rh-table">
                         <tr>
                             <th>ID</th>
@@ -31,7 +39,7 @@
                       <th>Motivo de decision</th>
                     </tr>
                     <ng-container *ngFor="let individualConflict of conflict">
-                      <tr *ngIf="individualConflict.RequestType == 0">
+                      <tr>
                         <th>{{individualConflict.OwnerName}}</th>
                         <th>
                           <textarea style="padding: 2%;" class="enabledTextbox" placeholder="Motivo" (keyup)="checkMessage()" [(ngModel)]="individualConflict.HrResponse"></textarea>
@@ -59,7 +67,7 @@
 
 
 
-<main *ngIf="conflictType == 1">
+<!-- <main *ngIf="conflictType == 1">
   <div class="pop-up">
       <div class="message">
           <div>
@@ -92,4 +100,4 @@
           
       </div>
   </div>
-</main>
+</main> -->

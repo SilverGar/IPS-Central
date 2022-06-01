@@ -124,21 +124,24 @@ export class HrApproveteamsComponent implements OnInit {
       }
 
       input[i].HrDecision = true
+      this.notificationModule(input[i], 0, false)
       if(allowEditing){
         input[i].warning = 0
         if(input[i].OwnerCheck == null || input[i].PartnerCheck == null){
           input[i].warning = 1
         }
 
-        if(input[i].PartnerCheck == false){
+        if(input[i].PartnerCheck == false || (input[i].Approved == null && input[i].OwnerCheck ==false)){
           input[i].warning = 2
-          this.notificationModule(input[i], 0, false)
+          if(input[i].Approved == false){
+            input[i].Approved = true
+            input[i].HrDecision = false
+          }
         }
 
         if((input[i].Approved == false || input[i].Hours < 40) && input[i].warning != 2){
           input[i].warning = 3
-          input[i].HrDecision = false
-          this.notificationModule(input[i], 1, false)
+          input[i].HrDecision = input[i].Approved
         }
         
         if(input[i].OwnerCheck == null){
@@ -154,13 +157,15 @@ export class HrApproveteamsComponent implements OnInit {
 
         if(input[i].PartnerCheck == false || input[i].OwnerCheck == false){
           input[i].warning = 2
-          this.notificationModule(input[i], 0, false)
+          if(input[i].Approved == false){
+            input[i].Approved = true
+            input[i].HrDecision = false
+          }
         }
 
         if((input[i].Approved == false || input[i].Hours < 40) && input[i].warning != 2){
           input[i].warning = 3
           input[i].HrDecision = input[i].Approved
-          this.notificationModule(input[i], 1, false)
         }
       }
     }
@@ -173,15 +178,23 @@ export class HrApproveteamsComponent implements OnInit {
     // 1-> Delete user from conflict and push
     // 2-> Add Notificacion due to adding user
 
-    
+    if(notificationAction == 0){
+      this.queryNotification(input);
+    }
 
     if(flipSwitch){
       input.HrDecision = !input.HrDecision
+      if(input.warning == 1 || input.warning == 0){
+        this.notificationRemove(input);
+      }
+
       if(input.warning == 2){
-        notificationAction = 1
+        this.notificationConflict(input);
+        
       }
 
       if(input.warning == 3){
+        this.notificationAdd(input);
         if(input.Approved == false){
           input.Approved = true
           input.HrDecision = true
@@ -190,24 +203,47 @@ export class HrApproveteamsComponent implements OnInit {
           input.Approved = false
           input.HrDecision = false
         }
-        notificationAction = 2
       }
       
 
     }
 
-    if(notificationAction == 0){
-      this.notificationConflict(input)
-    }
-    else if(notificationAction == 1){
-      this.notificationDualConflict(input)
-    }
-    else{
-      this.notificationAddUser(input)
-    }
+    
   }
 
-  notificationConflict(input: Complete_Team360){
+  insertNewNotification(type: number, input: Complete_Team360, owner: boolean): NotificationData {
+    //Owner = True -> The sender is the owner of the input
+    //Owner = false -> The sender is the partner of the input
+    if(owner){
+      var notificationOwner: NotificationData = {
+        OwnerName: input.TeamOwner ?? '',
+        OwnerID: input.TeamOwnerID ?? 0,
+        PartnerID: input.PartnerID ?? 0,
+        EvalType: input.EvalType ?? 0,
+        Reason: '',
+        HrResponse: '',
+        RequestType: type,
+        Status: false
+      }
+      return notificationOwner;
+    }
+    else{
+      var notificationPartner: NotificationData = {
+        OwnerName: input.Partner ?? '',
+        OwnerID: input.PartnerID ?? 0,
+        PartnerID: input.TeamOwnerID ?? 0,
+        EvalType: input.EvalTypePartner ?? 0,
+        Reason: '',
+        HrResponse: '',
+        RequestType: type,
+        Status: false
+      }
+      return notificationPartner;
+    }
+    
+  }
+
+  queryNotification(input: Complete_Team360){
     var conflictQuery: getConflictData ={
       owner: input.TeamOwnerID ?? 0,
       partner: input.PartnerID ?? 0,
@@ -219,109 +255,64 @@ export class HrApproveteamsComponent implements OnInit {
     input.Notification = []
     this.db.getConflictData(conflictQuery).subscribe(resp => {
       input.Notification = resp
+      if(resp.length != 0 && input.Hours > 40 && resp[0].RequestType  == 0 && input.Approved == false){
+        input.warning = 1
+        input.Approved = true
+        input.HrDecision = false
+      }
       for(var i in input.Notification){
         input.conflictStatus = input.Notification[i].Status
       }
     })
   }
 
-  notificationDualConflict(input: Complete_Team360){
-    if(input.Approved == true && input.HrDecision == true){
-      var conflictQuery: getConflictData ={
-        owner: input.TeamOwnerID ?? 0,
-        partner: input.PartnerID ?? 0,
-        evalTypeOwner: input.EvalType ?? 0,
-        evalTypePartner: input.EvalTypePartner ?? 0,
-        RequestType: 0
+  notificationConflict(input: Complete_Team360){
+    // console.log(input);
+    if(input.Notification?.length == 1){
+      if(input.HrDecision == false){
+        // console.log("Insertar")
+        input.Notification.push(this.insertNewNotification(0, input, input.OwnerCheck ?? true));
       }
-  
-      input.Notification = []
-      this.db.getConflictData(conflictQuery).subscribe(resp => {
-        input.Notification = resp
-        if(resp.length < 2 && input.HrDecision == false){
-          if(input.OwnerCheck == false){
-            var notificationPartner: NotificationData = {
-              OwnerName: input.Partner ?? '',
-              OwnerID: input.PartnerID ?? 0,
-              PartnerID: input.TeamOwnerID ?? 0,
-              EvalType: input.EvalTypePartner ?? 0,
-              Reason: '',
-              HrResponse: '',
-              RequestType: 0,
-              Status: false
-            }
-            console.log("Push Partner")
-            input.Notification.push(notificationPartner)
-          }
-          else{
-            var notificationOwner: NotificationData = {
-              OwnerName: input.TeamOwner ?? '',
-              OwnerID: input.TeamOwnerID ?? 0,
-              PartnerID: input.PartnerID ?? 0,
-              EvalType: input.EvalType ?? 0,
-              Reason: '',
-              HrResponse: '',
-              RequestType: 0,
-              Status: false
-            }
-            console.log("Push Owner")
-            input.Notification.push(notificationOwner)
-          }
-        }
-      })
+    }
+    else if(input.Notification?.length == 2){
+      if(!input.Notification[0].Status){
+        this.queryNotification(input);
+      }
     }
   }
 
-  notificationAddUser(input: Complete_Team360){
-
-    var conflictQuery: getConflictData ={
-      owner: input.TeamOwnerID ?? 0,
-      partner: input.PartnerID ?? 0,
-      evalTypeOwner: input.EvalType ?? 0,
-      evalTypePartner: input.EvalTypePartner ?? 0,
-      RequestType: 1
-    }
-
-    this.db.getConflictData(conflictQuery).subscribe(resp => {
-      if(resp.length != 0){
-        input.Notification = resp
+  notificationAdd(input: Complete_Team360){
+    if(input.HrDecision == true){
+      if(input.Notification?.length == 0){
+        input.Notification.push(this.insertNewNotification(1, input, true));
+        input.Notification.push(this.insertNewNotification(1, input, false));
       }
-      else{
-        if(input.Approved == false && input.HrDecision == false){
+    }
+    else{
+      if(input.Notification?.length == 1 || input.Notification?.length == 2){
+        if(!input.Notification[0].Status){
           input.Notification = []
         }
-        else{
-          input.Notification = []
-          var notificationOwner: NotificationData = {
-            OwnerName: input.TeamOwner ?? '',
-            OwnerID: input.TeamOwnerID ?? 0,
-            PartnerID: input.PartnerID ?? 0,
-            EvalType: input.EvalType ?? 0,
-            Reason: '',
-            HrResponse: '',
-            RequestType: 1,
-            Status: false
-          }
-        
-          var notificationPartner: NotificationData = {
-            OwnerName: input.Partner ?? '',
-            OwnerID: input.PartnerID ?? 0,
-            PartnerID: input.TeamOwnerID ?? 0,
-            EvalType: input.EvalTypePartner ?? 0,
-            Reason: '',
-            HrResponse: '',
-            RequestType: 1,
-            Status: false
-          }
-          input.Notification = []
-          input.Notification?.push(notificationOwner)
-          input.Notification?.push(notificationPartner)
-        
-          }
-        }
-    })
+      }
+    }
   }
 
+  notificationRemove(input: Complete_Team360){
+    if(input.Notification?.length == 0){
+      if(input.HrDecision == false){
+        input.Notification.push(this.insertNewNotification(0, input, true));
+        input.Notification.push(this.insertNewNotification(0, input, false));
+      }
+    }
+    if(input.Notification?.length == 2){
+      if(!input.Notification[0].Status){
+        if(input.HrDecision == true){
+          input.Notification = []
+        }
+      }
+      
+    }
+  }
   checkMessage(input: Array<NotificationData>): boolean{
     var output = false
     if(input.length > 0){
@@ -340,4 +331,13 @@ export class HrApproveteamsComponent implements OnInit {
     //   this.getTeam(this.currentUserMail)
     // })
   } 
+
+  clockIconStatus(input: Array<NotificationData>): boolean{
+    if(input.length > 0){
+      if(input[0].Status){
+        return true
+      }
+    }
+    return false
+  }
 }
