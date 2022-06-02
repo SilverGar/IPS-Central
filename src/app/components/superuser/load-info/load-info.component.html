@@ -1,5 +1,34 @@
 <link rel="stylesheet" href="./load-info.component.css">
-<main>
+
+<body *ngIf="display == 0"> 
+  <div class="container">
+      <div class="center">
+          <div class="loader"></div>
+      </div>
+      
+  </div>
+</body>
+
+<ng-container *ngIf="display != 0">
+
+  <main *ngIf="display == 1">
+    <section class="title-section">
+        <h1>Cargar información</h1>
+    </section>
+    <section class="content-section">
+        <div class="message">
+            <div class="message-content">
+                <p>No tienes ningún archivo cargado.</p>
+            </div>
+            <div class="button-content">
+                <button mat-button (click)="viewLoadFile()">Cargar archivo</button>
+            </div>
+        </div>
+    </section>
+  </main>
+
+
+  <main *ngIf="display == 2">
     <section class="title-section">
         <h1>Cargar información</h1>
     </section>
@@ -20,4 +49,21 @@
             </div>
         </div>
     </section>
-</main>
+  </main>
+
+
+  <main *ngIf="display == 3">
+    <section class="title-section">
+        <h1>Cargar información</h1>
+    </section>
+    <section class="content-section">
+        <div class="message">
+            <div class="message-content">
+                <p>Arhivo ya cargado.
+                </p>
+                <p>Contacta al administrador para poder editar los datos de IPS Central.</p>
+            </div>
+        </div>
+    </section>
+  </main>
+</ng-container>

@@ -2,6 +2,8 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import DatalabelsPlugin from 'chartjs-plugin-datalabels';
 import { ChartConfiguration, ChartData, ChartEvent, ChartType } from 'chart.js';
 import { BaseChartDirective } from 'ng2-charts';
+import { DashboardData } from 'src/app/models/db-user';
+import { DatabaseService } from 'src/app/services/dataManagement/database.service';
 
 
 @Component({
@@ -9,9 +11,34 @@ import { BaseChartDirective } from 'ng2-charts';
   templateUrl: './hr-pie-chart.component.html',
   styleUrls: ['./hr-pie-chart.component.css']
 })
-export class HrPieChartComponent {
+export class HrPieChartComponent implements OnInit {
 
   @ViewChild(BaseChartDirective) chart: BaseChartDirective | undefined;
+
+
+  data?: Array<DashboardData>
+
+  newData: Array<number> = []
+
+  constructor(
+    private db: DatabaseService
+  ) { }
+
+  ngOnInit(): void {
+    this.queryData()
+      
+  }
+
+  queryData(){
+    this.db.getDashboardData().subscribe(resp =>{
+
+      if(resp.length == 1){
+        this.newData.push(resp[0].ApprovedTeams)
+        this.newData.push(resp[0].PendingTeams)
+        this.chart?.update()
+      }
+    })
+  }
 
   // Pie
   public pieChartOptions: ChartConfiguration['options'] = {
@@ -39,7 +66,7 @@ export class HrPieChartComponent {
   public pieChartData: ChartData<'pie', number[], string | string[]> = {
     labels: [ [ 'Approved Teams' ], [ 'Pending Teams' ] ],
     datasets: [ {
-      data: [ 350, 100 ]
+      data: this.newData
     } ]
   };
   public pieChartType: ChartType = 'pie';

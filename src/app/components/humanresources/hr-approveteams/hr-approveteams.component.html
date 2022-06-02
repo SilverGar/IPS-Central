@@ -18,10 +18,10 @@
                             <input type="submit" value="Reset" class="submitbutton" (click)="sortUserList(1,''); searchQuery=''"/>
 
                             <ul class="filters">
-                                <li class="letter-up-filter" title="Alfabeto Ascendente" data-searchType="web" (click)="sortUserList(2, '')">A</li>
-                                <li class="letter-down-filter" title="Alfabeto Descendete" data-searchType="web" (click)="sortUserList(3, '')">Z</li>
-                                <li class="approved" title="Aprobados" data-searchType="web" (click)="sortUserList(4, '')">Ap</li>
-                                <li class="not-approved" title="No Aprobados" data-searchType="web" (click)="sortUserList(5, '')">NAp</li>
+                                <li *ngIf="!alphabeticSort" class="letter-up-filter" title="Alfabeto Ascendente" data-searchType="web" (click)="sortUserList(2, '')">A</li>
+                                <li *ngIf="alphabeticSort" class="letter-down-filter" title="Alfabeto Descendete" data-searchType="web" (click)="sortUserList(3, '')">Z</li>
+                                <li *ngIf="!approvedSort" class="approved" title="Aprobados" data-searchType="web" (click)="sortUserList(4, '')">Ap</li>
+                                <li *ngIf="approvedSort" class="not-approved" title="No Aprobados" data-searchType="web" (click)="sortUserList(5, '')">NAp</li>
                                 <li class="orphans" title="Huerfanos" data-searchType="web">H</li>
                             </ul>
                         </form>
@@ -56,19 +56,19 @@
                 <table class="styled-table">
                     <caption title="{{currentUser}}">Equipo 360 de {{currentUser}}</caption>
                     <thead>
-                        <tr>
+                        <tr class="styled-rows">
                             <th>ID</th>
                             <th>Nombre</th>
-                            <th style="width: 100px;">Evaluación</th>
-                            <th style="width: 50px;">Horas</th>
-                            <th style="width: 75px;">Status</th>
-                            <th style="width: 60px;">Acción</th>
+                            <th>Evaluación</th>
+                            <th>Horas</th>
+                            <th>Status</th>
+                            <th>Acción</th>
                         </tr>
                     </thead>
                     <!-- 550 -->
                     <tbody>
                       <ng-container *ngFor="let user of userTeam">
-                        <tr *ngIf="(user.Approved == null || user.Approved == true) && user.warning == 3">
+                        <tr *ngIf="(user.Approved == null || user.Approved == true) && user.warning == 3" class="styled-rows">
                           <th>{{user.PartnerID}}</th> 
                           <th>{{user.Partner}}</th>  
                           <th *ngIf="user.EvalType == 0">Peer</th>
@@ -109,7 +109,7 @@
 
 
                       <ng-container *ngFor="let user of userTeam">
-                        <tr *ngIf="(user.Approved == null || user.Approved == true) && user.warning == 2">
+                        <tr *ngIf="(user.Approved == null || user.Approved == true) && user.warning == 2" class="styled-rows">
                           <th>{{user.PartnerID}}</th> 
                           <th>{{user.Partner}}</th>  
                           <th *ngIf="user.EvalType == 0">Peer</th>
@@ -142,7 +142,7 @@
                       </ng-container>
 
                       <ng-container *ngFor="let user of userTeam">
-                        <tr *ngIf="(user.Approved == null || user.Approved == true) && user.warning == 1">
+                        <tr *ngIf="(user.Approved == null || user.Approved == true) && user.warning == 1" class="styled-rows">
                           <th>{{user.PartnerID}}</th> 
                           <th>{{user.Partner}}</th>  
                           <th *ngIf="user.EvalType == 0">Peer</th>
@@ -174,7 +174,7 @@
 
 
                       <ng-container *ngFor="let user of userTeam">
-                        <tr *ngIf="user.Approved && user.warning == 0">
+                        <tr *ngIf="user.Approved && user.warning == 0" class="styled-rows">
                           <th>{{user.PartnerID}}</th> 
                           <th>{{user.Partner}}</th>  
                           <th *ngIf="user.EvalType == 0">Peer</th>
@@ -210,7 +210,7 @@
                 </div>
                 <table class="styled-table">
                     <thead>
-                        <tr>
+                        <tr class="styled-rows">
                             <th>ID</th>
                             <th>Nombre</th>
                             <th>Evaluación</th>
@@ -220,7 +220,7 @@
                     </thead>
                     <tbody>
                       <ng-container *ngFor="let user of userTeam">
-                        <tr *ngIf="user.Approved == false">
+                        <tr *ngIf="user.Approved == false" class="styled-rows">
                           <th>{{user.PartnerID}}</th> 
                           <th>{{user.Partner}}</th>  
                           <th *ngIf="user.EvalType == 0">Peer</th>

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Day, Notification } from 'src/app/models/db-user';
+import { Day } from 'src/app/models/db-user';
 import { DatabaseService } from 'src/app/services/dataManagement/database.service';
 import { threadId } from 'worker_threads';
 import { DatePipe } from '@angular/common';
@@ -25,7 +25,7 @@ export class HrNotificationsComponent implements OnInit {
   }
 
   getDays(){
-    this.db.getNotificationsDays(2).subscribe(resp =>{
+    this.db.getNotificationsDays(287).subscribe(resp =>{
       this.Notificationdata = resp
       this.getNotifications();
     })
@@ -35,7 +35,7 @@ export class HrNotificationsComponent implements OnInit {
     if(this.Notificationdata != null){
       for(let i in this.Notificationdata){
         // console.log("Fecha query: " + this.Notificationdata[i].date)
-        this.db.getNotifications(this.Notificationdata[i].date, 2).subscribe(resp=>{
+        this.db.getNotifications(this.Notificationdata[i].date, 287).subscribe(resp=>{
           if(this.Notificationdata != null){
             this.Notificationdata[i].Notifications = resp;
           }

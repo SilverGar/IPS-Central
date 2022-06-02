@@ -46,8 +46,21 @@ export class SuperuserLoadFileComponent implements OnInit, OnDestroy {
   displayText: Array<string> = ['', 'Procesando archivo', 'Cargando Usuarios', 'Cargando Proyectos', 'Cargando Horas', 'Cargando Evaluaciones 360', '']
   displayPage: boolean = false
 
+  status: boolean = false
+
   //Helps subscribing to the data
   ngOnInit(): void {
+
+    this.db.getReleasedStatus().subscribe(resp => {
+      if(resp == 1){
+        this.status = true
+      }
+      else{
+        this.status = false
+      }
+    }   
+  )
+
     this.db.getProccessProgress().subscribe(resp => {
       this.fileProcessProgress = resp
       this.displayPage = true
@@ -143,6 +156,10 @@ export class SuperuserLoadFileComponent implements OnInit, OnDestroy {
 
   visualizeTeams() {
     this.router.navigateByUrl('/superuser/visualize-teams')
+  }
+
+  viewDashboard(){
+    this.router.navigateByUrl('/superuser/dashboard')
   }
 
   deleteDatabase() {

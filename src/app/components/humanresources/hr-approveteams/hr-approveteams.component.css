@@ -10,7 +10,7 @@
     /* Tamanio */
 
     /* Formato */
-    grid-template-columns: 330px 680px;
+    grid-template-columns: 350px auto;
     display: grid;
     
 }
@@ -47,7 +47,7 @@
     padding-left: 20px;
 }
 
-/**========================================================================
+/**====x====================================================================
  *                           Buscador
  *========================================================================**/
 .finder{
@@ -71,10 +71,10 @@
     /* The search form. */
     background-color: #e65624;
     margin-top: 5px;
-    padding:10px 10px 30px 10px;
+    padding:10px 10px 25px 10px;
     position:relative;
     box-shadow: 0 0 5px rgb(108, 108, 108);
-    border-radius:8px;
+    border-radius: 5px;
 }
 
 .searchbar fieldset{
@@ -88,7 +88,7 @@
     margin-right:5px;
     outline:medium none;
     text-shadow:1px 1px 0 white;
-    border-radius: 10px;
+    border-radius: 5px;
     color: black;
     width: 68%;
     height: 34px;
@@ -98,9 +98,9 @@
     width:75px;
     height:34px;
     overflow:hidden;
-    border-style:double;
     cursor:pointer;
-    border-radius: 10px;
+    border-radius: 5px;
+    background-color: rgb(255, 255, 255);
 }
 
 .submitbutton:hover{
@@ -122,13 +122,15 @@
 
     /* Tamanio */
     height: 35px;
-    max-width: 70%;
+    min-width: 70%;
     width: 70%;
 
     /* Formato */
     background-color: #e2e0e0;
     word-wrap: break-word;
     cursor: pointer;
+
+    overflow-x: auto;
 }
 
 .employee-btn:hover{
@@ -162,12 +164,51 @@
     font-size: 1rem;
     
     /* Tamanio */
-    max-width: 680px;
+    max-width: 100%;
+    min-width: 90%;
+    
     
     /* Formato */
     table-layout: fixed;
     display: table;
 }
+
+.styled-rows{
+  min-width: 800px;
+}
+
+.styled-rows th:nth-child(1){
+  width: 5%;
+}
+
+.styled-rows th:nth-child(2){
+  width: 40%;
+  text-align: left;
+}
+
+.styled-rows th:nth-child(3){
+  width: 15%;
+}
+
+.styled-rows th:nth-child(4){
+  width: 10%;
+}
+
+.styled-rows th:nth-child(5){
+  width: 10%;
+}
+
+.styled-rows th:nth-child(6){
+  width: 15%;
+}
+
+
+/* <th style="width: 5%;">ID</th>
+<th style="width: 40%;">Nombre</th>
+<th style="width: 15%;">Evaluación</th>
+<th style="width: 10%;">Horas</th>
+<th style="width: 10%">Status</th>
+<th style="width: 15%;">Acción</th> */
 
 .styled-table caption{
     /* Borde */

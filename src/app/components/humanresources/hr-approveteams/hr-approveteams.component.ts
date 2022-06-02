@@ -23,6 +23,10 @@ export class HrApproveteamsComponent implements OnInit {
 
   ownerEditing: boolean = false
 
+  //Display Filters
+  alphabeticSort: boolean = false
+  approvedSort: boolean = false
+
   constructor(
     private db: DatabaseService,
 		private dialog: MatDialog,
@@ -30,6 +34,10 @@ export class HrApproveteamsComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    this.queryUsers()
+  }
+
+  queryUsers() {
     this.db.getUsers().subscribe(resp =>{
       this.userList = resp
       this.displayUserList = resp
@@ -57,18 +65,24 @@ export class HrApproveteamsComponent implements OnInit {
       switch (input){
         case 1:
           this.displayUserList = this.filterItems(query)
+          this.alphabeticSort = false
+          this.approvedSort = false
           break
         case 2:
           this.displayUserList?.sort((a, b) => (a.name ?? '').localeCompare((b.name ?? '')))
+          this.alphabeticSort = false
           break
         case 3:
           this.displayUserList?.sort((a, b) => (b.name ?? '').localeCompare((a.name ?? '')))
+          this.alphabeticSort = true
           break
         case 4:
           this.displayUserList = this.filterApproved(false)
+          this.approvedSort = false
           break
         case 5:
           this.displayUserList = this.filterApproved(true)
+          this.approvedSort = true
           break
       }
     }

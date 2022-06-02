@@ -140,7 +140,7 @@ nav .profile-details i{
     width: calc(100% / 3 - 15px);
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: space-evenly;
     padding: 15px 14px;
     background: #fff;
     border-radius: 12px;
@@ -155,7 +155,7 @@ nav .profile-details i{
 .home-content .overview-boxes .number{
     font-size: 35px;
     font-weight: 500;
-    margin-top: -5px;
+    margin-top: 15px;
     display: inline-block;
 }
 

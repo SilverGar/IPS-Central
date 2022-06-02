@@ -22,14 +22,15 @@
     </div>
   </body>
 
-  <body *ngIf="fileProcessProgress == 6 && displayPage">
+  <body *ngIf="(fileProcessProgress == 6 || status) && displayPage">
     <div class="container">
       <div class="center">
       </div>
       <section>
         <h1 style="text-align: center;">Archivo cargado exitosamente</h1>
         <button (click)="visualizeTeams()">Visualizar equipos</button>
-        <button (click)="deleteDatabase()">Eliminar información</button>
+        <button *ngIf="!status" (click)="deleteDatabase()">Eliminar información</button>
+        <button *ngIf="status" (click)="viewDashboard()">Ver Dashboard</button>
       </section>
     </div>
   </body>
