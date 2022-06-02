@@ -56,23 +56,23 @@
                 
             <table class="rh-table">
                 <tr>
-                    <th>ID</th>
-                    <th>Usuario</th>
-                    <th>Como evaluo</th>
-                    <th>Horas Totales</th>
-                    <th *ngIf="textStatus!=  'Ya puedes empezar tu Evaluación360.'">Mi decisión</th>
+                    <th style="width: 10%;">ID</th>
+                    <th style="width: 40%; text-align: left;">Usuario</th>
+                    <th style="width: 10%;">Como evaluo</th>
+                    <th style="width: 10%;">Horas Totales</th>
+                    <th style="width: 10%;" *ngIf="textStatus!=  'Ya puedes empezar tu Evaluación360.'">Mi decisión</th>
 
                 </tr>
 
                 <!-- DATABASE -->
                 <tr *ngFor="let team of displayTeam">
-                    <th>{{team.PartnerID}}</th>
-                    <th>{{team.Partner}}</th>
-                    <th *ngIf="team.EvalType == 0">Peer</th>
-                    <th *ngIf="team.EvalType == 1">Team</th>
-                    <th *ngIf="team.EvalType == 2">Leader</th>
-                    <th>{{team.Hours}}</th>
-                    <th  *ngIf="textStatus!=  'Ya puedes empezar tu Evaluación360.'">
+                    <th style="width: 10%;">{{team.PartnerID}}</th>
+                    <th style="width: 40%; text-align: left;">{{team.Partner}}</th>
+                    <th style="width: 10%;" *ngIf="team.EvalType == 0">Peer</th>
+                    <th style="width: 10%;" *ngIf="team.EvalType == 1">Team</th>
+                    <th style="width: 10%;" *ngIf="team.EvalType == 2">Leader</th>
+                    <th style="width: 10%;">{{team.Hours}}</th>
+                    <th style="width: 10%;" *ngIf="textStatus!=  'Ya puedes empezar tu Evaluación360.'">
                         <div *ngIf="!team.Approved">
                             <div *ngIf="team.Check1 != null">
                                 <div *ngIf="!team.Check1" class="tooltip">

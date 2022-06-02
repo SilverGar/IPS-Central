@@ -22,6 +22,11 @@ Una notificacion debe tener:
 
 
 <body>
+
+    <form>
+      <input type="number" placeholder="ID" [(ngModel)]="currentID" [ngModelOptions]="{standalone: true}">
+      <button (click)="searchNotifications()">Buscar</button>
+    </form>
     <div class="container">
         <div class="days" *ngFor="let day of Notificationdata">
             

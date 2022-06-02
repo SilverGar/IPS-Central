@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { DatabaseService } from 'src/app/services/dataManagement/database.service';
 import { DashboardData } from 'src/app/models/db-user';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-hr-dashboard',
@@ -16,17 +17,26 @@ export class HrDashboardComponent implements OnInit {
   Orphans: number = 0
 
   constructor(
-    private db: DatabaseService
+    private db: DatabaseService,
+    private router: Router
   ) { }
 
   ngOnInit(): void {
-    this.db.getDashboardData().subscribe(resp =>{
-      if(resp.length == 1){
-        this.ApprovedTeams = resp[0].ApprovedTeams
-        this.PendingTeams = resp[0].PendingTeams
-        this.Orphans = resp[0].Orphans
+    this.db.getProccessProgress().subscribe(resp => {
+      if(resp != 6){
+        this.router.navigateByUrl('/superuser/load-file')
+      }
+      else{
+        this.db.getDashboardData().subscribe(resp =>{
+          if(resp.length == 1){
+            this.ApprovedTeams = resp[0].ApprovedTeams
+            this.PendingTeams = resp[0].PendingTeams
+            this.Orphans = resp[0].Orphans
+          }
+        })
       }
     })
+    
       
   }
 

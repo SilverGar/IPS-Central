@@ -266,6 +266,18 @@ export class DatabaseService {
       )
   }
 
+  getUserId(email: string){
+    var URL = `http://localhost:4000/api/user/getID/` + email
+    return this.http.get<number>(URL)
+      .pipe(
+        map(
+          resp =>{
+            return resp
+          }
+        )
+      )
+  }
+
   //Errores
   apiNotEnabled() {
     console.log("Error")

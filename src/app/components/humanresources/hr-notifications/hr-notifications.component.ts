@@ -13,6 +13,7 @@ import { DatePipe } from '@angular/common';
 export class HrNotificationsComponent implements OnInit {
   today:Date = new Date();
   Notificationdata?: Array<Day>
+  currentID: number = 0
   constructor(
     private db: DatabaseService, 
     public dp: DatePipe
@@ -21,11 +22,15 @@ export class HrNotificationsComponent implements OnInit {
 
   ngOnInit(): void {
     this.getDays();
+  }
 
+  searchNotifications(){
+    this.getDays()
   }
 
   getDays(){
-    this.db.getNotificationsDays(287).subscribe(resp =>{
+    this.db.getNotificationsDays(this.currentID).subscribe(resp =>{
+      console.log(this.currentID)
       this.Notificationdata = resp
       this.getNotifications();
     })
@@ -35,7 +40,7 @@ export class HrNotificationsComponent implements OnInit {
     if(this.Notificationdata != null){
       for(let i in this.Notificationdata){
         // console.log("Fecha query: " + this.Notificationdata[i].date)
-        this.db.getNotifications(this.Notificationdata[i].date, 287).subscribe(resp=>{
+        this.db.getNotifications(this.Notificationdata[i].date, this.currentID).subscribe(resp=>{
           if(this.Notificationdata != null){
             this.Notificationdata[i].Notifications = resp;
           }
