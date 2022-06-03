@@ -28,7 +28,7 @@
       <div class="logo-text" @fadeInOut *ngIf="collapsed"> {{profile.givenName}}
           <div class="logo-description">Empleado</div>
       </div>
-      <button class="btn-close" @fadeInOut *ngIf="collapsed">
+      <button class="btn-close" @fadeInOut *ngIf="collapsed" (click)="logout()">
           <i class='bx bx-log-out'></i>
       </button>
   </div>

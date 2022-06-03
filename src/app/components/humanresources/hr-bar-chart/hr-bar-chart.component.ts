@@ -32,9 +32,11 @@ export class HrBarChartComponent implements OnInit {
   queryDataBar(){
     this.db.getDashboardData().subscribe(resp =>{
       if(resp.length == 1){
+
         this.ApprovedTeams = resp[0].ApprovedTeams
         this.PendingTeams = resp[0].PendingTeams
         this.Orphans = resp[0].Orphans
+
         this.chart?.update()
         
       }

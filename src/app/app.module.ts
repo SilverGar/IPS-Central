@@ -49,6 +49,7 @@ import { SuPieChartComponent } from './components/superuser/su-pie-chart/su-pie-
 import { SuBarChartComponent } from './components/superuser/su-bar-chart/su-bar-chart.component';
 import { BodyComponent } from './components/shared/body/body.component';
 import { DatePipe } from '@angular/common';
+import { InfoNotAvailableComponent } from './components/shared/info-not-available/info-not-available.component';
 const isIE = window.navigator.userAgent.indexOf('MSIE ') > -1 || window.navigator.userAgent.indexOf('Trident/') > -1;
 
 
@@ -85,7 +86,8 @@ const isIE = window.navigator.userAgent.indexOf('MSIE ') > -1 || window.navigato
     FooterComponent,
     SuPieChartComponent,
     SuBarChartComponent,
-    BodyComponent
+    BodyComponent,
+    InfoNotAvailableComponent
   ],
   imports: [
     BrowserModule,

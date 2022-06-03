@@ -28,6 +28,7 @@ import { LoadInfoComponent } from './components/superuser/load-info/load-info.co
 import { InvalidUserComponent } from './components/shared/invalid-user/invalid-user.component';
 import { HrApproveteamsComponent } from './components/humanresources/hr-approveteams/hr-approveteams.component';
 import { SuperuserVisualizeTeamsComponent } from './components/superuser/superuser-visualize-teams/superuser-visualize-teams.component';
+import { InfoNotAvailableComponent } from './components/shared/info-not-available/info-not-available.component';
 
 const routes: Routes = [
   {
@@ -44,6 +45,11 @@ const routes: Routes = [
     component: EmployeeDetailsComponent,
     canActivate: [MsalGuard]
   },
+  {
+    path: 'info-not-available',
+    component: InfoNotAvailableComponent
+  },
+  
   {
     path: 'userNotFound',
     component: InvalidUserComponent,

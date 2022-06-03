@@ -22,6 +22,6 @@ export const navbarData = [
   {
     routeLink: '/superuser/confirm-load',
     icon: 'bx bxs-file-export',
-    label: 'Cargar informacion'
+    label: 'Cargar información'
   }
 ];

@@ -8,6 +8,8 @@ import { DatabaseService } from 'src/app/services/dataManagement/database.servic
 import { MsSignInService } from 'src/app/services/ms-sign-in.service';
 
 import { navbarData } from './nav-data';
+import { throws } from 'assert';
+import { Router } from '@angular/router';
 
 interface SideNavToggle {
   screenWidth: number;
@@ -76,7 +78,8 @@ export class SidebarComponent implements OnInit, OnDestroy {
   constructor(
     private msSignIn: MsSignInService,
     private dataSharingService: DataSharingService,
-    private db: DatabaseService
+    private db: DatabaseService,
+    private router: Router
   ) { }
 
   ngOnInit(): void {
@@ -134,6 +137,9 @@ export class SidebarComponent implements OnInit, OnDestroy {
       this.currentReleasedStatus = resp
       if(resp == 1){
         this.fetchUpdate()
+      }
+      else{
+        this.router.navigateByUrl('/info-not-available')
       }
     })
   }

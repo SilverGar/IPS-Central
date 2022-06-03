@@ -22,22 +22,13 @@ export class HrDashboardComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.db.getProccessProgress().subscribe(resp => {
-      if(resp != 6){
-        this.router.navigateByUrl('/superuser/load-file')
-      }
-      else{
-        this.db.getDashboardData().subscribe(resp =>{
-          if(resp.length == 1){
-            this.ApprovedTeams = resp[0].ApprovedTeams
-            this.PendingTeams = resp[0].PendingTeams
-            this.Orphans = resp[0].Orphans
-          }
-        })
+    this.db.getDashboardData().subscribe(resp =>{
+      if(resp.length == 1){
+        this.ApprovedTeams = resp[0].ApprovedTeams
+        this.PendingTeams = resp[0].PendingTeams
+        this.Orphans = resp[0].Orphans
       }
     })
-    
-      
   }
 
 }
