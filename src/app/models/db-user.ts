@@ -16,7 +16,7 @@ export interface UserType {
 }
 
 export interface User {
-    id?: number,
+    id: number,
     name?: string,
     email?: string,
     AllowEditing?: boolean
