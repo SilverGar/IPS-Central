@@ -19,7 +19,8 @@ export interface User {
     id?: number,
     name?: string,
     email?: string,
-    AllowEditing?: boolean
+    AllowEditing?: boolean,
+    Status?: number
 }
 
 export interface ManageUsers {
