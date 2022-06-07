@@ -22,11 +22,22 @@ Una notificacion debe tener:
 
 
 <body>
+    <div class="search">
+        <form>
+            <input type="number" placeholder="ID" [(ngModel)]="currentID" [ngModelOptions]="{standalone: true}">
+            <button (click)="searchNotifications()">Buscar</button>
+        </form>
 
-    <form>
-      <input type="number" placeholder="ID" [(ngModel)]="currentID" [ngModelOptions]="{standalone: true}">
-      <button (click)="searchNotifications()">Buscar</button>
-    </form>
+        <table class="styled-table" id="employees" style="box-shadow: none; border-spacing: 0px;">
+            <tbody>
+                <tr *ngFor="let user of userList">
+                    <td (click)="currentID = user.id; searchNotifications()" style="cursor:pointer ;text-align: start; width: 85%;" title="{{user.name}}">{{user.name}}</td><span [class.circle] = "user.AllowEditing"></span>
+                </tr>
+            </tbody>
+        </table>
+
+    </div>
+
     <div class="container">
         <div class="days" *ngFor="let day of Notificationdata">
             

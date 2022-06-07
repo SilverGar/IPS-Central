@@ -3,6 +3,8 @@ import { Day } from 'src/app/models/db-user';
 import { DatabaseService } from 'src/app/services/dataManagement/database.service';
 import { threadId } from 'worker_threads';
 import { DatePipe } from '@angular/common';
+import { User } from 'src/app/models/db-user';
+import { HttpClient } from '@angular/common/http';
 
 
 @Component({
@@ -14,15 +16,23 @@ export class HrNotificationsComponent implements OnInit {
   today:Date = new Date();
   Notificationdata?: Array<Day>
   currentID: number = 0
+  userList?: Array<User>
   constructor(
     private db: DatabaseService, 
-    public dp: DatePipe
-  ) { }
+    public dp: DatePipe, 
+    private http: HttpClient
+  ) {}
   
 
   ngOnInit(): void {
-    this.getDays();
+    this.queryUsers();
   }
+
+queryUsers() {
+    this.db.getUsers().subscribe(resp =>{
+      this.userList = resp;
+  })
+}
 
   searchNotifications(){
     this.getDays()
@@ -30,8 +40,9 @@ export class HrNotificationsComponent implements OnInit {
 
   getDays(){
     this.db.getNotificationsDays(this.currentID).subscribe(resp =>{
-      console.log(this.currentID)
       this.Notificationdata = resp
+      console.log(resp)
+      console.log(this.currentID)
       this.getNotifications();
     })
   }

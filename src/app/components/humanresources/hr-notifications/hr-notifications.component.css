@@ -5,6 +5,8 @@
  *========================================================================**/
 body{
   font-family: 'Montserrat', sans-serif;
+  display: grid;
+  grid-template-columns: 20% 80%;
 }
 
  .container{
@@ -257,4 +259,148 @@ body{
 
 .info_link:hover::after {
   width: 100%;
+}
+
+/**========================================================================
+ *                           TABLA DE USUARIOS
+ *========================================================================**/
+ .styled-table {
+  /* Borde */
+  box-shadow: 0 0 10px rgb(89, 71, 71);
+  border-collapse: collapse;
+  border-collapse:separate;
+  border-spacing: 3px;
+  border-radius:6px;
+  margin: 25px 0;
+
+  /* Fuente */
+  font-family: 'Montserrat', sans-serif;
+  font-size: 1rem;
+  
+  /* Tamanio */
+  max-width: 100%;
+  min-width: 90%;
+  max-height: 100%;
+  
+  
+  /* Formato */
+  table-layout: fixed;
+  display: table;
+}
+
+/* En edicion */
+.styled-table tbody{ 
+  /* Borde */
+
+  /* Fuente */
+
+  /* Tamanio */
+
+  /* Formato */
+  display: block;
+  max-height: 100%;
+  overflow-y: auto;
+} 
+
+.styled-table tbody tr {
+  /* Borde */
+  border-bottom: 3px solid #dddddd;
+
+  /* Fuente */
+
+  /* Tamanio */
+  width: 100%;
+
+  /* Formato */
+  
+}
+
+.styled-table tbody tr:last-of-type {
+  /* Borde */
+  border-bottom: 2px solid #f76300;
+
+  /* Fuente */
+
+  /* Tamanio */
+
+  /* Formato */
+  
+}
+
+.styled-table tbody tr:nth-of-type(odd){
+  /* Borde */
+
+  /* Fuente */
+
+  /* Tamanio */
+
+  /* Formato */
+  background-color: #ece7e7;
+}
+
+.styled-table tbody tr:nth-of-type(even) {
+  /* Borde */
+
+  /* Fuente */
+
+  /* Tamanio */
+
+  /* Formato */
+  background-color: #f3f3f3;
+}
+
+.styled-table tbody tr:nth-of-type(odd):hover, .styled-table tbody tr:nth-of-type(even):hover{
+  /* Borde */
+
+  /* Fuente */
+
+  /* Tamanio */
+
+  /* Formato */
+  background-color: #c8c8c8;
+}
+
+/* en edicion */
+.styled-table thead, .styled-table tbody tr{ 
+  display: table;
+  width: 100%;
+  table-layout: fixed;
+}
+
+.styled-table thead tr {
+  /* Borde */
+  border-radius: 10px;
+
+  /* Fuente */
+
+  /* Tamanio */
+
+  /* Formato */
+  background-color: #e65624;
+  color: #ffffff;
+}
+
+.styled-table th, .styled-table td {
+  /* Borde */
+  padding: 12px 15px;
+
+  /* Fuente */
+  text-align: center;
+
+  /* Tamanio */
+  max-width: 150px;
+
+  /* Formato */
+  /* word-wrap: break-word; */
+  white-space: nowrap; 
+  overflow: hidden;
+  text-overflow: ellipsis; 
+}
+
+#employees tbody{
+  max-height: 85vh;
+}
+
+#employees{
+  margin: 0;
 }
