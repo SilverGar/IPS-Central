@@ -1,4 +1,5 @@
 import { HttpClient } from '@angular/common/http';
+import { IfStmt } from '@angular/compiler';
 import { Component, OnInit } from '@angular/core';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { Complete_Team360, NotificationData, getConflictData, User } from 'src/app/models/db-user';
@@ -26,6 +27,7 @@ export class HrApproveteamsComponent implements OnInit {
   //Display Filters
   alphabeticSort: boolean = false
   approvedSort: boolean = false
+  orphanSort: boolean = false
 
   constructor(
     private db: DatabaseService,
@@ -41,6 +43,8 @@ export class HrApproveteamsComponent implements OnInit {
     this.db.getUsers().subscribe(resp =>{
       this.userList = resp
       this.displayUserList = resp
+      this.alphabeticSort = false
+      this.approvedSort = false
     })
   }
 
@@ -65,36 +69,63 @@ export class HrApproveteamsComponent implements OnInit {
       switch (input){
         case 1:
           this.displayUserList = this.filterItems(query)
-          this.alphabeticSort = false
-          this.approvedSort = false
           break
         case 2:
-          this.displayUserList?.sort((a, b) => (a.name ?? '').localeCompare((b.name ?? '')))
-          this.alphabeticSort = false
+          this.displayUserList?.sort((a, b) => (b.name ?? '').localeCompare((a.name ?? '')))
+          this.alphabeticSort = !this.alphabeticSort
           break
         case 3:
-          this.displayUserList?.sort((a, b) => (b.name ?? '').localeCompare((a.name ?? '')))
-          this.alphabeticSort = true
+          this.displayUserList?.sort((a, b) => (a.name ?? '').localeCompare((b.name ?? '')))
+          this.alphabeticSort = !this.alphabeticSort
           break
         case 4:
-          this.displayUserList = this.filterApproved(false)
-          this.approvedSort = false
+          this.approvedSort = !this.approvedSort
+          this.displayUserList = this.filterApproved(this.approvedSort)
           break
         case 5:
-          this.displayUserList = this.filterApproved(true)
-          this.approvedSort = true
-          break
+          this.orphanSort = !this.orphanSort
+          this.displayUserList = this.filterOrphans(this.orphanSort)
+          break;
+          
       }
     }
+  }
+
+  filterOrphans(input: boolean){
+    var newDisplay: Array<User> = []
+    if(this.userList != null){
+      for(var i in this.userList){
+        if(input){
+          if(this.userList[i].Status == 0){
+            newDisplay.push(this.userList[i])
+          }
+        }
+        else{
+          if(this.userList[i].Status != 0){
+            newDisplay.push(this.userList[i])
+          }
+        }
+        
+      }
+    }
+    return newDisplay
   }
 
   filterApproved(input: boolean){
     var newDisplay: Array<User> = []
     if(this.userList != null){
       for(var i in this.userList){
-        if(this.userList[i].AllowEditing == input){
-          newDisplay.push(this.userList[i])
+        if(input){
+          if(this.userList[i].Status != 2){
+            newDisplay.push(this.userList[i])
+          }
         }
+        else{
+          if(this.userList[i].Status == 2){
+            newDisplay.push(this.userList[i])
+          }
+        }
+        
       }
     }
     return newDisplay
@@ -343,6 +374,7 @@ export class HrApproveteamsComponent implements OnInit {
     console.log(this.userTeam)
     this.db.hr_ConfirmTeam(this.userTeam ?? []).subscribe(resp => {
       this.getTeam(this.currentUserMail)
+      this.queryUsers()
     })
   } 
 

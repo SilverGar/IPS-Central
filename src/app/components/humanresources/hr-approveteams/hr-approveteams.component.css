@@ -26,6 +26,7 @@
     text-align: center;
     font-size:250%;
 
+
     /* Tamanio */
 
     /* Formato */
@@ -220,12 +221,11 @@
 
     /* Tamanio */
     
-
     /* Formato */
     background-color: rgb(254, 254, 247);
 
     white-space: nowrap; 
-    width: 680px; 
+    width: 96.5%; 
     overflow: hidden;
     text-overflow: ellipsis; 
     border: 1px solid #000000;
@@ -348,7 +348,7 @@
     margin: 0;
 }
 
-.circle{
+.circle2{
     margin-top: 5px;
     text-align: end;
     float: left;
@@ -356,8 +356,32 @@
     height: 10px;
     border-radius: 50%;
     color: #fff;
-    background: #12ba0f;
+    background: green;
 }
+
+.circle1{
+  margin-top: 5px;
+  text-align: end;
+  float: left;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  color: #fff;
+  background: orange;
+}
+
+.circle0{
+  margin-top: 5px;
+  text-align: end;
+  float: left;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  color: #fff;
+  background: red;
+}
+
+
 
 
 /**========================================================================
@@ -419,6 +443,14 @@
     width:15px; 
     opacity: 0.5;
     /* background-position:right 0; */
+}
+
+.with-team{ 
+  background:url("/assets/icons/searchIcons/team-icon.png") no-repeat;
+  background-size: contain;
+  width:20px; 
+  opacity: 0.5;
+  /* background-position:right 0; */
 }
 
 .active, .orphans:hover, .not-approved:hover, .approved:hover, .letter-down-filter:hover, .letter-up-filter:hover{ 
