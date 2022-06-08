@@ -22,7 +22,7 @@ Una notificacion debe tener:
 
 
 <body>
-    <div class="search">
+    <!-- <div class="search">
         <form>
             <input type="number" placeholder="ID" [(ngModel)]="currentID" [ngModelOptions]="{standalone: true}">
             <button (click)="searchNotifications()">Buscar</button>
@@ -35,9 +35,34 @@ Una notificacion debe tener:
                 </tr>
             </tbody>
         </table>
+    </div> -->
+<!--  -->
+    <div class="search">
+        <fieldset>
+            <form class="searchform" method="post">
+                <input (keyup)="sortUserList(1,searchQuery)" class="searcharea" type="text" placeholder="Buscar Usuario" [(ngModel)]="searchQuery" [ngModelOptions]="{standalone: true}">
+                <input type="submit" value="Reset" class="submitbutton" (click)="queryUsers(); searchQuery=''"/>
 
+                <ul class="filters">
+                    <li *ngIf="!alphabeticSort" class="letter-up-filter" title="Alfabeto Ascendente" data-searchType="web" (click)="sortUserList(2, '')">A</li>
+                    <li *ngIf="alphabeticSort" class="letter-down-filter" title="Alfabeto Descendete" data-searchType="web" (click)="sortUserList(3, '')">Z</li>
+                    <li *ngIf="!approvedSort" class="approved" title="Aprobados" data-searchType="web" (click)="sortUserList(4, '')">Ap</li>
+                    <li *ngIf="approvedSort" class="not-approved" title="No Aprobados" data-searchType="web" (click)="sortUserList(4, '')">NAp</li>
+                    <li *ngIf="orphanSort" class="orphans" title="Huerfanos" data-searchType="web" (click)="sortUserList(5, '')">H</li>
+                    <li *ngIf="!orphanSort" class="with-team" title="No Huerfanos" data-searchType="web" (click)="sortUserList(5, '')">A</li>
+                </ul>
+            </form>
+            <table class="styled-table" id="employees" style="box-shadow: none; border-spacing: 0px;">
+                <tbody>
+                    <tr *ngFor="let user of userList">
+                        <td (click)="currentID = user.id; searchNotifications()" style="cursor:pointer ;text-align: start; width: 85%;" title="{{user.name}}">{{user.name}}</td><span [class.circle] = "user.AllowEditing"></span>
+                    </tr>
+                </tbody>
+            </table>
+        </fieldset>
     </div>
 
+<!--  -->
     <div class="container">
         <div class="days" *ngFor="let day of Notificationdata">
             
