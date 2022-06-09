@@ -46,6 +46,7 @@ main .content-section {
 
 main .content-section .message {
     width: 100%;
+    max-width: 800px;
     height: fit-content;
     background-color: #46647c;
     border-radius: 5px;
