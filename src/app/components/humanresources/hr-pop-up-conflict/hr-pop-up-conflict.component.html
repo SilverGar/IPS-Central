@@ -14,19 +14,19 @@
                 <div class="tableRequest" *ngIf="displayTable">
                     <table class="rh-table">
                         <tr>
-                            <th>ID</th>
-                            <th>Nombre</th>
-                            <th>Evaluación</th>
-                            <th>Motivo</th>
+                            <th style="width: 5%;">ID</th>
+                            <th style="width: 35%; text-align: left;">Nombre</th>
+                            <th style="width: 10%;">Evaluación</th>
+                            <th style="width: 50%; text-align: left;">Motivo</th>
                         </tr>
                         <ng-container *ngFor="let individualConflict of conflict">
                           <tr *ngIf="individualConflict.RequestType == 0">
-                            <th>{{individualConflict.OwnerID}}</th>
-                            <th>{{individualConflict.OwnerName}}</th>
-                            <th *ngIf="individualConflict.EvalType == 0">Peer</th>
-                            <th *ngIf="individualConflict.EvalType == 1">Team</th>
-                            <th *ngIf="individualConflict.EvalType == 2">Leader</th>
-                            <th>{{individualConflict.Reason}}</th>
+                            <th style="width: 5%;">{{individualConflict.OwnerID}}</th>
+                            <th style="width: 15%; text-align: left;">{{individualConflict.OwnerName}}</th>
+                            <th style="width: 10%;" *ngIf="individualConflict.EvalType == 0">Peer</th>
+                            <th style="width: 10%;" *ngIf="individualConflict.EvalType == 1">Team</th>
+                            <th style="width: 10%;" *ngIf="individualConflict.EvalType == 2">Leader</th>
+                            <th style="width: 70%; text-align: left;">{{individualConflict.Reason}}</th>
                         </tr>
                         </ng-container>
                         
@@ -35,14 +35,14 @@
                 <div class="tableRequest">
                   <table class="rh-table">
                     <tr>
-                      <th>Para</th>
-                      <th>Motivo de decision</th>
+                      <th style="width: 30%; text-align: left;">Para</th>
+                      <th style="width: 70%; text-align: center;">Motivo de decision</th>
                     </tr>
                     <ng-container *ngFor="let individualConflict of conflict">
                       <tr>
-                        <th>{{individualConflict.OwnerName}}</th>
+                        <th style="width: 30%; text-align: left;">{{individualConflict.OwnerName}}</th>
                         <th>
-                          <textarea style="padding: 2%;" class="enabledTextbox" placeholder="Motivo" (keyup)="checkMessage()" [(ngModel)]="individualConflict.HrResponse"></textarea>
+                          <textarea style="padding: 2%; width: 90%; text-align: left;" class="enabledTextbox" placeholder="Motivo" (keyup)="checkMessage()" [(ngModel)]="individualConflict.HrResponse"></textarea>
                         </th>
                       </tr>
                     </ng-container>

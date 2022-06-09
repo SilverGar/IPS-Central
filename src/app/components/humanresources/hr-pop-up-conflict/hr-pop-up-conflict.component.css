@@ -18,13 +18,14 @@ main {
     background: white;
     padding: 24px;
     position: absolute;
-    overflow-y: scroll; height:90%;
+    overflow-y: scroll; height: 90%;
+
 }
 
 .pop-up .message {
-    width: 100%;
+    width: 80%;
     height: fit-content;
-    display: flex;
+    margin: auto;
     flex-direction: column;
     justify-content: space-evenly;
     align-items: center;
@@ -40,6 +41,7 @@ main {
 .pop-up .message .buttons {
     width: 50%;
     display: flex;
+    margin: auto;
     justify-content: space-around;
     align-items: center;
     margin-top: 24px;
