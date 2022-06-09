@@ -6,7 +6,7 @@
 body{
   font-family: 'Montserrat', sans-serif;
   display: grid;
-  grid-template-columns: 20% 80%;
+  grid-template-columns: 27% 73%;
 }
 
  .container{
@@ -403,4 +403,184 @@ body{
 
 #employees{
   margin: 0;
+}
+
+/**========================================================================
+ *                           Buscador de empleados
+ *========================================================================**/
+ fieldset{
+   border: none;
+ }
+
+ .finder{
+  /* Borde */
+  margin-left: 10px;
+  margin-top: 30px;
+  position: static;
+
+  /* Fuente */
+
+  /* Tamanio */
+  height: 82vh;
+  width: 330px;
+
+  /* Formato */
+  box-shadow: 0 0 5px rgb(108, 108, 108);
+  background: rgb(254, 254, 247);
+}
+
+.searchform{
+  /* The search form. */
+  background-color: #e65624;
+  margin-top: 5px;
+  padding:10px 10px 25px 10px;
+  position:relative;
+  box-shadow: 0 0 5px rgb(108, 108, 108);
+  border-radius: 5px;
+}
+
+.searchbar fieldset{
+  border: none;
+}
+
+.searcharea{
+  border:none;
+  float:left;
+  line-height:22px;
+  margin-right:5px;
+  outline:medium none;
+  text-shadow:1px 1px 0 white;
+  border-radius: 5px;
+  color: black;
+  width: 68%;
+  height: 34px;
+}
+
+.submitbutton{
+  width:75px;
+  height:34px;
+  overflow:hidden;
+  cursor:pointer;
+  border-radius: 5px;
+  background-color: rgb(255, 255, 255);
+}
+
+.submitbutton:hover{
+  background-position:left bottom;
+
+}
+
+.employee-btn{
+  /* Borde */
+  box-shadow: 0 0 5px rgb(108, 108, 108);
+  border-radius: 10px;
+  padding-top: 1%;
+  margin-left: 3%;
+  margin-top: 3%;
+  border: none;
+  
+  /* Fuente */
+  text-align: left;
+
+  /* Tamanio */
+  height: 35px;
+  min-width: 70%;
+  width: 70%;
+
+  /* Formato */
+  background-color: #e2e0e0;
+  word-wrap: break-word;
+  cursor: pointer;
+
+  overflow-x: auto;
+}
+
+.employee-btn:hover{
+  /* Borde */
+
+  /* Fuente */
+
+  /* Tamanio */
+
+  /* Formato */
+  background-color: #f3f3f3;
+  transition: all 0.5s;
+}
+
+/**========================================================================
+ *                           Iconos de Filtros
+ *========================================================================**/
+ .filters{
+  list-style:none;
+  margin:10px 0 0 140px;
+  /* height:19px; */
+
+  position:relative;
+}
+
+.filters li{
+  float:left;
+  /* height:19px; */
+  text-indent:-999px;
+  cursor:pointer;
+  margin-right:10px;
+}
+
+/* Alfabeto superior */
+.letter-up-filter{
+  background:url("/assets/icons/searchIcons/letterFilter-icon.png") no-repeat;
+  background-size: contain;
+  width:15px;
+  opacity: 0.5;
+}
+
+/* Alfabeto inferior */
+.letter-down-filter{
+  background:url("/assets/icons/searchIcons/letterFilterBack-icon.png") no-repeat;
+  background-size: contain;
+  width:15px;
+  opacity: 0.5;
+}
+
+/* Aprobados */
+.approved{ 
+  background:url("/assets/icons/searchIcons/completeFilter-icon.png") no-repeat;
+  background-size: contain;
+  width:15px; 
+  opacity: 0.5;
+  /* background-position:-44px 0; */
+}
+
+/* No aprobados */
+.not-approved{
+  background:url("/assets/icons/searchIcons/notCompleteFilter-icon.png") no-repeat;
+  background-size: contain;
+  width:15px;
+  opacity: 0.5;
+}
+
+/* Huerfanos */
+.orphans{ 
+  background:url("/assets/icons/searchIcons/orphan-icon.png") no-repeat;
+  background-size: contain;
+  width:15px; 
+  opacity: 0.5;
+  /* background-position:right 0; */
+}
+
+.with-team{ 
+background:url("/assets/icons/searchIcons/team-icon.png") no-repeat;
+background-size: contain;
+width:20px; 
+opacity: 0.5;
+/* background-position:right 0; */
+}
+
+.active, .orphans:hover, .not-approved:hover, .approved:hover, .letter-down-filter:hover, .letter-up-filter:hover{ 
+  background-position:right bottom;
+  opacity: 1;
+}
+
+.active{
+  filter:drop-shadow(0px 0px 5px #fff);
 }
