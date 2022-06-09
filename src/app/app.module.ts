@@ -50,6 +50,8 @@ import { SuBarChartComponent } from './components/superuser/su-bar-chart/su-bar-
 import { BodyComponent } from './components/shared/body/body.component';
 import { DatePipe } from '@angular/common';
 import { InfoNotAvailableComponent } from './components/shared/info-not-available/info-not-available.component';
+import { HrDoughnutChartComponent } from './components/humanresources/hr-doughnut-chart/hr-doughnut-chart.component';
+import { SuDoughnutChartComponent } from './components/superuser/su-doughnut-chart/su-doughnut-chart.component';
 const isIE = window.navigator.userAgent.indexOf('MSIE ') > -1 || window.navigator.userAgent.indexOf('Trident/') > -1;
 
 
@@ -87,7 +89,9 @@ const isIE = window.navigator.userAgent.indexOf('MSIE ') > -1 || window.navigato
     SuPieChartComponent,
     SuBarChartComponent,
     BodyComponent,
-    InfoNotAvailableComponent
+    InfoNotAvailableComponent,
+    HrDoughnutChartComponent,
+    SuDoughnutChartComponent
   ],
   imports: [
     BrowserModule,
@@ -105,7 +109,6 @@ const isIE = window.navigator.userAgent.indexOf('MSIE ') > -1 || window.navigato
     NgChartsModule,
     MsalModule.forRoot(new PublicClientApplication({
       auth: {
-        //clientId: '01f29e73-b3dc-4096-9f42-51fed93bedc5',
         clientId: 'cba815b2-a711-4989-b197-d77ffd118ba6',
         authority: 'https://login.microsoftonline.com/c65a3ea6-0f7c-400b-8934-5a6dc1705645',
         redirectUri: 'http://localhost:4200',
