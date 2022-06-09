@@ -17,7 +17,9 @@ export class InvalidUserComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    /*
     this.logout()
+    */
   }
 
   delay(ms: number){
@@ -30,11 +32,11 @@ export class InvalidUserComponent implements OnInit {
     //await this.delay(2000)
     this.router.navigateByUrl('/')
     this.MsSignIn.logout()
-    
+
   }
 
 
 
-  
+
 
 }

@@ -122,7 +122,7 @@ button::after, button::before {
     color: lightseagreen;
     text-align: center;
     font-size: 18px;
-    
+
     /* Display */
     background-color: beige;
     display: inline-block;
@@ -131,7 +131,7 @@ button::after, button::before {
     overflow: hidden;
     width: 150px;
     margin: 20px;
-    
+
     /* Border */
     border-color: lightseagreen;
     border-radius: 6px;
@@ -142,7 +142,7 @@ button::after, button::before {
     font-size: 30px;
     color: black;
     content: "↑";
-    
+
     /* Display */
     transition: all 0.2s linear 0s;
     justify-content: center;
@@ -208,7 +208,7 @@ button::after, button::before {
     overflow: hidden;
     box-shadow: none;
     margin: 10px;
-    
+
 }
 
 .actions button:hover{
@@ -273,26 +273,59 @@ button::after, button::before {
     animation: spin 2s linear infinite;
   }
 
-  .container { 
+  .container {
     height: 100%;
     position: relative;
 
   }
-  
+
   .center {
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100%;
   }
-  
+
   /* Safari */
   @-webkit-keyframes spin {
     0% { -webkit-transform: rotate(0deg); }
     100% { -webkit-transform: rotate(360deg); }
   }
-  
+
   @keyframes spin {
     0% { transform: rotate(0deg); }
     100% { transform: rotate(360deg); }
   }
+
+/* Load File Buttons */
+  .action-button
+{
+	position: relative;
+	padding: 10px 40px;
+	margin: 0px 10px 10px 0px;
+	float: left;
+	border-radius: 10px;
+	color: #FFF;
+	text-decoration: none;
+}
+
+.red
+{
+	background-color: #E74C3C;
+	border-bottom: 5px solid #BD3E31;
+	text-shadow: 0px -2px #BD3E31;
+}
+
+.green
+{
+	background-color: #82BF56;
+	border-bottom: 5px solid #669644;
+	text-shadow: 0px -2px #669644;
+}
+
+.action-button:active
+{
+	transform: translate(0px,5px);
+	-webkit-transform: translate(0px,5px);
+	border-bottom: 1px solid;
+}
