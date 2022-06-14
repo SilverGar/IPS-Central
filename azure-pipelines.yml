@@ -46,12 +46,6 @@ stages:
           ng build --prod
         displayName: 'npm install and build'
         workingDirectory: '$(Build.SourcesDirectory)'
-      - task: CmdLine@2
-        displayName: "Run unit tests"
-        inputs:
-          script: |
-            cd AngularWithAzure/
-            ng test --browsers=ChromeHeadless --code-coverage --watch=false
       - task: ArchiveFiles@2
         displayName: 'Archive files'
         inputs:
@@ -84,7 +78,7 @@ stages:
           - task: AzureWebApp@1
             displayName: 'Deploy App Service'
             inputs:
-              azureSubscription: 'Inform-your-subscription'
+              azureSubscription: 'DevelopmentServer'
               appType: 'webAppLinux'
               appName: 'angularwithazure'
               package: '$(Pipeline.Workspace)/drop/$(Build.BuildId).zip'
